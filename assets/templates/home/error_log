@@ -1,0 +1,37 @@
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 66
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $title in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 67
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 71
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 75
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 19:06:25 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 19:06:25 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 20:06:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 20:06:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 20:06:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 20:06:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 20:06:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 20:06:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 20:06:17 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 20:06:17 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 66
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  Undefined variable $title in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 67
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 71
+[11-Mar-2023 20:06:40 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 75
+[11-Mar-2023 20:06:41 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 20:06:41 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 3
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 66
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $title in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 67
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 71
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/header.inc.php on line 75
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 8
+[11-Mar-2023 20:32:18 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/home/footer.inc.php on line 14

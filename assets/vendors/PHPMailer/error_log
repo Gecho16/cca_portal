@@ -1,0 +1,28 @@
+[22-Feb-2023 13:24:37 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36
+[11-Mar-2023 18:59:07 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36
+[11-Mar-2023 20:05:28 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36
+[11-Mar-2023 20:05:31 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36
+[11-Mar-2023 20:05:32 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36
+[11-Mar-2023 20:05:34 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36
+[11-Mar-2023 20:32:12 Asia/Manila] PHP Fatal error:  Uncaught Error: Interface "PHPMailer\PHPMailer\OAuthTokenProvider" not found in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/vendors/PHPMailer/OAuth.php on line 36

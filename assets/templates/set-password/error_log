@@ -1,0 +1,53 @@
+[22-Feb-2023 13:25:05 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[22-Feb-2023 13:25:05 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[22-Feb-2023 13:25:06 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[22-Feb-2023 13:25:06 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[22-Feb-2023 13:25:06 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[22-Feb-2023 13:25:06 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 5
+[11-Mar-2023 18:59:15 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 18:59:15 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 18:59:16 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 18:59:16 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 18:59:16 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 18:59:16 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 5
+[11-Mar-2023 19:06:30 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 19:06:30 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 20:06:53 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:06:53 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:06:53 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:06:53 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 5
+[11-Mar-2023 20:06:54 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 20:06:54 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 5
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 20:06:56 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 20:06:56 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 20:07:27 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 20:07:27 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 3
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/header.inc.php on line 5
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 8
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/set-password/footer.inc.php on line 12

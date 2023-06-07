@@ -1,0 +1,51 @@
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 18:59:11 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 5
+[11-Mar-2023 18:59:12 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 6
+[11-Mar-2023 18:59:12 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 9
+[11-Mar-2023 18:59:12 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 26
+[11-Mar-2023 20:06:25 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:25 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:25 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:25 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 5
+[11-Mar-2023 20:06:27 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:27 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:27 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:27 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 5
+[11-Mar-2023 20:06:28 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:28 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:28 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:28 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 5
+[11-Mar-2023 20:06:30 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:30 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:30 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:06:30 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 5
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 6
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 9
+[11-Mar-2023 20:06:55 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 26
+[11-Mar-2023 20:32:19 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:32:19 Asia/Manila] PHP Warning:  include(assets/includes/dbh.inc.php): Failed to open stream: No such file or directory in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:32:19 Asia/Manila] PHP Warning:  include(): Failed opening 'assets/includes/dbh.inc.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 3
+[11-Mar-2023 20:32:19 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to undefined function allowedRole() in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/header.inc.php on line 5
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 6
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 9
+[11-Mar-2023 20:32:20 Asia/Manila] PHP Warning:  Undefined variable $baseUrl in /home/ljgtmurty1m6/public_html/portal.cca.edu.ph/assets/templates/admin/footer.inc.php on line 26
