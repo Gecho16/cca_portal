@@ -104,27 +104,6 @@ $academic_year = $row['year'];
                             </select>
                         </div>
                     </div>
-
-                    <!-- <div id="course-container" class="col-md-4">
-                        <div class="mb-3">
-                            <label>Course</label>
-                            <select class="form-select form-select-lg" id="course" name="course">
-                                <option clas="IBM" value="BSA">BSA</option>
-                                <option clas="IBM" value="BSE">BSE</option>
-                                <option clas="IBM" value="BSTM">BSTM</option>
-                                <option clas="ICSLIS" value="ACT">ACT</option>
-                                <option clas="ICSLIS" value="BSCS">BSCS</option>
-                                <option clas="ICSLIS" value="BSIS">BSIS</option>
-                                <option clas="ICSLIS" value="BLIS">BLIS</option>
-                                <option clas="IEAS" value="BLIS">BSM</option>
-                                <option clas="IEAS" value="BLIS">BSNE</option>
-                                <option clas="IEAS" value="BLIS">BSP</option>
-                                <option clas="IEAS" value="BLIS">BPE</option>
-                                <option clas="IEAS" value="BLIS">BTVTED</option>
-                                <option clas="IEAS" value="BLIS">BAELS</option>
-                            </select>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="row">
@@ -135,6 +114,12 @@ $academic_year = $row['year'];
                             <label>Username</label>
                             <input class="form-control form-control-lg" type="text" id="username" name="username" required>
                         </div>
+                        <label class="form-check" id="userReadonly">
+                            <input class="form-check-input" type="checkbox" id="userReadonlyCheckbox" checked>
+                            <span class="form-check-label">
+                                Autofill username
+                            </span>
+                        </label>
                     </div>
 
                     <!-- Password -->
@@ -152,19 +137,6 @@ $academic_year = $row['year'];
                     </div>
 
                 </div>
-
-                <div class="row">
-
-                    <!-- Email -->
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Email Address</label>
-                            <input class="form-control form-control-lg" id="email" type="email" name="email" required>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 
             <div class="col-md-6">
@@ -211,8 +183,12 @@ $academic_year = $row['year'];
 
             <!-- Submit button -->
             <div class="text-end">
+                <!-- Values for autofill -->
                 <input type='hidden' name='user_count' id="user_count" value='<?= $user_count ?>'>
                 <input type='hidden' name='academic_year' id="academic_year" value='<?= $academic_year ?>'>
+
+                <!-- Hide restricted fields -->
+
                 <button class="btn btn-primary btn-lg" id="submitButton" name="submitAddUser" type="submit">
                     Submit
                 </button>
@@ -233,19 +209,14 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 var role = document.getElementById("role").value;
 var institute = document.getElementById("institute");
 var username = document.getElementById("username");
-var email = document.getElementById("email");
 var firstname = document.getElementById("firstname");
 var lastname = document.getElementById("lastname");
 var middlename = document.getElementById("middlename");
 var suffix = document.getElementById("suffix");
-var email_suffix = "@cca.edu.ph";
 
 function setNames(){
     var role = document.getElementById("role").value;
     var institute = document.getElementById("institute").value;
-    var email_suffix = "@cca.edu.ph";
-
-    // console.log(course);
 
     if (['VPAA', 'Registrar', 'HR'].includes(role)) {
         // Personal Info
@@ -254,9 +225,7 @@ function setNames(){
         
         // Username
         document.getElementById("username").value = "CCA-" + role;
-        
-        // Email
-        document.getElementById("email").value = ("CCA" + role).toLowerCase() + email_suffix;
+        document.getElementById("userReadonly").style.display = "none";
 
     }else if (['Dean', 'Secretary'].includes(role)) {
         // Personal Info 
@@ -265,9 +234,7 @@ function setNames(){
         
         // Username 
         document.getElementById("username").value = institute + "-" + role;
-        
-        // Email 
-        document.getElementById("email").value = (institute + role).toLowerCase() + email_suffix;
+        document.getElementById("userReadonly").style.display = "none";
 
     }else if (role == "Coordinator") {
         var courseContainerId = institute + "-course-container";
@@ -280,9 +247,7 @@ function setNames(){
 
         // Username
         document.getElementById("username").value = course + "-" + role;
-
-        // Email
-        document.getElementById("email").value = (course + role).toLowerCase() + email_suffix;
+        document.getElementById("userReadonly").style.display = "none";
 
     }else if (['Faculty', 'Student'].includes(role)) {
         // Personal Info
@@ -298,9 +263,7 @@ function setNames(){
         academic_year_sliced = academic_year.slice(7);
         
         document.getElementById("username").value = "CCA" + academic_year_sliced + "_" + user_count_padded;
-
-        // Email
-        document.getElementById("email").value = email_suffix;
+        document.getElementById("userReadonly").style.display = "block";
     }
 
     if (!['Faculty', 'Student'].includes(role)) {
@@ -316,7 +279,6 @@ function setNames(){
     }
 
     document.getElementById("username").readOnly = true;
-    document.getElementById("email").readOnly = true;
 }
 
 function setInstitute(){
@@ -332,7 +294,6 @@ function setInstitute(){
     }
 
     if (['VPAA', 'Registrar', 'HR'].includes(role)) {
-        // document.getElementById("institute").disabled = true;
         document.getElementById("institute-container").style.display = "none";
     }else{
         document.getElementById("NTPs_opt").style.display = "none";
@@ -369,16 +330,24 @@ function setCourses(){
         document.getElementById(courseContainerId).style.display = "block";
     }
 }
+function setUsername(){
+    var firstname = document.getElementById("firstname");
+    var lastname = document.getElementById("lastname");
 
-function setEmail(role){
-    if (['Faculty', 'Student'].includes(role)) {
-        var email = document.getElementById("email");
-        var firstname = document.getElementById("firstname");
-        var lastname = document.getElementById("lastname");
-        var email_suffix = "@cca.edu.ph";
+    var usercode = firstname.value.charAt(0) + lastname.value.charAt(0);
 
-        email.value = (firstname.value.charAt(0) + lastname.value.replace(/\s/g, "")).toLowerCase() + email_suffix;
+    // Username
+    var user_count = document.getElementById("user_count").value;
+    var academic_year = document.getElementById("academic_year").value;
+    if (user_count.length < 6) {
+        user_count_padded = user_count.padStart(4, '0');
     }
+    academic_year_sliced = academic_year.slice(7);
+    usercode = (usercode).toUpperCase();
+
+    // Username
+    document.getElementById("username").value = "CCA" + academic_year_sliced + "_" + usercode + user_count_padded;
+    
 }
 
 setInstitute()
@@ -409,53 +378,23 @@ $('#IEAS-course').on('change', function() {
 });
 
 $('#firstname').on('change', function() {
-    var email = document.getElementById("email");
-    var firstname = document.getElementById("firstname");
-    var lastname = document.getElementById("lastname");
-    var email_suffix = "@cca.edu.ph";
-
-    var usercode = firstname.value.charAt(0) + lastname.value.charAt(0);
-    var emailcode = firstname.value.charAt(0) + lastname.value.replace(/\s/g, "");
-
-    // Username
-    var user_count = document.getElementById("user_count").value;
-    var academic_year = document.getElementById("academic_year").value;
-    if (user_count.length < 6) {
-        user_count_padded = user_count.padStart(4, '0');
-    }
-    academic_year_sliced = academic_year.slice(7);
-    usercode = (usercode).toUpperCase();
-
-    // Username
-    document.getElementById("username").value = "CCA" + academic_year_sliced + "_" + usercode + user_count_padded;
-
-    // Email
-    email.value = (emailcode).toLowerCase() + email_suffix;
+    setUsername()
 });
 
 $('#lastname').on('change', function() {
-    var email = document.getElementById("email");
-    var firstname = document.getElementById("firstname");
-    var lastname = document.getElementById("lastname");
-    var email_suffix = "@cca.edu.ph";
+    setUsername()
+});
 
-    var usercode = firstname.value.charAt(0) + lastname.value.charAt(0);
-    var emailcode = firstname.value.charAt(0) + lastname.value.replace(/\s/g, "");
-
-    // Username
-    var user_count = document.getElementById("user_count").value;
-    var academic_year = document.getElementById("academic_year").value;
-    if (user_count.length < 6) {
-        user_count_padded = user_count.padStart(4, '0');
+// Read only Username
+const usernameInput = document.getElementById("username");
+const userReadonlyCheckbox = document.getElementById("userReadonlyCheckbox");
+userReadonlyCheckbox.addEventListener("change", function() {
+    usernameInput.readOnly = userReadonlyCheckbox.checked;
+    if (userReadonlyCheckbox.checked) {
+        setUsername();
+    } else {
+        usernameInput.value = "";
     }
-    academic_year_sliced = academic_year.slice(7);
-    usercode = (usercode).toUpperCase();
-
-    // Username
-    document.getElementById("username").value = "CCA" + academic_year_sliced + "_" + usercode + user_count_padded;
-
-    // Email
-    email.value = (emailcode).toLowerCase() + email_suffix;
 });
 
 // Show / hide password

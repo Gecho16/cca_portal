@@ -89,9 +89,9 @@ if (isset($_GET["selectUsers"])) {
 			$checkbox = "<input id='" . $row["id"] . "' type='checkbox' name='checkbox[]' value='" . $row["id"] . "'>";
 
 			// Avatar
-			$avatar = "	<a data-fancybox='' data-src='../../assets/uploads/avatars/" . $row["avatar"] . "'>
-							<button class='btn btn-secondary btn-sm'>View</button>
-						</a>";
+			$avatar  = " <a data-fancybox='' data-src='../../assets/uploads/avatars/" . $row["avatar"] . "'>";
+			$avatar .= " <button class='btn btn-secondary btn-sm'>View</button>";
+			$avatar .= " </a>";
 			
 			// Suffix
 			if (!in_array($row["suffix"], [null, ''])) {
@@ -250,47 +250,32 @@ if (isset($_GET["selectUsers"])) {
 			}
 
 			// Action Bullet
+			$actionBullet = "	<div class='btn-group d-flex justify-content-end'>";
+			$actionBullet .= "	<button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>
+									<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>
+								</button>";
+			$actionBullet .= "	<div class='dropdown-menu ' id='dropdown-container'>";
+			$actionBullet .= "	<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#recoverModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?recoverUser&id=" . $row["id"] . "' title='recover'>
+									Recover
+								</button>";
 			if ($row["is_active"] == 1) {
-			    $actionBullet = "	<div class='btn-group d-flex justify-content-end'>
-										<button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>
-											<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>
-										</button>
-									<div class='dropdown-menu ' id='dropdown-container'>
-										<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#recoverModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?recoverUser&id=" . $row["id"] . "' title='recover'>
-											Recover
-										</button>
-										<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#disableModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?disableUser&id=" . $row["id"] . "' title='disable'>
-											Disable
-										</button>
-										<a class='dropdown-item' href='edit?userId=" . $id . "' title='edit'>
-											Edit
-										</a>
-										<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?deleteUser&id=" . $row["id"] . "' title='delete'>
-											Delete
-										</button>
-									</div>
-								</div>";
-			} else if ($row["is_active"] == 0) {
-				$actionBullet = "	<div class='btn-group d-flex justify-content-end'>
-										<button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>
-											<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>
-										</button>
-									<div class='dropdown-menu ' id='dropdown-container'>
-										<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#recoverModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?recoverUser&id=" . $row["id"] . "' title='recover'>
-											Recover
-										</button>
-										<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#enableModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?enableUser&id=" . $row["id"] . "' title='enable'>
-											Enable
-										</button>
-										<a class='dropdown-item' href='edit?userId=" . $id . "' title='edit'>
-											Edit
-										</a>
-										<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?deleteUser&id=" . $row["id"] . "' title='delete'>
-											Delete
-										</button>
-									</div>
-								</div>";
+				$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#disableModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?disableUser&id=" . $row["id"] . "' title='disable'>
+										Disable
+									</button>";
+			}else{
+				$actionBullet .= "	<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#enableModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?enableUser&id=" . $row["id"] . "' title='enable'>
+									Enable
+								</button>";
 			}
+			if (in_array($role, ['Faculty', 'Student'])) {
+				$actionBullet .= "	<a class='dropdown-item' href='edit?userId=" . $id . "' title='edit'>
+										Edit
+									</a>";
+			}
+			$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $row["username"] . "' data-bs-href='../../assets/includes/admin/users/user.inc.php?deleteUser&id=" . $row["id"] . "' title='delete'>
+									Delete
+								</button>";
+			$actionBullet .= "	</div></div>";
 
 			$subdata = array();
 
@@ -304,7 +289,6 @@ if (isset($_GET["selectUsers"])) {
 			$subdata[] = $middlename;
 			$subdata[] = $suffix;
 			$subdata[] = $institute_details;
-			// $subdata[] = '';
 			$subdata[] = $institute;
 			$subdata[] = $email;
 			$subdata[] = $username;

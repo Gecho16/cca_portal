@@ -7,27 +7,16 @@ $page = "users";
 
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
-// Get user count
-$users = "SELECT id FROM user_accounts WHERE role = 'student' OR role = 'faculty'";
-$result_users = mysqli_query($conn, $users);
-$user_count = mysqli_num_rows($result_users);
-
-// Get active academic year
-$acad_year = "SELECT year FROM academic_years WHERE is_active = 1";
-$result_acad_year = mysqli_query($conn, $acad_year);
-$row_acad_year = mysqli_fetch_assoc($result_acad_year);
-$academic_year = $row_acad_year['year'];
-
 // Get user info
 $userId = sanitize($_GET["userId"]);
-$sql = "SELECT * FROM user_accounts WHERE id = '$userId'";
+$sql = "SELECT role, institute, course, username, firstname, lastname, middlename, suffix FROM user_accounts WHERE id = '$userId'";
 $result_userId = mysqli_query($conn, $sql);
 $row_userId = mysqli_fetch_assoc($result_userId);
-print_r($row_userId);
 
+// Set Variables
 $role = $row_userId['role'];
 $institute = $row_userId['institute'];
-// $course = $row_userId['course'];
+$course = $row_userId['course'];
 $username = $row_userId['username'];
 $firstname = $row_userId['firstname'];
 $lastname = $row_userId['lastname'];
@@ -38,7 +27,7 @@ $suffix = $row_userId['suffix'];
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">
     <h1 class="h3 mb-0">Edit User</h1>
 
-    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../users">
+    <a class="btn btn-secondary d-flex justify-content-between align-items-center"  href="../users">
         <i class="fa-solid fa-chevron-left me-2"></i>
         Back
     </a>
@@ -54,14 +43,8 @@ $suffix = $row_userId['suffix'];
                         <div class="mb-3">
                             <label>Role</label>
                             <select class="form-select form-select-lg" id="role" name="role" required>
-                                <option value="VPAA" >VPAA</option>
-                                <option value="Dean" >Dean</option>
-                                <option value="Coordinator" >Coordinator</option>
-                                <option value="Secretary" >Secretary</option>
-                                <option value="Registrar" >Registrar</option>
-                                <option value="HR" >HR</option>
-                                <option value="Faculty" >Faculty</option>
-                                <option value="Student" selected>Student</option>
+                                <option value="Faculty" <?= ($role === 'Faculty') ? 'selected' : '';?>>Faculty</option>
+                                <option value="Student" <?= ($role === 'Student') ? 'selected' : '';?>>Student</option>
                             </select>
                         </div>
                     </div> 
@@ -71,11 +54,9 @@ $suffix = $row_userId['suffix'];
                         <div class="mb-3">
                             <label>Institute</label>
                             <select class="form-select form-select-lg" id="institute" name="institute">
-                                <option value="IBM" <?= ($institute === 'IBM') ? 'select' : '';?>>IBM</option>
-                                <option value="ICSLIS" <?= ($institute === 'IBM') ? 'select' : '';?>>ICSLIS</option>
-                                <option value="IEAS" <?= ($institute === 'IBM') ? 'select' : '';?>>IEAS</option>
-                                <option id="MISSO_opt" value="MISSO" <?= ($institute === 'IBM') ? 'select' : '';?>>MISSO</option>
-                                <option id="NTPs_opt" value="NTPs" <?= ($institute === 'IBM') ? 'select' : '';?>>NTPs</option>
+                                <option value="IBM" <?= ($institute === 'IBM') ? 'selected' : '';?>>IBM</option>
+                                <option value="ICSLIS" <?= ($institute === 'ICSLIS') ? 'selected' : '';?>>ICSLIS</option>
+                                <option value="IEAS" <?= ($institute === 'IEAS') ? 'selected' : '';?>>IEAS</option>
                             </select>
                         </div>
                     </div>
@@ -85,9 +66,9 @@ $suffix = $row_userId['suffix'];
                         <div class="mb-3">
                             <label>Course</label>
                             <select class="form-select form-select-lg" id="IBM-course" name="course">
-                                <option clas="IBM" value="BSA" selected>BSA</option>
-                                <option clas="IBM" value="BSE">BSE</option>
-                                <option clas="IBM" value="BSTM">BSTM</option>
+                                <option clas="IBM" value="BSA" <?= ($course === 'BSA') ? 'selected' : '';?>>BSA</option>
+                                <option clas="IBM" value="BSE" <?= ($course === 'BSE') ? 'selected' : '';?>>BSE</option>
+                                <option clas="IBM" value="BSTM" <?= ($course === 'BSTM') ? 'selected' : '';?>>BSTM</option>
                             </select>
                         </div>
                     </div>
@@ -97,10 +78,10 @@ $suffix = $row_userId['suffix'];
                         <div class="mb-3">
                             <label>Course</label>
                             <select class="form-select form-select-lg" id="ICSLIS-course" name="course">
-                                <option clas="ICSLIS" value="ACT">ACT</option>
-                                <option clas="ICSLIS" value="BSCS">BSCS</option>
-                                <option clas="ICSLIS" value="BSIS">BSIS</option>
-                                <option clas="ICSLIS" value="BLIS">BLIS</option>
+                                <option clas="ICSLIS" value="ACT" <?= ($course === 'ACT') ? 'selected' : '';?>>ACT</option>
+                                <option clas="ICSLIS" value="BSCS" <?= ($course === 'BSCS') ? 'selected' : '';?>>BSCS</option>
+                                <option clas="ICSLIS" value="BSIS" <?= ($course === 'BSIS') ? 'selected' : '';?>>BSIS</option>
+                                <option clas="ICSLIS" value="BLIS" <?= ($course === 'BLIS') ? 'selected' : '';?>>BLIS</option>
                             </select>
                         </div>
                     </div>
@@ -110,36 +91,16 @@ $suffix = $row_userId['suffix'];
                         <div class="mb-3">
                             <label>Course</label>
                             <select class="form-select form-select-lg" id="IEAS-course" name="course">
-                                <option clas="IEAS" value="BSM">BSM</option>
-                                <option clas="IEAS" value="BSNE">BSNE</option>
-                                <option clas="IEAS" value="BSP">BSP</option>
-                                <option clas="IEAS" value="BPE">BPE</option>
-                                <option clas="IEAS" value="BTVTED">BTVTED</option>
-                                <option clas="IEAS" value="BAELS">BAELS</option>
+                                <option clas="IEAS" value="BSM" <?= ($course === 'BSM') ? 'selected' : '';?>>BSM</option>
+                                <option clas="IEAS" value="BSNE" <?= ($course === 'BSNE') ? 'selected' : '';?>>BSNE</option>
+                                <option clas="IEAS" value="BSP" <?= ($course === 'BSP') ? 'selected' : '';?>>BSP</option>
+                                <option clas="IEAS" value="BPE" <?= ($course === 'BPE') ? 'selected' : '';?>>BPE</option>
+                                <option clas="IEAS" value="BTVTED" <?= ($course === 'BTVTED') ? 'selected' : '';?>>BTVTED</option>
+                                <option clas="IEAS" value="BAELS" <?= ($course === 'BAELS') ? 'selected' : '';?>>BAELS</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- <div id="course-container" class="col-md-4">
-                        <div class="mb-3">
-                            <label>Course</label>
-                            <select class="form-select form-select-lg" id="course" name="course">
-                                <option clas="IBM" value="BSA">BSA</option>
-                                <option clas="IBM" value="BSE">BSE</option>
-                                <option clas="IBM" value="BSTM">BSTM</option>
-                                <option clas="ICSLIS" value="ACT">ACT</option>
-                                <option clas="ICSLIS" value="BSCS">BSCS</option>
-                                <option clas="ICSLIS" value="BSIS">BSIS</option>
-                                <option clas="ICSLIS" value="BLIS">BLIS</option>
-                                <option clas="IEAS" value="BLIS">BSM</option>
-                                <option clas="IEAS" value="BLIS">BSNE</option>
-                                <option clas="IEAS" value="BLIS">BSP</option>
-                                <option clas="IEAS" value="BLIS">BPE</option>
-                                <option clas="IEAS" value="BLIS">BTVTED</option>
-                                <option clas="IEAS" value="BLIS">BAELS</option>
-                            </select>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="row">
@@ -148,33 +109,7 @@ $suffix = $row_userId['suffix'];
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Username</label>
-                            <input class="form-control form-control-lg" type="text" id="username" name="username" required>
-                        </div>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Password</label>
-                            <input class="form-control form-control-lg" type="password" name="password" id="passwordInput" required>
-                        </div>
-                        <label class="form-check" id="showPassword">
-                            <input class="form-check-input" type="checkbox" id="showPasswordCheckbox">
-                            <span class="form-check-label">
-                                Show password
-                            </span>
-                        </label>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <!-- Email -->
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Email Address</label>
-                            <input class="form-control form-control-lg" id="email" type="email" name="email" required>
+                            <input class="form-control form-control-lg" type="text" id="username" name="username" value="<?= $username ?>" required>
                         </div>
                     </div>
 
@@ -189,7 +124,7 @@ $suffix = $row_userId['suffix'];
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>First Name</label>
-                            <input class="form-control form-control-lg" id="firstname" type="text" name="firstname" required>
+                            <input class="form-control form-control-lg" id="firstname" type="text" name="firstname"  value="<?= $firstname ?>" required>
                         </div>
                     </div>
 
@@ -197,7 +132,7 @@ $suffix = $row_userId['suffix'];
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Middle Name</label>
-                            <input class="form-control form-control-lg" id="middlename" type="text" name="middlename">
+                            <input class="form-control form-control-lg" id="middlename" type="text" name="middlename"  value="<?= $middlename ?>">
                         </div>
                     </div>
 
@@ -209,7 +144,7 @@ $suffix = $row_userId['suffix'];
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Last Name</label>
-                            <input class="form-control form-control-lg" id="lastname" type="text" name="lastname" required>
+                            <input class="form-control form-control-lg" id="lastname" type="text" name="lastname"  value="<?= $lastname ?>" required>
                         </div>
                     </div>
 
@@ -217,7 +152,7 @@ $suffix = $row_userId['suffix'];
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Suffix</label>
-                            <input class="form-control form-control-lg" id="suffix" type="text" name="suffix">
+                            <input class="form-control form-control-lg" id="suffix" type="text" name="suffix" value="<?= $suffix ?>">
                         </div>
                     </div>
 
@@ -225,15 +160,12 @@ $suffix = $row_userId['suffix'];
             </div>
 
             <div class="text-end">
-                <!-- Values for autofill -->
-                <input type='hidden' name='user_count' id="user_count" value='<?= $user_count ?>'>
-                <input type='hidden' name='academic_year' id="academic_year" value='<?= $academic_year ?>'>
-
                 <!-- Hide restricted fields -->
+                <input type='hidden' name='userId' value='<?= $userId ?>'>
                 <input type='hidden' name='role' value='<?= $role ?>'>
 
                 <!-- Submit button -->
-                <button class="btn btn-primary btn-lg" id="submitButton" name="submitAddUser" type="submit">
+                <button class="btn btn-primary btn-lg" id="submitButton" name="submitEditUser" type="submit">
                     Submit
                 </button>
             </div>
@@ -247,208 +179,30 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 ?>
 
 <script> 
-
-
-// Set Variables
-var role = document.getElementById("role").value;
-var institute = document.getElementById("institute");
-var username = document.getElementById("username");
-var email = document.getElementById("email");
-var firstname = document.getElementById("firstname");
-var lastname = document.getElementById("lastname");
-var middlename = document.getElementById("middlename");
-var suffix = document.getElementById("suffix");
-var email_suffix = "@cca.edu.ph";
-
-function setNames(){
-    var role = document.getElementById("role").value;
-    var institute = document.getElementById("institute").value;
-    var email_suffix = "@cca.edu.ph";
-
-    // console.log(course);
-
-    if (['VPAA', 'Registrar', 'HR'].includes(role)) {
-        // Personal Info
-        document.getElementById("firstname").value = "CCA";
-        document.getElementById("lastname").value = role;
-        
-        // Username
-        document.getElementById("username").value = "CCA-" + role;
-        
-        // Email
-        document.getElementById("email").value = ("CCA" + role).toLowerCase() + email_suffix;
-
-    }else if (['Dean', 'Secretary'].includes(role)) {
-        // Personal Info 
-        document.getElementById("firstname").value = institute;
-        document.getElementById("lastname").value = role;
-        
-        // Username 
-        document.getElementById("username").value = institute + "-" + role;
-        
-        // Email 
-        document.getElementById("email").value = (institute + role).toLowerCase() + email_suffix;
-
-    }else if (role == "Coordinator") {
-        var courseContainerId = institute + "-course-container";
-        var courseId = institute + "-course";
-        var course = document.getElementById(courseId).value;
-
-        // Personal Info
-        document.getElementById("firstname").value = course;
-        document.getElementById("lastname").value = role;
-
-        // Username
-        document.getElementById("username").value = course + "-" + role;
-
-        // Email
-        document.getElementById("email").value = (course + role).toLowerCase() + email_suffix;
-
-    }else if (['Faculty', 'Student'].includes(role)) {
-        // Personal Info
-        document.getElementById("firstname").value = '';
-        document.getElementById("lastname").value = '';
-
-        // Username
-        var user_count = document.getElementById("user_count").value;
-        var academic_year = document.getElementById("academic_year").value;
-        if (user_count.length < 6) {
-            user_count_padded = user_count.padStart(4, '0');
-        }
-        academic_year_sliced = academic_year.slice(7);
-        
-        document.getElementById("username").value = "CCA" + academic_year_sliced + "_" + user_count_padded;
-
-        // Email
-        document.getElementById("email").value = email_suffix;
-    }
-
-    if (!['Faculty', 'Student'].includes(role)) {
-        document.getElementById("firstname").readOnly = true;
-        document.getElementById("lastname").readOnly = true;
-        document.getElementById("middlename").readOnly = true;
-        document.getElementById("suffix").readOnly = true;
-    }else{
-        document.getElementById("firstname").readOnly = false;
-        document.getElementById("lastname").readOnly = false;
-        document.getElementById("middlename").readOnly = false;
-        document.getElementById("suffix").readOnly = false;
-    }
-
-    document.getElementById("username").readOnly = true;
-    document.getElementById("email").readOnly = true;
-}
-
-function setInstitute(){
-    var role = document.getElementById("role").value;
-    var institute = document.getElementById("institute").value;
-
-    console.log(institute);
-
-    if (['VPAA', 'Registrar', 'HR'].includes(role)) {
-        document.getElementById("institute").value = "NTPs";
-    } else {
-        document.getElementById("institute").value = "IBM";
-    }
-
-    if (['VPAA', 'Registrar', 'HR'].includes(role)) {
-        // document.getElementById("institute").disabled = true;
-        document.getElementById("institute-container").style.display = "none";
-    }else{
-        document.getElementById("NTPs_opt").style.display = "none";
-        document.getElementById("MISSO_opt").style.display = "none";
-        document.getElementById("institute").disabled = false;
-        document.getElementById("institute-container").style.display = "block";
-    }
-}
-
 function setCourses(){
     var role = document.getElementById("role").value;
     var institute = document.getElementById("institute").value;
     var courseContainerId = institute + "-course-container";
     var courseId = institute + "-course";
 
-    // console.log(institute);
+    document.getElementById("IBM-course").disabled = true;
+    document.getElementById("ICSLIS-course").disabled = true;
+    document.getElementById("IEAS-course").disabled = true;
+    document.getElementById("IBM-course-container").style.display = "none";
+    document.getElementById("ICSLIS-course-container").style.display = "none";
+    document.getElementById("IEAS-course-container").style.display = "none";
 
-    if (['VPAA', 'Registrar', 'HR', 'Dean', 'Secretary'].includes(role)) {
-        document.getElementById("IBM-course").disabled = true;
-        document.getElementById("ICSLIS-course").disabled = true;
-        document.getElementById("IEAS-course").disabled = true;
-        document.getElementById("IBM-course-container").style.display = "none";
-        document.getElementById("ICSLIS-course-container").style.display = "none";
-        document.getElementById("IEAS-course-container").style.display = "none";
-    } else {
-        document.getElementById("IBM-course").disabled = true;
-        document.getElementById("ICSLIS-course").disabled = true;
-        document.getElementById("IEAS-course").disabled = true;
-        document.getElementById("IBM-course-container").style.display = "none";
-        document.getElementById("ICSLIS-course-container").style.display = "none";
-        document.getElementById("IEAS-course-container").style.display = "none";
-
-        document.getElementById(courseId).disabled = false;
-        document.getElementById(courseContainerId).style.display = "block";
-    }
+    document.getElementById(courseId).disabled = false;
+    document.getElementById(courseContainerId).style.display = "block";
+    
 }
 
-function setEmail(role){
-    if (['Faculty', 'Student'].includes(role)) {
-        var email = document.getElementById("email");
-        var firstname = document.getElementById("firstname");
-        var lastname = document.getElementById("lastname");
-        var email_suffix = "@cca.edu.ph";
+setCourses();
 
-        email.value = (firstname.value.charAt(0) + lastname.value.replace(/\s/g, "")).toLowerCase() + email_suffix;
-    }
-}
+$('#institute').on('change', function() {
+    setCourses()
+})
 
 // Disable role selection
 document.getElementById("role").disabled = true;
-
-// setInstitute()
-// setNames()
-// setCourses()
-
-$('#role').on('change', function() {
-    // setInstitute()
-    // setNames()
-    // setCourses()
-})
-
-$('#institute').on('change', function() {
-    // setNames()
-    // setCourses()
-})
-
-$('#IBM-course').on('change', function() {
-    // setNames()
-});
-
-$('#ICSLIS-course').on('change', function() {
-    // setNames()
-});
-
-$('#IEAS-course').on('change', function() {
-    // setNames()
-});
-
-
-// Show / hide password
-const passwordInput = document.getElementById("passwordInput");
-const showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
-showPasswordCheckbox.addEventListener("change", function () {
-    passwordInput.type = this.checked ? "text" : "password";
-});
-
-passwordInput.addEventListener("input", function () {
-    const password = this.value;
-
-    const hasMinimumLength = password.length >= 8;
-    const hasUppercaseLetter = /[A-Z]/.test(password);
-    const hasLowercaseLetter = /[a-z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
-
-    const isValidPassword = hasMinimumLength && hasUppercaseLetter && hasLowercaseLetter && hasNumber;
-    this.setCustomValidity(isValidPassword ? "" : "Password must contain: at least 8 characters, an uppercase letter, a lowercase letter, and a number.");
-})
-
 </script>
