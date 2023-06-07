@@ -1,2 +1,2 @@
 # cca_portal
-City College of Angeles Webdsite
+City College of Angeles Website
