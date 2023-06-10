@@ -54,12 +54,15 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 				</div>
 
 				<div class="text-center">
-					<button class="btn btn-success btn-lg" id="submitButton" type="submit">
+					<button class="btn btn-secondary btn-lg" id="downloadCSVTemplate" name="downloadCSVTemplate" type="submit">
+						Template
+					</button>
+					<button class="btn btn-success btn-lg" id="submitButton" name="submitButton" type="submit">
 						Submit
 					</button>
 				</div>
 			</div>
-		</form>	
+		</form>
 	</div>
 </div>
 
@@ -70,60 +73,72 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 ?>
 
 <script type="text/javascript">
-	$(document).ready(function() { 
-		$('#form').submit(function(e) {	
-			e.preventDefault();
+	$(document).ready(function() {
+	$('#form').submit(function(e) {
+		e.preventDefault();
 
-			let formData = new FormData();
-			formData.append("csv", $("input[type=file]")[0].files[0]);
-			formData.append("submitImportUsers", "");
+		let formData = new FormData();
+		formData.append("csv", $("input[type=file]")[0].files[0]);
+		formData.append("submitImportUsers", "");
 
-			$.ajax({
-				url: "../../assets/includes/admin/user.inc.php",
-				type: "POST",
-				data: formData,
-				dataType: "json",
-				contentType: false,
-				processData: false,
-				beforeSend: function() {
-					$("#submitButton").prop("disabled", true);
-					$("#submitButton").html(`<span class="spinner-grow spinner-grow-sm"></span> Loading..`);
+		$.ajax({
+			url: "../../assets/includes/admin/users/user.inc.php",
+			type: "POST",
+			data: formData,
+			dataType: "json",
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$("#submitButton").prop("disabled", true);
+				$("#submitButton").html(`<span class="spinner-grow spinner-grow-sm"></span> Loading..`);
 
-					window.onbeforeunload = function() {
-						return "Are you sure you want to leave this page?";
-					};
+				window.onbeforeunload = function() {
+					return "Are you sure you want to leave this page?";
+				};
 
-					isImporting = true;
-				},
-				success: function(data) {
-					$("#submitButton").prop("disabled", false);
-					$("#submitButton").html(`Submit`);
+				isImporting = true;
+			},
+			success: function(data) {
+				$("#submitButton").prop("disabled", false);
+				$("#submitButton").html(`Submit`);
 
-					window.onbeforeunload = null;
+				window.onbeforeunload = null;
 
-					if (data.type == "error") {
-						Swal.fire(
-							'Error!',
-							data.value + '.',
-							'error'
-						)
-					}
-
-					if (data.type == "success") {
-						Swal.fire(
-							'Success!',
-							data.value + '.',
-							'success'
-						)
-					}
-
-					isImporting = false;
-
-					$('#form').trigger("reset");
+				if (data.type == "error") {
+					Swal.fire(
+						'Error!',
+						data.value + '.',
+						'error'
+					)
 				}
-			});
 
-			return false;
+				if (data.type == "success") {
+					Swal.fire(
+						'Success!',
+						data.value + '.',
+						'success'
+					)
+				}
+
+				isImporting = false;
+
+				$('#form').trigger("reset");
+			}
 		});
+
+		return false;
 	});
+
+	// Get the template button element
+	var templateButton = document.getElementById('downloadCSVTemplate');
+
+	// Add a click event listener to the template button
+	templateButton.addEventListener('click', function(event) {
+		// Prevent the form from submitting
+		event.preventDefault();
+
+		// Code to load the template file instead of submitting the form
+		window.location.href = "../../assets/includes/admin/users/user.inc.php?downloadCSVTemplate";
+	});
+});
 </script>
