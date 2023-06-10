@@ -25,14 +25,108 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 				<h5 class="card-title">Field Names</h5>
 
 				<ul class="mb-0">
-					<li>Institute</li>
-					<li>Username</li>
-					<li>Last Name</li>
-					<li>First Name</li>
+					<li>First Name
+						
+					</li>
+
+					<li>Last Name
+						
+					</li>
 					<li>Middle Name</li>
-					<li>Role</li>
-					<li>Initial Password</li>
-					<li>Email Address</li>
+					<li>Suffix</li>
+					<li>Institute
+						<i 	class='fa-solid fa-circle-info text-info'
+							data-bs-toggle='tooltip'
+							data-bs-placement='right'
+							data-bs-html='true'
+							title='	Institute can only be: <br>
+									<ul><?php
+										$sql_institute = "SELECT DISTINCT institute_code FROM institutes";
+										$result_institute = mysqli_query($conn, $sql_institute);
+										while($row_institute = mysqli_fetch_assoc($result_institute)){
+											if($row_institute['institute_code'] != "MISSO" && $row_institute['institute_code'] != "NTPs"){
+												echo "<li>" . $row_institute['institute_code'] . "</li>";
+											}
+										}
+									?></ul> '>
+						</i>
+					</li>
+					<li>Course
+						<i 	class='fa-solid fa-circle-info text-info'
+							data-bs-toggle='tooltip'
+							data-bs-placement='right'
+							data-bs-html='true'
+							title='	Course can only be: <br>
+										<?php
+										$sql_institute = "SELECT DISTINCT institute_code FROM institutes";
+										$result_institute = mysqli_query($conn, $sql_institute);
+										$counter = 0;
+										while($row_institute = mysqli_fetch_assoc($result_institute)){
+											$counter++;
+											if($row_institute['institute_code'] != "MISSO" && $row_institute['institute_code'] != "NTPs"){
+												echo "(For " . $row_institute['institute_code'] . ") <br>";
+												echo "<ul>"; 
+
+												$sql_name = "sql_course";
+												$sql_name .= $counter;
+												$result_name = "result_course";
+												$result_name .= $counter;
+												$row_name = "row_course";
+												$row_name .= $counter;
+
+
+												$sql_name = "SELECT DISTINCT course_code FROM courses WHERE institute = " . $counter;
+												$result_name = mysqli_query($conn, $sql_name);
+												while($row_name = mysqli_fetch_assoc($result_name)){
+													echo "<li>" . $row_name['course_code'] . "</li>";
+												}
+												echo "</ul>"; 
+											}
+										}
+									?>'>
+						</i>
+					</li>
+					<li>User Name
+						<i 	class='fa-solid fa-circle-info text-info'
+							data-bs-toggle='tooltip'
+							data-bs-placement='right'
+							data-bs-html='true'
+							title='	Username must contain: <br>
+									<ul>
+									<li>at least 8 characters</li>
+									<li>an uppercase letter</li>
+									<li>a lowercase letter</li>
+									<li>a number</li>
+									<li>can contain ( - ) or ( _ )</li>
+									</ul>'>
+						</i>
+					</li>
+					<li>Password
+						<i 	class='fa-solid fa-circle-info text-info'
+							data-bs-toggle='tooltip'
+							data-bs-placement='right'
+							data-bs-html='true'
+							title='	Password must contain: <br>
+									<ul>
+									<li>at least 8 characters</li>
+									<li>an uppercase letter</li>
+									<li>a lowercase letter</li>
+									<li>a number</li>
+									</ul>'>
+						</i>
+					</li>
+					<li>Role
+						<i 	class='fa-solid fa-circle-info text-info'
+							data-bs-toggle='tooltip'
+							data-bs-placement='right'
+							data-bs-html='true'
+							title='	Role can only be: <br>
+									<ul>
+									<li>Student</li>
+									<li>Faculty</li>
+									</ul> '>
+						</i>
+					</li>
 				</ul>
 			</div>
 		</div>	
