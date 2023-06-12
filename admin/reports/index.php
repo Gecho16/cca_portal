@@ -18,8 +18,9 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
         <div class="d-flex justify-content-end align-items-center my-2">
             <div class="d-flex align-items-center">
                 <select class="form-select me-2" id="tableSelect">
-                    <option value='reports'>Reports</option>
-                    <option value='evaluation'>Evaluation</option>
+                    <option value='accomplishment-reports'>Accomplishment Reports</option>
+                    <option value='dtr-reports'>DTR Reports</option>
+                    <option value='evaluation-reports'>Evaluation Reports</option>
                 </select>
                 <select class="form-select me-2" id="academicYearFull">
 
