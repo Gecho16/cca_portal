@@ -65,13 +65,6 @@ $('#users').DataTable({
                 },
             ]
         },
-        // View All Columns
-        // {   extend: 'colvis',
-        //     text: 'Hide Columns',
-        //     columns: '2,3,4,5,6',
-        //     autoClose: true,
-        //     postfixButtons: [ 'colvisRestore' ]
-        // },
         // View Mode
         {   extend: 'colvis',
             text: 'View',
@@ -106,37 +99,37 @@ $('#users').DataTable({
     // Prevent error form
     error: function(){
         $("#datatable_processing").css("display","none");
-    }
-},
-// Setting column names and bool orderable
-columns: [
-    { data: 0, title: checkbox, orderable: false, visible: true  },
-    { data: 1, title: 'Id', orderable: true, visible: false },
-    { data: 2, title: 'Avatar', orderable: false, visible: true },
-    { data: 3, title: 'Fullname', orderable: true, visible: true },
-    { data: 4, title: 'Lastname', orderable: true, visible: false },
-    { data: 5, title: 'Firstname', orderable: true, visible: false },
-    { data: 6, title: 'Middlename', orderable: true, visible: false },
-    { data: 7, title: 'Suffix', orderable: true, visible: false },
-    { data: 8, title: 'Institute', orderable: true, visible: true },
-    { data: 9, title: 'Institute', orderable: true, visible: false },
-    { data: 10, title: 'Email', orderable: true, visible: false },
-    { data: 11, title: 'Username', orderable: true, visible: true },
-    { data: 12, title: 'Role', orderable: true, visible: true },
-    { data: 13, title: 'Last Login', orderable: true, visible: true },
-    { data: 14, title: 'Status', orderable: true, visible: true },
-    { data: 15, title: actionBullet, orderable: false }
-],
-// Setting column width
-columnDefs: [
-    // { width: '5%', targets: 0 },
-    // { width: '5%', targets: 1 },
-    // { width: '5%', targets: 2 },
-    // { width: '5%', targets: 3 },
-    // { width: '20%', targets: 4 },
-    // { width: '25%', targets: 5 },
-    // { width: '5%', targets: 6 },
-    // { width: '5%', targets: 7 },
-    // { width: '5%', targets: 8 },
-],
+        }
+    },
+    // Setting column names and bool orderable
+    columns: [
+        { data: 0, title: checkbox, orderable: false, visible: true  },
+        { data: 1, title: 'Id', orderable: true, visible: false },
+        { data: 2, title: 'Avatar', orderable: false, visible: true },
+        { data: 3, title: 'Fullname', orderable: true, visible: true },
+        { data: 4, title: 'Lastname', orderable: true, visible: false },
+        { data: 5, title: 'Firstname', orderable: true, visible: false },
+        { data: 6, title: 'Middlename', orderable: true, visible: false },
+        { data: 7, title: 'Suffix', orderable: true, visible: false },
+        { data: 8, title: 'Institute', orderable: true, visible: true },
+        { data: 9, title: 'Institute', orderable: true, visible: false },
+        { data: 10, title: 'Email', orderable: true, visible: false },
+        { data: 11, title: 'Username', orderable: true, visible: true },
+        { data: 12, title: 'Role', orderable: true, visible: true },
+        { data: 13, title: 'Last Login', orderable: true, visible: true },
+        { data: 14, title: 'Status', orderable: true, visible: true },
+        { data: 15, title: actionBullet, orderable: false }
+    ],
+    // Setting column width
+    columnDefs: [
+        // { width: '5%', targets: 0 },
+        // { width: '5%', targets: 1 },
+        // { width: '5%', targets: 2 },
+        // { width: '5%', targets: 3 },
+        // { width: '20%', targets: 4 },
+        // { width: '25%', targets: 5 },
+        // { width: '5%', targets: 6 },
+        // { width: '5%', targets: 7 },
+        // { width: '5%', targets: 8 },
+    ],
 });

@@ -14,20 +14,21 @@ if (isset($_GET["selectUsers"])) {
 	// define index of column
 	$columns = array( 
 		0 => 'id',
-		1 => 'avatar',
-		2 => 'fullname',
+		1 => 'id',
+		2 => 'avatar',
 		3 => 'lastname',
-		4 => 'firstname',
-		5 => 'middlename',
-		6 => 'suffix',
-		7 => 'institute',
+		4 => 'lastname',
+		5 => 'firstname',
+		6 => 'middlename',
+		7 => 'suffix',
 		8 => 'institute',
-		9 => 'email',
-		10 => 'username',
-		11 => 'role',
-		12 => 'last_login',
-		13 => 'is_active',
-		14 => ''
+		9 => 'institute',
+		10 => 'email',
+		11 => 'username',
+		12 => 'role',
+		13 => 'last_login',
+		14 => 'is_active',
+		15 => ''
 	);
 	
 	$where = $sqlTot = $sqlRec = "";
@@ -116,51 +117,6 @@ if (isset($_GET["selectUsers"])) {
 				$fullname = $lastname . ', ' . $firstname; 
 			}
 
-			// Institute Details
-			// if(in_array($institute, ['IBM', 'ICSLIS', 'IEAS', 'MISSO', 'NTPs'])){
-			// 	$sql_institutes = "SELECT institute.id,
-			// 							institute.institute_code,
-			// 							institute.institute_name,
-			// 							institute.dean,
-			// 							users.lastname,
-			// 							users.firstname,
-			// 							users.middlename,
-			// 							users.suffix
-			// 						FROM institutes as institute
-			// 							INNER JOIN user_accounts AS users ON institute.dean = users.id
-			// 						WHERE institute.institute_code = '" . $institute . "'";
-			// 	$query_institutes = mysqli_query($conn, $sql_institutes);
-			// 	if (mysqli_num_rows($query_institutes) > 0) {
-			// 		while ($row_institutes = mysqli_fetch_assoc($query_institutes)) {
-			// 			$dean_lastname = $row_institutes['lastname'];
-			// 			$dean_firstname = $row_institutes['firstname'];
-			// 			$dean_middlename = $row_institutes['middlename'];
-			// 			$dean_suffix = $row_institutes['suffix'];
-						
-			// 			if (!in_array($row["suffix"], [null, ''])) {
-			// 				$dean_fullname = $dean_lastname . ' ' . $dean_suffix . ', ' . $dean_firstname . ' ' . $dean_middlename; 
-			// 			}else if (!in_array($row["middlename"], [null, ''])) {
-			// 				$dean_fullname = $dean_lastname . ', ' . $dean_firstname . ' ' . $dean_middlename; 
-			// 			}else{
-			// 				$dean_fullname = $dean_lastname . ', ' . $dean_firstname; 
-			// 			}
-
-			// 			$institute_details = "<button type='button'
-			// 										class='bg-transparent border-0'
-			// 										data-bs-toggle='modal'
-			// 										data-bs-target='#institute_information'
-			// 										data-bs-modal-title='Institute Information'
-			// 										data-bs-institute_code='" . $row_institutes['institute_code'] . "'
-			// 										data-bs-institute_name='" . $row_institutes['institute_name'] . "'
-			// 										data-bs-dean='" . $dean_fullname . "'
-			// 										title='Click for more info'>
-			// 										<i class='me-2 fa-solid fa-circle-info fa-lg table-info-icon'></i>
-			// 										" . $row_institutes['institute_code'] . "
-			// 									</button>";
-			// 		}
-			// 	}
-			// }
-
 			if(in_array($institute, ['IBM', 'ICSLIS', 'IEAS'])){
 
 				$sql_institutes = "	SELECT * FROM institutes
@@ -182,23 +138,7 @@ if (isset($_GET["selectUsers"])) {
 												</button>";
 					}
 				}
-			}
-			// else{
-			// 		$institute_details = "<button type='button'
-			// 							class='bg-transparent border-0'
-			// 							data-bs-toggle='modal'
-			// 							data-bs-target='#institute_information'
-			// 							data-bs-modal-title='Institute Information'
-			// 							data-bs-institute_code='NTPs'
-			// 							data-bs-institute_name='Non Teaching Personnels'
-			// 							data-bs-dean='N/A'
-			// 							title='Click for more info'>
-			// 							<i class='me-2 fa-solid fa-circle-info fa-lg table-info-icon'></i>
-			// 							NTPs
-			// 						</button>";
-			// }
-
-			else if($institute == 'MISSO'){
+			}else if($institute == 'MISSO'){
 				$institute_details = "<button type='button'
 										class='bg-transparent border-0'
 										data-bs-toggle='modal'

@@ -445,33 +445,6 @@ if (isset($_GET["selectYear"])) {
 
 			$subdata = array();
 
-			// Data to array
-			// $subdata[] = $checkbox;
-			// $subdata[] = $id;
-			// $subdata[] = $academic_year;
-			// $subdata[] = $institute;
-			// $subdata[] = $course;
-			// $subdata[] = $subject;
-			// $subdata[] = $subject_code;
-			// $subdata[] = $subject_title;
-			// $subdata[] = $lecture_hours;
-			// $subdata[] = $laboratory_hours;
-			// $subdata[] = $credited_units;
-			// $subdata[] = $class_code;
-			// $subdata[] = $section;
-			// $subdata[] = $instructor;
-			// $subdata[] = $synchronous;
-			// $subdata[] = $synch_day;
-			// $subdata[] = $synch_time;
-			// $subdata[] = $synch_room;
-			// $subdata[] = $asynchronous;
-			// $subdata[] = $asynch_day;
-			// $subdata[] = $asynch_time;
-			// $subdata[] = $asynch_room;
-			// $subdata[] = $status;
-			// $subdata[] = $remarks;
-			// $subdata[] = $actionBullet;
-
 			$subdata[] = $checkbox;
 			$subdata[] = $id;
 			$subdata[] = $academic_year;

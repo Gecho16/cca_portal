@@ -88,6 +88,13 @@ allowedRole($baseUrl, "Admin");
 						</a>
 					</li>
 
+					<li class="sidebar-item <?= page("academics", $page); ?>">
+						<a class="sidebar-link" href="<?= $baseUrl; ?>admin/academics">
+							<i class="fa-solid fa-chart-pie align-middle"></i>
+							<span class="align-middle">Academics</span>
+						</a>
+					</li>
+
 					<li class="sidebar-item <?= page("schedule", $page); ?>">
 						<a class="sidebar-link" href="<?= $baseUrl; ?>admin/schedule">
 							<i class="fa-solid fa-chart-pie align-middle"></i>

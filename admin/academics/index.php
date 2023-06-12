@@ -1,9 +1,9 @@
 <?php
 
-$baseUrl = "../";
+$baseUrl = "../../";
 
 $title = "City College of Angeles - Totalis Humanae";
-$page = "registrar";
+$page = "academics";
 
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
@@ -12,17 +12,19 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 <!-- BODY HEADERS -->
 <div class="d-flex justify-content-between align-items-center mb-3 d-print-none">
     <div class="d-flex flex-column align-items-start w-50">
-        <h1 id="page-title" class="h1">Registrar</h1>
+        <h1 id="page-title" class="h1">Academic Years</h1>
     </div>
     <div class="d-flex flex-column w-50">
         <div class="d-flex justify-content-end align-items-center my-2">
             <div class="d-flex align-items-center">
                 <select class="form-select me-2" id="tableSelect">
-                    <option value='class-list'>Class List</option>
-                    <option value='clearance'>Clearance</option>
-                    <option value='grades'>Grades</option>
-                    <option value='ched-reports'>CHED Reports</option>
-                    <option value='unifast-reports'>UNIFAST Reports</option>
+                    <option value='academic-year'>Academic Year</option>
+                    <option value='institutes'>Institutes</option>
+                    <option value='courses'>Courses</option>
+                    <option value='subjects'>Subjects</option>
+                    <option value='sections'>Sections</option>
+                    <option value='faculty'>Faculty</option>
+                    <option value='rooms'>Rooms</option>
                 </select>
                 <select class="form-select me-2" id="academicYearFull">
 
@@ -55,21 +57,6 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                     ?>
                     
                 </select>
-
-                <div class='btn-group'>
-                    <button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>
-                        <i class='fa-solid fa-ellipsis-vertical fa-xl'></i>
-                    </button>
-                    <div class='dropdown-menu ' id='dropdown-container'>
-                        <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#enableModal' data-bs-name='" . $row["username"] . "' data-bs-href='#' title='enable'>
-                            Option (Button)
-                        </button>
-                        <a class='dropdown-item' href='#' title='edit'>
-                            Option (Link)
-                        </a>
-                    </div>
-                </div>
-
             </div>	
         </div>
         <div class="d-flex justify-content-end">
@@ -91,13 +78,46 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 <!-- TABLE -->
 <div class="card">
     <div class="card-body">
-        <div class="table-responsive">
-            <form method="POST" action='' id="registrarform">
-                <table class="table table-striped table-sm w-100" id="registrar"></table>
-            </form>
+        <div class="table-responsive" id="academics-container">
+            <table class="table table-striped table-sm w-100" id="academics"></table>
         </div>
     </div>
 </div>
+
+<!-- ENABLE MODAL -->
+<div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="activateModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="activateModalLabel">Activate Academic Year</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to activete <strong class="name"></strong>?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a href="#" class="btn btn-success href">Confirm</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	let activateModal = document.getElementById("activateModal");
+
+	activateModal.addEventListener("show.bs.modal", function (event) {
+		let button = event.relatedTarget;
+
+		let name = button.getAttribute("data-bs-name");
+		let modalBodyName = activateModal.querySelector(".modal-body .name");
+		modalBodyName.innerHTML = name;
+
+		let href = button.getAttribute("data-bs-href");
+		let modalFooterHref = activateModal.querySelector(".modal-footer .href");
+		modalFooterHref.href = href;
+	});
+</script>
 
 <?php
 
@@ -107,56 +127,48 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 
 <!-- TABLE SCRIPT -->
 <script>
-function studentInfoTable(){
+function academicTable(){
     view = document.getElementById("tableSelect").value;
-    $.getScript('../assets/js/admin/registrar/'+ view +'-table-script.js');
+    $.getScript('../../assets/js/admin/academics/'+ view +'-table-script.js');
 }
 
-studentInfoTable()
+academicTable()
 
 // Refresh table when view value is changed
 $( document ).ready(function() {
-    // Refresh table when academic year value is changed
-    $('#academicYearFull').on('change', function() {
-        acadYear = document.getElementById("academicYearFull").value;
-        var table = $('#registrar').DataTable();
-        table.destroy();
-        // console.log(document.getElementById("academicYearFull").value);
-
-        // Set page title depending of selected table
-        studentInfoTable()
-    });
-
     // Refresh table when view value is changed
     $('#tableSelect').on('change', function() {
-        acadYear = document.getElementById("academicYearFull").value;
         view = document.getElementById("tableSelect").value;
-        var table = $('#registrar').DataTable();
-        var container = $('#registrar');
+        var table = $('#academics').DataTable();
+        var container = $('#academics');
 
-        console.log(view);
+        // console.log(view);
 
-        if ($.fn.DataTable.isDataTable('#registrar')) {
+        if ($.fn.DataTable.isDataTable('#academics')) {
             table.destroy();
             container.remove();
         }
 
-        var parentContainer = $('#registrarform');
-        var newTable = $('<table class="table table-striped table-sm w-100" id="registrar"></table>');
+        var parentContainer = $('#academics-container');
+        var newTable = $('<table class="table table-striped table-sm w-100" id="academics"></table>');
         parentContainer.append(newTable);
 
-        studentInfoTable()
+        academicTable()
         // Set page title depending of selected table
-        if(view == 'class-list'){
-            document.getElementById("page-title").innerHTML = 'Class List';
-        }else if(view == 'clearance'){
-            document.getElementById("page-title").innerHTML = 'Clearance';
-        }else if(view == 'grades'){
-            document.getElementById("page-title").innerHTML = 'Grades';
-        }else if(view == 'ched-reports'){
-            document.getElementById("page-title").innerHTML = 'CHED Reports';
-        }else if(view == 'unifast-reports'){
-            document.getElementById("page-title").innerHTML = 'UNIFAST Reports';
+        if(view == 'academic-year'){
+            document.getElementById("page-title").innerHTML = 'Academic Years';
+        }else if(view == 'institutes'){
+            document.getElementById("page-title").innerHTML = 'Institutes';
+        }else if(view == 'courses'){
+            document.getElementById("page-title").innerHTML = 'Courses';
+        }else if(view == 'subjects'){
+            document.getElementById("page-title").innerHTML = 'Subjects';
+        }else if(view == 'sections'){
+            document.getElementById("page-title").innerHTML = 'Sections';
+        }else if(view == 'faculty'){
+            document.getElementById("page-title").innerHTML = 'Faculty';
+        }else if(view == 'rooms'){
+            document.getElementById("page-title").innerHTML = 'Rooms';
         }
     });
 });
