@@ -104,8 +104,17 @@ $('#reports').DataTable({
     // Setting column names and bool orderable
     columns: [
         { data: 0, title: checkbox, orderable: false, visible: true},
-        { data: 1, title: "Column", orderable: true, visible: true},
-        { data: 2, title: "Column", orderable: true, visible: true},
+        { data: 1, title: "Id", orderable: true, visible: true},
+        { data: 2, title: "Faculty", orderable: true, visible: true},
+        { data: 3, title: "Reference Number", orderable: true, visible: true},
+        { data: 4, title: "Date", orderable: true, visible: true},
+        { data: 5, title: "Day", orderable: true, visible: true},
+        { data: 6, title: "Time In", orderable: true, visible: true},
+        { data: 7, title: "Time Out", orderable: true, visible: true},
+        { data: 8, title: "Status", orderable: true, visible: true},
+        { data: 9, title: "Total Hours", orderable: true, visible: true},
+        { data: 10, title: "Remarks", orderable: true, visible: true},
+        { data: 11, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width
     columnDefs: [

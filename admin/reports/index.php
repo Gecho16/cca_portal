@@ -12,7 +12,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 <!-- BODY HEADERS -->
 <div class="d-flex justify-content-between align-items-center mb-3 d-print-none">
     <div class="d-flex flex-column align-items-start w-50">
-        <h1 id="page-title" class="h1">Reports</h1>
+        <h1 id="page-title" class="h1">Accomplishment Reports</h1>
     </div>
     <div class="d-flex flex-column w-50">
         <div class="d-flex justify-content-end align-items-center my-2">
@@ -145,10 +145,12 @@ $( document ).ready(function() {
 
         reportsTable()
         // Set page title depending of selected table
-        if(view == 'reports'){
-            document.getElementById("page-title").innerHTML = 'Reports';
-        }else if(view == 'evaluation'){
-            document.getElementById("page-title").innerHTML = 'Evaluation';
+        if(view == 'accomplishment-reports'){
+            document.getElementById("page-title").innerHTML = 'Accomplishment Reports';
+        }else if(view == 'dtr-reports'){
+            document.getElementById("page-title").innerHTML = 'DTR Reports';
+        }else if(view == 'evaluation-reports'){
+            document.getElementById("page-title").innerHTML = 'Evaluation Reports';
         }
     });
 });

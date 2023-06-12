@@ -104,8 +104,19 @@ $('#reports').DataTable({
     // Setting column names and bool orderable
     columns: [
         { data: 0, title: checkbox, orderable: false, visible: true},
-        { data: 1, title: "Column", orderable: true, visible: true},
-        { data: 2, title: "Column", orderable: true, visible: true},
+        { data: 1, title: "Id", orderable: true, visible: true},
+        { data: 2, title: "Faculty", orderable: true, visible: true},
+        { data: 3, title: "Reference Number", orderable: true, visible: true},
+        { data: 4, title: "VPAA", orderable: true, visible: true},
+        { data: 5, title: "Dean", orderable: true, visible: true},
+        { data: 6, title: "Coordinator", orderable: true, visible: true},
+        { data: 7, title: "Student", orderable: true, visible: true},
+        { data: 8, title: "Peer", orderable: true, visible: true},
+        { data: 9, title: "Self", orderable: true, visible: true},
+        { data: 10, title: "Overall", orderable: true, visible: true},
+        { data: 11, title: "Remarks", orderable: true, visible: true},
+        { data: 12, title: "Academic Year", orderable: true, visible: true},
+        { data: 13, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width
     columnDefs: [

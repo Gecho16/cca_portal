@@ -78,14 +78,39 @@ if (isset($_GET["selectYear"])) {
 
 	if (mysqli_num_rows($queryRecords) > 0) {
 		while ($row = mysqli_fetch_assoc($queryRecords)) {
-			$subdata = array();
+
+			// Variable transfer
+			$id = $row["id"];
 
 			// Checbox
 			$checkbox = "<input id='" . $row["id"] . "' type='checkbox' name='checkbox[]' value='" . $row["id"] . "'>";
+			
+			//Action Bullet 
+			$actionBullet = "";
+			$actionBullet .= "<div class='btn-group d-flex justify-content-end'>";
+			$actionBullet .= "<button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>";
+			$actionBullet .= "<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>";
+			$actionBullet .= "</button>";
+			$actionBullet .= "<div class='dropdown-menu' id='dropdown-container'>";
+			$actionBullet .= "<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#deleteSelectedModal' data-bs-name='' data-bs-href='../assets/includes/admin/user.inc.php?deleteSelectedUser' title='deleteSelected'>Option (Button)</button>";
+			$actionBullet .= "<a class='dropdown-item' href='#' title='edit'>Option (Link)</a>";
+			$actionBullet .= "</div>";
+			$actionBullet .= "</div>";
+
+			$subdata = array();
 
 			$subdata[] = $checkbox;
-			$subdata[] = '';
-			$subdata[] = '';
+			$subdata[] = $id;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $checkbox;
+			$subdata[] = $actionBullet;
 
 			$data[] = $subdata;
 		}

@@ -69,23 +69,6 @@ $('#reports').DataTable({
                 },
             ]
         },
-        // View Mode
-        {   extend: 'colvis',
-            text: 'View',
-            autoClose: true,
-            buttons: [
-                {   extend: 'colvisGroup',
-                    text: 'Column 1',
-                    show: [0, 1],
-                    hide: [2],
-                },
-                {   extend: 'colvisGroup',
-                    text: 'Column 2',
-                    show: [0, 2],
-                    hide: [1],
-                },
-            ],
-        },
         // Page length options
         'pageLength',
         ],
@@ -104,8 +87,14 @@ $('#reports').DataTable({
     // Setting column names and bool orderable
     columns: [
         { data: 0, title: checkbox, orderable: false, visible: true},
-        { data: 1, title: "Column", orderable: true, visible: true},
-        { data: 2, title: "Column", orderable: true, visible: true},
+        { data: 1, title: "Id", orderable: true, visible: true},
+        { data: 2, title: "Faculty", orderable: true, visible: true},
+        { data: 3, title: "Reference Number", orderable: true, visible: true},
+        { data: 4, title: "Coverage", orderable: true, visible: true},
+        { data: 5, title: "Date Submitted", orderable: true, visible: true},
+        { data: 6, title: "Academic Year", orderable: true, visible: true},
+        { data: 7, title: "Accomplishments", orderable: true, visible: true},
+        { data: 8, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width
     columnDefs: [
