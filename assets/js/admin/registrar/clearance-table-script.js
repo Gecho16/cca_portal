@@ -94,7 +94,7 @@ $('#registrar').DataTable({
         "serverSide": true,
         // JSON datasource
         "ajax":{
-            url :"../../assets/api/admin/registrar/"+view+".inc.php?selectYear="+acadYear, 
+            url :"../../assets/api/admin/registrar/clearance.inc.php?selectYear="+acadYear, 
             type: "POST",
         // Prevent error form
         error: function(){
@@ -104,8 +104,18 @@ $('#registrar').DataTable({
     // Setting column names and bool orderable
     columns: [
         { data: 0, title: checkbox, orderable: false, visible: true},
-        { data: 1, title: "Column", orderable: true, visible: true},
-        { data: 2, title: "Column", orderable: true, visible: true},
+        { data: 1, title: "Id", orderable: true, visible: true},
+        { data: 2, title: "Student", orderable: true, visible: true},
+        { data: 3, title: "Reference Number", orderable: true, visible: true},
+        { data: 4, title: "Course", orderable: true, visible: true},
+        { data: 5, title: "Section", orderable: true, visible: true},
+        { data: 6, title: "Academic Year", orderable: true, visible: true},
+        { data: 7, title: "Academics", orderable: true, visible: true},
+        { data: 8, title: "Library", orderable: true, visible: true},
+        { data: 9, title: "Registrar", orderable: true, visible: true},
+        { data: 10, title: "Status", orderable: true, visible: true},
+        { data: 11, title: "Remarks", orderable: true, visible: true},
+        { data: 12, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width
     columnDefs: [

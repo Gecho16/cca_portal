@@ -1,6 +1,5 @@
 // Initialize Table
 var acadYear = document.getElementById("academicYearFull").value;
-var view = document.getElementById("tableSelect").value;
 
 // Table Column Headers
 var checkbox = "<input id='selectAll' onclick='select_all()' type='checkbox'>";
@@ -94,7 +93,7 @@ $('#registrar').DataTable({
         "serverSide": true,
         // JSON datasource
         "ajax":{
-            url :"../../assets/api/admin/registrar/"+view+".inc.php?selectYear="+acadYear, 
+            url :"../../assets/api/admin/registrar/class-list.inc.php?selectYear="+acadYear, 
             type: "POST",
         // Prevent error form
         error: function(){
@@ -104,8 +103,19 @@ $('#registrar').DataTable({
     // Setting column names and bool orderable
     columns: [
         { data: 0, title: checkbox, orderable: false, visible: true},
-        { data: 1, title: "Column", orderable: true, visible: true},
-        { data: 2, title: "Column", orderable: true, visible: true},
+        { data: 1, title: "Id", orderable: true, visible: true},
+        { data: 2, title: "Reference Number", orderable: true, visible: true},
+        { data: 3, title: "Fullname", orderable: true, visible: true},
+        { data: 4, title: "Firstname", orderable: true, visible: true},
+        { data: 5, title: "Lastname", orderable: true, visible: true},
+        { data: 6, title: "Middlename", orderable: true, visible: true},
+        { data: 7, title: "Suffix", orderable: true, visible: true},
+        { data: 8, title: "Course", orderable: true, visible: true},
+        { data: 9, title: "Section", orderable: true, visible: true},
+        { data: 10, title: "Year Level", orderable: true, visible: true},
+        { data: 11, title: "Type", orderable: true, visible: true},
+        { data: 12, title: "Academic Year", orderable: true, visible: true},
+        { data: 13, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width
     columnDefs: [

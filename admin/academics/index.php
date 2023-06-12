@@ -26,37 +26,6 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                     <option value='faculty'>Faculty</option>
                     <option value='rooms'>Rooms</option>
                 </select>
-                <select class="form-select me-2" id="academicYearFull">
-
-                    <?php
-
-                    $sql = "SELECT * FROM academic_years ORDER BY CONCAT(year, ' ', semester) DESC";
-                    $result = mysqli_query($conn, $sql);
-                    
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $academicYear = $row["year"];
-                            $semester = $row["semester"];
-
-                            $semesterFull = $semester;
-
-                            if ($semester != "Summer") {
-                                $semesterFull .= " Semester";
-                            }
-
-                            echo "<option value='" . $row["id"] . "'>A.Y. " . $academicYear . ", " . $semesterFull . "</option>";
-                        }
-                    } else {
-                        echo "<option value=''>No Academic Years available</option>";
-                    }
-
-                    if (mysqli_num_rows($result) > 1) {
-                        echo "<option value='All'>All</option>";
-                    }
-
-                    ?>
-                    
-                </select>
             </div>	
         </div>
         <div class="d-flex justify-content-end">

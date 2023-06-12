@@ -12,7 +12,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 <!-- BODY HEADERS -->
 <div class="d-flex justify-content-between align-items-center mb-3 d-print-none">
     <div class="d-flex flex-column align-items-start w-50">
-        <h1 id="page-title" class="h1">Registrar</h1>
+        <h1 id="page-title" class="h1">Class List</h1>
     </div>
     <div class="d-flex flex-column w-50">
         <div class="d-flex justify-content-end align-items-center my-2">
@@ -20,9 +20,6 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                 <select class="form-select me-2" id="tableSelect">
                     <option value='class-list'>Class List</option>
                     <option value='clearance'>Clearance</option>
-                    <option value='grades'>Grades</option>
-                    <option value='ched-reports'>CHED Reports</option>
-                    <option value='unifast-reports'>UNIFAST Reports</option>
                 </select>
                 <select class="form-select me-2" id="academicYearFull">
 
@@ -151,12 +148,6 @@ $( document ).ready(function() {
             document.getElementById("page-title").innerHTML = 'Class List';
         }else if(view == 'clearance'){
             document.getElementById("page-title").innerHTML = 'Clearance';
-        }else if(view == 'grades'){
-            document.getElementById("page-title").innerHTML = 'Grades';
-        }else if(view == 'ched-reports'){
-            document.getElementById("page-title").innerHTML = 'CHED Reports';
-        }else if(view == 'unifast-reports'){
-            document.getElementById("page-title").innerHTML = 'UNIFAST Reports';
         }
     });
 });
