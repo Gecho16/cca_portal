@@ -24,7 +24,8 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
             <h3 class="h1">IBM</h3>
             <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi doloremque dolore in incidunt voluptatibus accusamus voluptatem eum quam, molestiae, quae optio.</p>
             <a href="#" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VIEW DOCUMENT TEMPLATES</a>
-            <a href="#" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
+            <a href="../institutes/new/ibm.php" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
+            <a href="../institutes/home/ibm.html" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
         </div>
     </div>
 
@@ -34,7 +35,8 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
             <h3 class="h1">ICSLIS</h3>
             <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi doloremque dolore in incidunt voluptatibus accusamus voluptatem eum quam, molestiae, quae optio.</p>
             <a href="#" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VIEW DOCUMENT TEMPLATES</a>
-            <a href="#" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
+            <a href="../institutes/new/icslis.php" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
+            <a href="../institutes/home/icslis.html" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
         </div>
     </div>
 
@@ -44,7 +46,8 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
             <h3 class="h1">IEAS</h3>
             <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi doloremque dolore in incidunt voluptatibus accusamus voluptatem eum quam, molestiae, quae optio.</p>
             <a href="#" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VIEW DOCUMENT TEMPLATES</a>
-            <a href="#" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
+            <a href="../institutes/new/ieas.php" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
+            <a href="../institutes/home/ieas.html" class="badge badge-primary p-3 my-1" style="background-color: var(--green); color: white; font-size: .8vw; text-decoration: none;">VISIT INSTITUTE PAGE</a>
         </div>
     </div>
 </div>

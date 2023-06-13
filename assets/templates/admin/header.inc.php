@@ -102,12 +102,12 @@ allowedRole($baseUrl, "Admin");
 						</a>
 					</li>
 
-					<li class="sidebar-item <?= page("student-information", $page); ?>">
+					<!-- <li class="sidebar-item <?= page("student-information", $page); ?>">
 						<a class="sidebar-link" href="<?= $baseUrl; ?>admin/student-information">
 							<i class="fa-solid fa-chart-pie align-middle"></i>
 							<span class="align-middle">Student Information</span>
 						</a>
-					</li>
+					</li> -->
 
 					<li class="sidebar-item <?= page("registrar", $page); ?>">
 						<a class="sidebar-link" href="<?= $baseUrl; ?>admin/registrar">

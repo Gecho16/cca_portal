@@ -24,6 +24,13 @@ if (isset($_GET["selectYear"])) {
 	$columns = array( 
 		0 => 'reports.id',
 		1 => 'reports.id',
+		2 => 'faculty.lastname',
+		3 => 'reports.reference_number',
+		4 => 'reports.coverage',
+		5 => 'reports.submitted',
+		6 => 'reports.academic_year',
+		7 => '',
+		8 => '',
 
 	);
 	
@@ -45,16 +52,28 @@ if (isset($_GET["selectYear"])) {
 	// check search value exists
 	if (!empty($request["search"]["value"])) {
 		$where .= " WHERE ";
-		$where .= " institute LIKE '%" . $request["search"]["value"] . "%' ";
-		$where .= " OR reference_number LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " reports.faculty  LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.reference_number LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.coverage LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.accomplishments LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.submitted LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.firstname LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.lastname LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.middlename LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.suffix LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR acad_year.year LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR acad_year.semester LIKE '%" . $request["search"]["value"] . "%' ";
 	}
 
 	// Set academic year
 	if (!empty($request["search"]["value"] && $_GET["selectYear"] !== "All")) {
 		$where .= " AND";
+	}else{
+		$where .= " WHERE";
 	}
+
 	if($_GET["selectYear"] !== "All"){
-		$where .= " WHERE reports.academic_year = '$acadYearId'";	
+		$where .= " reports.academic_year = '$acadYearId'";	
 	}
 
 	$sqlTot .= $sql;
@@ -126,7 +145,7 @@ if (isset($_GET["selectYear"])) {
 			$academic_year = "A.Y. " . $academic_year . " " . $semester; 
 
 			// Accomplishments
-			$accomplishments = "<div class='d-flex justify-content-start'><button type='button' class='btn btn-sm rounded btn-primary' title='Edit'>View</button></div>";
+			$accomplishments = "<form action='../reports/report' method='POST' class='d-flex justify-content-start'><button type='submit' class='btn btn-sm rounded btn-primary' title='View' name='submitbutton' value=" . $id . " >View</button></form>";
 			
 			//Action Bullet 
 			$actionBullet = "";

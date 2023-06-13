@@ -77,7 +77,7 @@ $('#reports').DataTable({
         "serverSide": true,
         // JSON datasource
         "ajax":{
-            url :"../../assets/api/admin/reports/"+view+".inc.php?selectYear="+acadYear, 
+            url :"../../assets/api/admin/reports/accomplishment-reports.inc.php?selectYear="+acadYear, 
             type: "POST",
         // Prevent error form
         error: function(){
@@ -93,7 +93,7 @@ $('#reports').DataTable({
         { data: 4, title: "Coverage", orderable: true, visible: true},
         { data: 5, title: "Date Submitted", orderable: true, visible: true},
         { data: 6, title: "Academic Year", orderable: true, visible: true},
-        { data: 7, title: "Accomplishments", orderable: true, visible: true},
+        { data: 7, title: "Accomplishments", orderable: false, visible: true},
         { data: 8, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width

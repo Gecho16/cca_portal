@@ -69,23 +69,6 @@ $('#reports').DataTable({
                 },
             ]
         },
-        // View Mode
-        {   extend: 'colvis',
-            text: 'View',
-            autoClose: true,
-            buttons: [
-                {   extend: 'colvisGroup',
-                    text: 'Column 1',
-                    show: [0, 1],
-                    hide: [2],
-                },
-                {   extend: 'colvisGroup',
-                    text: 'Column 2',
-                    show: [0, 2],
-                    hide: [1],
-                },
-            ],
-        },
         // Page length options
         'pageLength',
         ],
@@ -116,7 +99,8 @@ $('#reports').DataTable({
         { data: 10, title: "Overall", orderable: true, visible: true},
         { data: 11, title: "Remarks", orderable: true, visible: true},
         { data: 12, title: "Academic Year", orderable: true, visible: true},
-        { data: 13, title: actionBullet, orderable: false, visible: true},
+        { data: 13, title: "View", orderable: false, visible: true},
+        { data: 14, title: actionBullet, orderable: false, visible: true},
     ],
     // Setting column width
     columnDefs: [

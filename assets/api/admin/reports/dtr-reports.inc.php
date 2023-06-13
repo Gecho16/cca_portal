@@ -22,31 +22,49 @@ if (isset($_GET["selectYear"])) {
 
 	// define index of column
 	$columns = array( 
-		0 => 'class.id',
-		1 => 'class.id',
+		0 => 'reports.id',
+		1 => 'reports.id',
+		2 => 'faculty.lastname',
+		3 => 'reports.reference_number',
+		4 => 'reports.date',
+		5 => 'reports.day',
+		6 => 'reports.time_in',
+		7 => 'reports.time_out',
+		8 => 'reports.status',
+		9 => 'reports.total_hours',
+		10 => 'reports.remarks',
+		11 => '',
+		12 => '',
 
 	);
 	
 	$where = $sqlTot = $sqlRec = "";
 
 	// getting total number records without any search
-	$sql = "SELECT 	DISTINCT class.id,
-					class.academic_year
-					FROM classes AS class";
+	$sql = "SELECT 	reports.*,
+					faculty.firstname AS firstname,
+					faculty.lastname AS lastname,
+					faculty.middlename AS middlename,
+					faculty.suffix AS suffix
+			FROM 	dtr_reports AS reports
+					INNER JOIN faculty AS faculty ON reports.faculty = faculty.id";
 
 	// check search value exists
 	if (!empty($request["search"]["value"])) {
 		$where .= " WHERE ";
-		$where .= " institute LIKE '%" . $request["search"]["value"] . "%' ";
-		$where .= " OR reference_number LIKE '%" . $request["search"]["value"] . "%' ";
-	}
-
-	// Set academic year
-	if (!empty($request["search"]["value"] && $_GET["selectYear"] !== "All")) {
-		$where .= " AND";
-	}
-	if($_GET["selectYear"] !== "All"){
-		$where .= " WHERE class.academic_year = '$acadYearId'";	
+		$where .= " reports.faculty  LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.reference_number LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.date LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.day LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.time_in LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.time_out LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.status LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.total_hours LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR reports.remarks LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.firstname LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.lastname LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.middlename LIKE '%" . $request["search"]["value"] . "%' ";
+		$where .= " OR faculty.suffix LIKE '%" . $request["search"]["value"] . "%' ";
 	}
 
 	$sqlTot .= $sql;
@@ -81,9 +99,41 @@ if (isset($_GET["selectYear"])) {
 
 			// Variable transfer
 			$id = $row["id"];
+			$faculty = $row["faculty"];
+			$reference_number = $row["reference_number"];
+			$date = $row["date"];
+			$day = $row["day"];
+			$time_in = $row["time_in"];
+			$time_out = $row["time_out"];
+			$status = $row["status"];
+			$total_hours = $row["total_hours"];
+			$remarks = $row["remarks"];
+			$firstname = $row["firstname"];
+			$lastname = $row["lastname"];
+			$middlename = $row["middlename"];
+			$suffix = $row["suffix"];
 
 			// Checbox
 			$checkbox = "<input id='" . $row["id"] . "' type='checkbox' name='checkbox[]' value='" . $row["id"] . "'>";
+
+			// Faculty
+			if ($middlename === null || $middlename === "") {
+				$fullname = $lastname . " " . $suffix . ", " . $firstname;
+			}else if($suffix === null || $suffix === ""){
+				$fullname = $lastname . ", " . $firstname . " " . $middlename;
+			}else if(($middlename === null || $middlename === "") || ($suffix === null || $suffix === "")){
+				$fullname = $lastname . ", " . $firstname;
+			}else{
+				$fullname = $lastname . " " . $suffix . ", " . $firstname . " " . $middlename;
+			}
+
+			// Remarks
+			if ($remarks === null || $remarks === "") {
+				$remarks = "- - -";
+			}
+
+			// View
+			$view = "<form action='../reports/report' method='POST' class='d-flex justify-content-start'><button type='submit' class='btn btn-sm rounded btn-primary' title='View' name='submitbutton' value=" . $id . " >View</button></form>";
 			
 			//Action Bullet 
 			$actionBullet = "";
@@ -101,15 +151,16 @@ if (isset($_GET["selectYear"])) {
 
 			$subdata[] = $checkbox;
 			$subdata[] = $id;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
-			$subdata[] = $checkbox;
+			$subdata[] = $fullname;
+			$subdata[] = $reference_number;
+			$subdata[] = $date;
+			$subdata[] = $day;
+			$subdata[] = $time_in;
+			$subdata[] = $time_out;
+			$subdata[] = $status;
+			$subdata[] = $total_hours;
+			$subdata[] = $remarks;
+			$subdata[] = $view;
 			$subdata[] = $actionBullet;
 
 			$data[] = $subdata;

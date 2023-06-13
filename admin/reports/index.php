@@ -70,7 +70,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 
             </div>	
         </div>
-        <div class="d-flex justify-content-end">
+        <!-- <div class="d-flex justify-content-end">
             <div class="d-flex mx-2">
                 <a class='btn bg-white border border-dark d-flex' href='#'>
                     Add Entry
@@ -82,7 +82,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                     Import
                 </a>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
