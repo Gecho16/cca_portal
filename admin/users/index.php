@@ -23,7 +23,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                 </select>
             </div>	
         </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end" id="user-input-buttons">
             <div class="d-flex mx-2">
                 <a class='btn bg-white border border-dark d-flex' href='add'>
                     Add User
@@ -85,9 +85,13 @@ $('#tableSelect').on('change', function() {
     if(view == 'users'){
         userListTable();
         document.getElementById("page-title").innerHTML = 'User Accounts';
+        document.getElementById("user-input-buttons").classList.remove("d-none");
+        document.getElementById("user-input-buttons").classList.add("d-flex");
     }else if(view == 'logs'){
         userLogsTable()
         document.getElementById("page-title").innerHTML = 'User Logs';
+        document.getElementById("user-input-buttons").classList.remove("d-flex");
+        document.getElementById("user-input-buttons").classList.add("d-none");
     }
 });
 

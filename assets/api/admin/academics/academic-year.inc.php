@@ -81,7 +81,7 @@ if (isset($_GET["selectYear"])) {
                                 <i class='fa-solid fa-toggle-on'></i>
                             </button>";
             }else{
-				$status =	"<button type='button' class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#activateModal' data-bs-name='" . $fullYear . "' data-bs-href='../assets/includes/admin/academic-year.inc.php?activateAcademicYear&id=" . $row["id"] . "' title='activate'>
+				$status =	"<button type='button' class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#activateModal' data-bs-name='" . $fullYear . "' data-bs-href='../../assets/includes/admin/academics/academic-year.inc.php?activateAcadYear&id=" . $row["id"] . "' title='activate'>
                                 <i class='fa-solid fa-toggle-off'></i>
                             </button>";
             }
@@ -93,8 +93,13 @@ if (isset($_GET["selectYear"])) {
 			$actionBullet .= "<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>";
 			$actionBullet .= "</button>";
 			$actionBullet .= "<div class='dropdown-menu' id='dropdown-container'>";
-			$actionBullet .= "<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#deleteSelectedModal' data-bs-name='' data-bs-href='../assets/includes/admin/user.inc.php?deleteSelectedUser' title='deleteSelected'>Option (Button)</button>";
-			$actionBullet .= "<a class='dropdown-item' href='#' title='edit'>Option (Link)</a>";
+			$actionBullet .= "	<a class='dropdown-item' href='academic-year/edit?acad_year=" . $id . "' title='edit'>
+									Edit
+								</a>";
+			$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $fullYear . "' data-bs-href='../../assets/includes/admin/academics/academic-year.inc.php?deleterAcadYear&id=" . $row["id"] . "' title='delete'>
+									Delete
+								</button>";
+			
 			$actionBullet .= "</div>";
 			$actionBullet .= "</div>";
 

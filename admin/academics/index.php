@@ -28,19 +28,19 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                 </select>
             </div>	
         </div>
-        <!-- <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end input-buttons" id="academic-year-input-buttons">
             <div class="d-flex mx-2">
-                <a class='btn bg-white border border-dark d-flex' href='#'>
-                    Add Entry
+                <a class='btn bg-white border border-dark d-flex' href='academic-year/add'>
+                    Add Year
                 </a>
             </div>
-            <div class="d-flex mx-2">
+            <!-- <div class="d-flex mx-2">
                 <a class="btn bg-white border border-dark d-flexx justify-content-center align-items-center" href="#">
                     <i class="fa-solid fa-upload me-2"></i>
                     Import
                 </a>
-            </div>
-        </div> -->
+            </div> -->
+        </div>
     </div>
 </div>
 
@@ -53,43 +53,9 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
     </div>
 </div>
 
-<!-- ENABLE MODAL -->
-<div class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="activateModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="activateModalLabel">Activate Academic Year</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<p>Are you sure you want to activete <strong class="name"></strong>?</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<a href="#" class="btn btn-success href">Confirm</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript">
-	let activateModal = document.getElementById("activateModal");
-
-	activateModal.addEventListener("show.bs.modal", function (event) {
-		let button = event.relatedTarget;
-
-		let name = button.getAttribute("data-bs-name");
-		let modalBodyName = activateModal.querySelector(".modal-body .name");
-		modalBodyName.innerHTML = name;
-
-		let href = button.getAttribute("data-bs-href");
-		let modalFooterHref = activateModal.querySelector(".modal-footer .href");
-		modalFooterHref.href = href;
-	});
-</script>
-
 <?php
 
+include $baseUrl . "assets/modals/admin/academics/academic-year_modals.php";
 include $baseUrl . "assets/templates/admin/footer.inc.php";
 
 ?>
