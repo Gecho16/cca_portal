@@ -26,6 +26,7 @@ $year_start = range(strftime("%Y", time()), 2098);
             <div class="col-md-12">
 
                 <div class="row">
+                    <label class="h3" >Academic Year Information</label>
                     <!-- Year -->
                     <div class="col-md-6">
                         <label>Year</label>

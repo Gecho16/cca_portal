@@ -28,11 +28,43 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                 </select>
             </div>	
         </div>
-        <div class="d-flex justify-content-end input-buttons" id="academic-year-input-buttons">
-            <div class="d-flex mx-2">
-                <a class='btn bg-white border border-dark d-flex' href='academic-year/add'>
-                    Add Year
-                </a>
+        <div>
+            <div class="d-flex justify-content-end w-100">
+                <div class="d-flex mx-2 input-buttons" id="academic-year-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='academic-year/add'>
+                        Add Year
+                    </a>
+                </div>
+                <div class="d-none mx-2 input-buttons" id="institute-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='institute/add'>
+                        Add Institute
+                    </a>
+                </div>
+                <div class="d-none mx-2 input-buttons" id="course-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='course/add'>
+                        Add Course
+                    </a>
+                </div>
+                <div class="d-none mx-2 input-buttons" id="section-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='section/add'>
+                        Add Section
+                    </a>
+                </div>
+                <div class="d-none mx-2 input-buttons" id="subject-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='subject/add'>
+                        Add Subject
+                    </a>
+                </div>
+                <div class="d-none mx-2 input-buttons" id="faculty-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='faculty/add'>
+                        Add Faculty
+                    </a>
+                </div>
+                <div class="d-none mx-2 input-buttons" id="room-input-buttons">
+                    <a class='btn bg-white border border-dark d-flex  mx-2' href='room/add'>
+                        Add Room
+                    </a>
+                </div>
             </div>
             <!-- <div class="d-flex mx-2">
                 <a class="btn bg-white border border-dark d-flexx justify-content-center align-items-center" href="#">
@@ -89,21 +121,43 @@ $( document ).ready(function() {
         parentContainer.append(newTable);
 
         academicTable()
+
+        var input_buttons = document.querySelectorAll('.input-buttons');
+
+        for (var i = 0; i < input_buttons.length; i++) {
+            input_buttons[i].classList.remove('d-flex');
+            input_buttons[i].classList.add('d-none');
+        }
+
         // Set page title depending of selected table
         if(view == 'academic-year'){
             document.getElementById("page-title").innerHTML = 'Academic Years';
+            document.getElementById("academic-year-input-buttons").classList.remove('d-none');
+            document.getElementById("academic-year-input-buttons").classList.add('d-flex');
         }else if(view == 'institutes'){
             document.getElementById("page-title").innerHTML = 'Institutes';
+            document.getElementById("institute-input-buttons").classList.remove('d-none');
+            document.getElementById("institute-input-buttons").classList.add('d-flex');
         }else if(view == 'courses'){
             document.getElementById("page-title").innerHTML = 'Courses';
+            document.getElementById("course-input-buttons").classList.remove('d-none');
+            document.getElementById("course-input-buttons").classList.add('d-flex');
         }else if(view == 'subjects'){
             document.getElementById("page-title").innerHTML = 'Subjects';
+            document.getElementById("subject-input-buttons").classList.remove('d-none');
+            document.getElementById("subject-input-buttons").classList.add('d-flex');
         }else if(view == 'sections'){
             document.getElementById("page-title").innerHTML = 'Sections';
+            document.getElementById("section-input-buttons").classList.remove('d-none');
+            document.getElementById("section-input-buttons").classList.add('d-flex');
         }else if(view == 'faculty'){
             document.getElementById("page-title").innerHTML = 'Faculty';
+            document.getElementById("faculty-input-buttons").classList.remove('d-none');
+            document.getElementById("faculty-input-buttons").classList.add('d-flex');
         }else if(view == 'rooms'){
             document.getElementById("page-title").innerHTML = 'Rooms';
+            document.getElementById("room-input-buttons").classList.remove('d-none');
+            document.getElementById("room-input-buttons").classList.add('d-flex');
         }
     });
 });

@@ -7,7 +7,7 @@ $page = "academics";
 
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
-// Get user info
+// Get entry info
 $acad_year = sanitize($_GET["acad_year"]);
 $sql = "SELECT year, semester FROM academic_years WHERE id = '$acad_year'";
 $result_acad_year = mysqli_query($conn, $sql);
@@ -36,6 +36,7 @@ $year_start = range(2020, 2098);
             <div class="col-md-12">
 
                 <div class="row">
+                    <label class="h3" >Academic Year Information</label>
                     <!-- Year -->
                     <div class="col-md-6">
                         <label>Year</label>
