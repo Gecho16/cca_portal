@@ -96,6 +96,8 @@ $result_institutes = mysqli_query($conn, $institutes);
                             <select class="form-select form-select-lg" id="type" name="type" required>
                                 <option value="COS Full Time">COS Full Time</option>
                                 <option value="COS Part Time">COS Part Time</option>
+                                <option value="Plantilla Permanent">Plantilla Permanent</option>
+                                <option value="Plantilla Temporary">Plantilla Temporary</option>
                             </select>
                         </div>
                     </div>
