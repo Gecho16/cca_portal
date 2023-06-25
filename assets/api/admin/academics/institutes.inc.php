@@ -91,7 +91,7 @@ if (isset($_GET["selectYear"])) {
 			$actionBullet .= "	<a class='dropdown-item' href='institute/edit?institute=" . $id . "' title='edit'>
 									Edit
 								</a>";
-			$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $institute_code . "' data-bs-href='../../assets/includes/admin/academics/institute.inc.php?deleteInstitute&id=" . $row["id"] . "' title='delete'>
+			$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $institute_code . "' data-bs-href='../../assets/includes/admin/academics/institute.inc.php?deleteInstitute&id=" . $id . "' title='delete'>
 									Delete
 								</button>";
 			$actionBullet .= "</div>";

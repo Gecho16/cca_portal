@@ -24,13 +24,6 @@ if (isset($_POST["submitAddYear"])) {
 	$acad_year = $year . " " . $semester;
 
 	// Check if entry exists 
-	// $checkQuery = "SELECT COUNT(*) as count FROM academic_years WHERE CONCAT(`year`, ' ', `semester`) = ?";
-	// $stmt = mysqli_prepare($conn, $checkQuery);
-	// mysqli_stmt_bind_param($stmt, 's', $acad_year);
-	// mysqli_stmt_execute($stmt);
-	// $count = mysqli_stmt_get_result($stmt)->fetch_assoc()['count'];
-
-	// Check if entry exists 
 	$checkQuery = "SELECT COUNT(*) as count FROM academic_years WHERE CONCAT(`year`, ' ', `semester`) = ?";
 	$stmt = mysqli_prepare($conn, $checkQuery);
 	mysqli_stmt_bind_param($stmt, 's', $acad_year);
@@ -49,9 +42,6 @@ if (isset($_POST["submitAddYear"])) {
 		'year' => $year,
 		'`semester`' => $semester,
 	);
-
-	// Unset empty variables
-	// if($middlename == ''){ unset($columns['middlename']); }
 
 	// Array to strings
 	$columnNames = implode(', ', array_keys($columns));

@@ -6,52 +6,31 @@ include $baseUrl . "assets/includes/dbh.inc.php";
 
 allowedRole($baseUrl, "Admin");
 
-if (isset($_POST["submitAddYear"])) {
+if (isset($_POST["submitAddCourse"])) {
 	// Fetch POST variables
-	$year = sanitize($_POST["year"]);
-	$semester = sanitize($_POST["semester"]);
-
-	if (preg_match('/^\d{4}-\d{4}$/', $year)) {
-		$acad_year = $year . " " . $semester;
-	} else {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Year");
-	}
-
-	if ($semester !== "1st" && $semester !== "2nd" && $semester !== "Summer") {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Semester");
-	}
-
-	$acad_year = $year . " " . $semester;
+	$course_name = sanitize($_POST["course_name"]);
+	$course_code = sanitize($_POST["course_code"]);
+	$institute = sanitize($_POST["institute"]);
 
 	// Check if entry exists 
-	// $checkQuery = "SELECT COUNT(*) as count FROM academic_years WHERE CONCAT(`year`, ' ', `semester`) = ?";
-	// $stmt = mysqli_prepare($conn, $checkQuery);
-	// mysqli_stmt_bind_param($stmt, 's', $acad_year);
-	// mysqli_stmt_execute($stmt);
-	// $count = mysqli_stmt_get_result($stmt)->fetch_assoc()['count'];
-
-	// Check if entry exists 
-	$checkQuery = "SELECT COUNT(*) as count FROM academic_years WHERE CONCAT(`year`, ' ', `semester`) = ?";
+	$checkQuery = "SELECT COUNT(*) as count FROM courses WHERE course_code = ?";
 	$stmt = mysqli_prepare($conn, $checkQuery);
-	mysqli_stmt_bind_param($stmt, 's', $acad_year);
+	mysqli_stmt_bind_param($stmt, 's', $course_code);
 	mysqli_stmt_execute($stmt);
-	$result = mysqli_stmt_get_result($stmt);
-	$count = $result->fetch_assoc()['count'];
+	$count = mysqli_stmt_get_result($stmt)->fetch_assoc()['count'];
 
 	// If entry already exists send error message
 	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Academic Year Already <b>Exists</b>");
+		header("Location: {$baseUrl}admin/academics?error=Course Code Already <b>Exists</b>");
 		exit();
 	}
 
 	// Vairables to array
 	$columns = array( 
-		'year' => $year,
-		'`semester`' => $semester,
+		'`course_title`' => $course_name,
+		'`course_code`' => $course_code,
+		'`institute`' => $institute,
 	);
-
-	// Unset empty variables
-	// if($middlename == ''){ unset($columns['middlename']); }
 
 	// Array to strings
 	$columnNames = implode(', ', array_keys($columns));
@@ -59,15 +38,15 @@ if (isset($_POST["submitAddYear"])) {
 
 	// Add qoutes to string variables 
 	foreach ($columns as $key => $value) {
-		if ($key === '`semester`') {
-			$columnValues .= "'" . $value . "'";
+		if ($key === '`institute`') {
+			echo $columnValues .= "'" . $value . "'";
 		} else {
-			$columnValues .= "'" . $value . "', ";
+			echo $columnValues .= "'" . $value . "', ";
 		}
 	}
 	
 	// // Prepare the SQL query
-	$sql = "INSERT INTO academic_years ($columnNames) VALUES ($columnValues)";
+	$sql = "INSERT INTO courses ($columnNames) VALUES ($columnValues)";
 	$stmt = mysqli_prepare($conn, $sql);
 
 	// Error preparing the statement
@@ -97,42 +76,18 @@ if (isset($_POST["submitAddYear"])) {
 	exit();
 }
 
-if (isset($_POST["submitEditYear"])) {
+if (isset($_POST["submitEditCourse"])) {
 	// Fetch POST variables
-	$year = sanitize($_POST["year"]);
-	$semester = sanitize($_POST["semester"]);
-	$acad_yearId = sanitize($_POST["submitEditYear"]);
-
-	if (preg_match('/^\d{4}-\d{4}$/', $year)) {
-		$acad_year = $year . " " . $semester;
-	} else {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Year");
-	}
-
-	if ($semester !== "1st" && $semester !== "2nd" && $semester !== "Summer") {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Semester");
-	}
-
-	$acad_year = $year . " " . $semester;
-
-	// Check if entry exists 
-	$checkQuery = "SELECT COUNT(*) as count FROM academic_years WHERE CONCAT(`year`, ' ', `semester`) = ? AND id != $acad_yearId";
-	$stmt = mysqli_prepare($conn, $checkQuery);
-	mysqli_stmt_bind_param($stmt, 's', $acad_year);
-	mysqli_stmt_execute($stmt);
-	$result = mysqli_stmt_get_result($stmt);
-	$count = $result->fetch_assoc()['count'];
-
-	// If entry already exists send error message
-	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Academic Year Already <b>Exists</b>");
-		exit();
-	}
+	$course_name = sanitize($_POST["course_name"]);
+	$course_code = sanitize($_POST["course_code"]);
+	$institute = sanitize($_POST["institute"]);
+	$course_id = sanitize($_POST["submitEditCourse"]);
 
 	// Vairables to array
 	$columns = array( 
-		'year' => $year,
-		'`semester`' => $semester,
+		'`course_title`' => $course_name,
+		'`course_code`' => $course_code,
+		'`institute`' => $institute,
 	);
 
 	// Prepare the column names and values for the SQL query
@@ -148,7 +103,7 @@ if (isset($_POST["submitEditYear"])) {
 	$columnUpdates = rtrim($columnUpdates, ', ');
 
 	// Prepare the SQL query
-	$sql = "UPDATE academic_years SET $columnUpdates WHERE id = ?";
+	echo $sql = "UPDATE courses SET $columnUpdates WHERE id = ?";
 	$stmt = mysqli_prepare($conn, $sql);
 
 	// Error preparing the statement
@@ -159,7 +114,7 @@ if (isset($_POST["submitEditYear"])) {
 
 	// Bind the parameters
 	$paramTypes = str_repeat('s', count($columnValues)) . 's';
-	$bindParams = array_merge($columnValues, [$acad_yearId]);
+	$bindParams = array_merge($columnValues, [$course_id]);
 	mysqli_stmt_bind_param($stmt, $paramTypes, ...$bindParams);
 
 	// Execute the statement
@@ -184,11 +139,11 @@ if (isset($_POST["submitEditYear"])) {
 	
 }
 
-if (isset($_GET["deleterAcadYear"])) {
-    $acad_yearId = sanitize($_GET["id"]);
+if (isset($_GET["deleteCourse"])) {
+    $course = sanitize($_GET["id"]);
 
-    $stmt = mysqli_prepare($conn, "DELETE FROM academic_years WHERE id = ?");
-    mysqli_stmt_bind_param($stmt, 's', $acad_yearId);
+    $stmt = mysqli_prepare($conn, "DELETE FROM courses WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, 's', $course);
 
     if (!mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
@@ -203,40 +158,3 @@ if (isset($_GET["deleterAcadYear"])) {
     header("Location: {$baseUrl}admin/academics?success=<b>ENTRY</b> Deleted Successfully");
     exit();
 }
-
-if (isset($_GET["activateAcadYear"])) {
-	$acad_yearId = sanitize($_GET["id"]);
-
-	$stmt = mysqli_prepare($conn, "UPDATE academic_years SET is_active = ?");
-	mysqli_stmt_bind_param($stmt, 'i', $is_active);
-
-	$is_active = 0;
-
-	if (!mysqli_stmt_execute($stmt)) {
-		mysqli_stmt_close($stmt);
-		mysqli_close($conn);
-		header("Location: {$baseUrl}admin/academics?error=Activate Academic Year <b>Error</b>");
-		exit();
-	}
-
-	mysqli_stmt_close($stmt);
-
-	$stmt = mysqli_prepare($conn, "UPDATE academic_years SET is_active = ? WHERE id = ?");
-	mysqli_stmt_bind_param($stmt, 'si', $is_active, $acad_yearId);
-
-	$is_active = 1;
-
-	if (!mysqli_stmt_execute($stmt)) {
-		mysqli_stmt_close($stmt);
-		mysqli_close($conn);
-		header("Location: {$baseUrl}admin/academics?error=Activate Academic Year <b>Error</b>");
-		exit();
-	}
-
-	mysqli_stmt_close($stmt);
-	mysqli_close($conn);
-
-	header("Location: {$baseUrl}admin/academics?success=<b>Academic Year</b> Activated Successfully");
-	exit();
-}
-	

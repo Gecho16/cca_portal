@@ -7,6 +7,18 @@ $page = "academics";
 
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
+// Get subject
+$section_id = sanitize($_GET["section"]);
+$section = "SELECT * FROM sections WHERE id = $section_id";
+$result_section = mysqli_query($conn, $section);
+$row_section = mysqli_fetch_assoc($result_section);
+
+// Set Variables
+$section_db = $row_section["section"];
+$course_db = $row_section["course"];
+$year_level_db = $row_section["year_level"];
+$academic_year_db = $row_section["academic_year"];
+
 // Get Courses
 $course = "SELECT * FROM courses";
 $result_course = mysqli_query($conn, $course);
@@ -27,7 +39,7 @@ $acad_year_active_id = $row_acad_year_active['id'];
 ?>
 
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">
-    <h1 class="h3 mb-0">Add Section</h1>
+    <h1 class="h3 mb-0">Edit Section</h1>
 
     <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../">
         <i class="fa-solid fa-chevron-left me-2"></i>
@@ -70,7 +82,7 @@ $acad_year_active_id = $row_acad_year_active['id'];
                                     $count = $row_section_number['count'];
                                     
                                 ?>
-                                    <option id="<?= $course; ?>" value="<?= $course; ?>"><?php echo "(" . $institute . ") " . $course; ?></option>
+                                    <option id="<?= $course; ?>" value="<?= $course; ?>" <?= ($course === $course_db) ? 'selected' : '';?>><?php echo "(" . $institute . ") " . $course; ?></option>
                                     <option id="<?= $course . "_number"; ?>" value="<?= $count ?>" hidden><?= $prefix ?></option>
                                 <?php } ?>
                             </select>
@@ -82,10 +94,10 @@ $acad_year_active_id = $row_acad_year_active['id'];
                         <div class="mb-3">
                             <label>Year Level</label>
                             <select class="form-select form-select-lg" id="year" name="year" required>
-                                    <option value="1">1st Year</option>
-                                    <option value="2">2nd Year</option>
-                                    <option value="3">3rd Year</option>
-                                    <option value="4">4th Year</option>
+                                    <option value="1" <?= ($year_lelve_db = 1) ? 'selected' : '';?>>1st Year</option>
+                                    <option value="2" <?= ($year_lelve_db = 2) ? 'selected' : '';?>>2nd Year</option>
+                                    <option value="3" <?= ($year_lelve_db = 3) ? 'selected' : '';?>>3rd Year</option>
+                                    <option value="4" <?= ($year_lelve_db = 4) ? 'selected' : '';?>>4th Year</option>
                             </select>
                         </div>
                     </div>
@@ -107,7 +119,7 @@ $acad_year_active_id = $row_acad_year_active['id'];
                                         $academic_year .= " (Active)";
                                     };
                                 ?>
-                                    <option value="<?php echo $academic_yearId; ?>"  <?= ($academic_yearId === $acad_year_active_id) ? 'selected' : '';?>><?php echo $academic_year; ?></option>
+                                    <option value="<?php echo $academic_yearId; ?>"  <?= ($academic_yearId === $academic_year_db) ? 'selected' : '';?>><?php echo $academic_year; ?></option>
                                 <?php } ?>
                             </select>
                         </div>

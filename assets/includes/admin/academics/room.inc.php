@@ -6,45 +6,77 @@ include $baseUrl . "assets/includes/dbh.inc.php";
 
 allowedRole($baseUrl, "Admin");
 
-if (isset($_POST["submitAddInstitute"])) {
+if (isset($_POST["submitAddSubject"])) {
 	// Fetch POST variables
-	$institute_name = sanitize($_POST["institute_name"]);
-	$institute_code = sanitize($_POST["institute_code"]);
+	$subject_title = sanitize($_POST["subject_title"]);
+	$subject_code = sanitize($_POST["subject_code"]);
+	$year = sanitize($_POST["year"]);
+	$lecture_hours = sanitize($_POST["lecture_hours"]);
+	$laboratory_hours = sanitize($_POST["laboratory_hours"]);
+	$credited_units = sanitize($_POST["credited_units"]);
+
+	if (isset($_POST["prerequisite"])){
+		$prerequisite = sanitize($_POST["prerequisite"]);
+	}else{
+		$prerequisite = "";
+	}
+
 
 	// Check if entry exists 
-	$checkQuery = "SELECT COUNT(*) as count FROM institutes WHERE institute_code = ?";
+	$checkQuery = "SELECT COUNT(*) as count FROM subjects WHERE subject_code = ?";
 	$stmt = mysqli_prepare($conn, $checkQuery);
-	mysqli_stmt_bind_param($stmt, 's', $institute_code);
+	mysqli_stmt_bind_param($stmt, 's', $subject_code);
 	mysqli_stmt_execute($stmt);
 	$count = mysqli_stmt_get_result($stmt)->fetch_assoc()['count'];
 
 	// If entry already exists send error message
 	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Institute Code Already <b>Exists</b>");
+		header("Location: {$baseUrl}admin/academics?error=Subject Code Already <b>Exists</b>");
 		exit();
 	}
 
 	// Vairables to array
 	$columns = array( 
-		'`institute_name`' => $institute_name,
-		'`institute_code`' => $institute_code,
+		'`subject_title`' => $subject_title,
+		'`subject_code`' => $subject_code,
+		'year' => $year,
+		'lecture_hours' => $lecture_hours,
+		'laboratory_hours' => $laboratory_hours,
+		'credited_units' => $credited_units,
+		'`prerequisite`' => $prerequisite,
 	);
 
 	// Array to strings
-	$columnNames = implode(', ', array_keys($columns));
 	$columnValues = '';
 
-	// Add qoutes to string variables 
-	foreach ($columns as $key => $value) {
-		if ($key === '`institute_code`') {
-			echo $columnValues .= "'" . $value . "'";
-		} else {
-			echo $columnValues .= "'" . $value . "', ";
+	// Unset empty variables
+	if($prerequisite == ''){
+		unset($columns['`prerequisite`']);
+		// Add qoutes to string variables 
+		foreach ($columns as $key => $value) {
+			if ($key === 'credited_units') {
+				$columnValues .= "'" . $value . "'";
+			} else {
+				$columnValues .= "'" . $value . "', ";
+			}
 		}
+		
+	}else{
+		// Add qoutes to string variables 
+		foreach ($columns as $key => $value) {
+			if ($key === '`prerequisite`') {
+				$columnValues .= "'" . $value . "'";
+			} else {
+				$columnValues .= "'" . $value . "', ";
+			}
+		}
+		
 	}
+
+	$columntitles = implode(', ', array_keys($columns));
 	
-	// // Prepare the SQL query
-	$sql = "INSERT INTO institutes ($columnNames) VALUES ($columnValues)";
+	// Prepare the SQL query
+	echo $sql = "INSERT INTO `subjects` ($columntitles) VALUES ($columnValues)";
 	$stmt = mysqli_prepare($conn, $sql);
 
 	// Error preparing the statement
@@ -74,30 +106,38 @@ if (isset($_POST["submitAddInstitute"])) {
 	exit();
 }
 
-if (isset($_POST["submitEditInstitute"])) {
+
+if (isset($_POST["submitEditSubject"])) {
 	// Fetch POST variables
-	$institute_name = sanitize($_POST["institute_name"]);
-	$institute_code = sanitize($_POST["institute_code"]);
-	$institute = sanitize($_POST["submitEditInstitute"]);
+	$subject_title = sanitize($_POST["subject_title"]);
+	$subject_code = sanitize($_POST["subject_code"]);
+	$year = sanitize($_POST["year"]);
+	$lecture_hours = sanitize($_POST["lecture_hours"]);
+	$laboratory_hours = sanitize($_POST["laboratory_hours"]);
+	$credited_units = sanitize($_POST["credited_units"]);
 
-	// Check if entry exists 
-	$checkQuery = "SELECT COUNT(*) as count FROM institutes WHERE institute_code = ?";
-	$stmt = mysqli_prepare($conn, $checkQuery);
-	mysqli_stmt_bind_param($stmt, 's', $institute_code);
-	mysqli_stmt_execute($stmt);
-	$count = mysqli_stmt_get_result($stmt)->fetch_assoc()['count'];
-
-	// If entry already exists send error message
-	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Institute Code Already <b>Exists</b>");
-		exit();
+	if (isset($_POST["prerequisite"])){
+		$prerequisite = sanitize($_POST["prerequisite"]);
+	}else{
+		$prerequisite = "";
 	}
+
+	$subject_id = sanitize($_POST["submitEditSubject"]);
+
 
 	// Vairables to array
 	$columns = array( 
-		'`institute_name`' => $institute_name,
-		'`institute_code`' => $institute_code,
+		'`subject_title`' => $subject_title,
+		'`subject_code`' => $subject_code,
+		'year' => $year,
+		'lecture_hours' => $lecture_hours,
+		'laboratory_hours' => $laboratory_hours,
+		'credited_units' => $credited_units,
+		'`prerequisite`' => $prerequisite,
 	);
+
+	if($prerequisite == ''){ unset($columns['`prerequisite`']); }
+
 
 	// Prepare the column names and values for the SQL query
 	$columnUpdates = '';
@@ -112,7 +152,7 @@ if (isset($_POST["submitEditInstitute"])) {
 	$columnUpdates = rtrim($columnUpdates, ', ');
 
 	// Prepare the SQL query
-	$sql = "UPDATE institutes SET $columnUpdates WHERE id = ?";
+	echo $sql = "UPDATE subjects SET $columnUpdates WHERE id = ?";
 	$stmt = mysqli_prepare($conn, $sql);
 
 	// Error preparing the statement
@@ -123,7 +163,7 @@ if (isset($_POST["submitEditInstitute"])) {
 
 	// Bind the parameters
 	$paramTypes = str_repeat('s', count($columnValues)) . 's';
-	$bindParams = array_merge($columnValues, [$institute]);
+	$bindParams = array_merge($columnValues, [$subject_id]);
 	mysqli_stmt_bind_param($stmt, $paramTypes, ...$bindParams);
 
 	// Execute the statement
@@ -148,11 +188,11 @@ if (isset($_POST["submitEditInstitute"])) {
 	
 }
 
-if (isset($_GET["deleteInstitute"])) {
-    $institute = sanitize($_GET["id"]);
+if (isset($_GET["deleteSubject"])) {
+    echo $subject = sanitize($_GET["id"]);
 
-    $stmt = mysqli_prepare($conn, "DELETE FROM institutes WHERE id = ?");
-    mysqli_stmt_bind_param($stmt, 's', $institute);
+    $stmt = mysqli_prepare($conn, "DELETE FROM subjects WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, 's', $subject);
 
     if (!mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);

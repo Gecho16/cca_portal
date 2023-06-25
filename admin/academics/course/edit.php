@@ -7,14 +7,24 @@ $page = "academics";
 
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
+// Get course
+$course_id = sanitize($_GET["course"]);
+$course = "SELECT * FROM courses WHERE id = $course_id";
+$result_course = mysqli_query($conn, $course);
+$row_course = mysqli_fetch_assoc($result_course);
+
+// Set Variables
+$course_title = $row_course['course_title'];
+$course_code = $row_course['course_code'];
+$institute = $row_course['institute'];
+
 // Get institute
 $institutes = "SELECT institute_code FROM institutes WHERE institute_code != 'MISSO' AND institute_code != 'NTPs'";
 $result_institutes = mysqli_query($conn, $institutes);
-
 ?>
 
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">   
-    <h1 class="h3 mb-0">Add Course</h1>
+    <h1 class="h3 mb-0">Edit Course</h1>
 
     <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../">
         <i class="fa-solid fa-chevron-left me-2"></i>
@@ -33,7 +43,7 @@ $result_institutes = mysqli_query($conn, $institutes);
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Course Name</label>
-                            <input type="text" class="form-select form-select-lg" id="course_name" name="course_name" required>
+                            <input type="text" class="form-select form-select-lg" id="course_name" name="course_name" value="<?= $course_title; ?>" required>
                             </input>
                         </div>
                     </div>
@@ -42,7 +52,7 @@ $result_institutes = mysqli_query($conn, $institutes);
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Course Code</label>
-                            <input type="text" class="form-select form-select-lg" id="course_code" name="course_code" required>
+                            <input type="text" class="form-select form-select-lg" id="course_code" name="course_code" value="<?= $course_code; ?>" required>
                             </input>
                         </div>
                     </div> 
@@ -53,7 +63,7 @@ $result_institutes = mysqli_query($conn, $institutes);
                             <label>Institute</label>
                             <select class="form-select form-select-lg" id="institute" name="institute" required>
                                 <?php while ($row = mysqli_fetch_assoc($result_institutes)) { $institute_code = $row['institute_code']; ?>
-                                    <option value="<?php echo $institute_code; ?>"><?php echo $institute_code; ?></option>
+                                    <option value="<?php echo $institute_code; ?>" <?= ($institute === $institute_code) ? 'selected' : '';?>><?php echo $institute_code; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -62,7 +72,7 @@ $result_institutes = mysqli_query($conn, $institutes);
 
                 <!-- Submit button -->
                 <div class="text-end">
-                    <button class="btn btn-primary btn-lg" name="submitAddCourse" type="submit">
+                    <button class="btn btn-primary btn-lg" name="submitEditCourse" value="<?= $course_id ?>" type="submit">
                         Submit
                     </button>
                 </div>

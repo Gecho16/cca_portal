@@ -87,7 +87,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 
 <?php
 
-include $baseUrl . "assets/modals/admin/academics/academic-year_modals.php";
+include $baseUrl . "assets/modals/admin/academics/academics_modals.php";
 include $baseUrl . "assets/templates/admin/footer.inc.php";
 
 ?>
