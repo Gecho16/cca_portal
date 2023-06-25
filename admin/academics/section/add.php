@@ -63,15 +63,33 @@ $acad_year_active_id = $row_acad_year_active['id'];
                                     $prefix = $row['section_prefix'];
 
                                     // Get number of each section
-                                    $section_number = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course'";
-                                    $result_section_number = mysqli_query($conn, $section_number);
-                                    $row_section_number = mysqli_fetch_assoc($result_section_number);
+                                    $section_number1 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 1";
+                                    $result_section_number1 = mysqli_query($conn, $section_number1);
+                                    $row_section_number1 = mysqli_fetch_assoc($result_section_number1);
 
-                                    $count = $row_section_number['count'];
+                                    $section_number2 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 2";
+                                    $result_section_number2 = mysqli_query($conn, $section_number2);
+                                    $row_section_number2 = mysqli_fetch_assoc($result_section_number2);
+
+                                    $section_number3 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 3";
+                                    $result_section_number3 = mysqli_query($conn, $section_number3);
+                                    $row_section_number3 = mysqli_fetch_assoc($result_section_number3);
+
+                                    $section_number4 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 4";
+                                    $result_section_number4 = mysqli_query($conn, $section_number4);
+                                    $row_section_number4 = mysqli_fetch_assoc($result_section_number4);
+
+                                    $count1 = $row_section_number1['count'];
+                                    $count2 = $row_section_number2['count'];
+                                    $count3 = $row_section_number3['count'];
+                                    $count4 = $row_section_number4['count'];
                                     
                                 ?>
                                     <option id="<?= $course; ?>" value="<?= $course; ?>"><?php echo "(" . $institute . ") " . $course; ?></option>
-                                    <option id="<?= $course . "_number"; ?>" value="<?= $count ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_1'; ?>" value="<?= $count1 ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_2'; ?>" value="<?= $count2 ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_3'; ?>" value="<?= $count3 ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_4'; ?>" value="<?= $count4 ?>" hidden><?= $prefix ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -198,7 +216,10 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
     function setSection(){
         section_display.disabled = true;
 
-        var number_id = course.value + '_number';
+        var number_id = course.value + '_' + year.value;
+
+        console.log(number_id);
+
         var sectionNum = document.getElementById(number_id).value;
         var prefix = document.getElementById(number_id).innerHTML;
         sectionNum++;

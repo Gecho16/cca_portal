@@ -91,8 +91,8 @@ if (isset($_POST["submitEditSection"])) {
 
 	// Vairables to array
 	$columns = array( 
-		'`section`' => "'" . $section . "'",
-		'`course`' => "'" . $course . "'",
+		'`section`' =>  $section,
+		'`course`' => $course,
 		'year_level' => $year,
 		'`academic_year`' => $acad_year,
 	);

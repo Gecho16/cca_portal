@@ -75,15 +75,33 @@ $acad_year_active_id = $row_acad_year_active['id'];
                                     $prefix = $row['section_prefix'];
 
                                     // Get number of each section
-                                    $section_number = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course'";
-                                    $result_section_number = mysqli_query($conn, $section_number);
-                                    $row_section_number = mysqli_fetch_assoc($result_section_number);
+                                    $section_number1 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 1";
+                                    $result_section_number1 = mysqli_query($conn, $section_number1);
+                                    $row_section_number1 = mysqli_fetch_assoc($result_section_number1);
 
-                                    $count = $row_section_number['count'];
+                                    $section_number2 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 2";
+                                    $result_section_number2 = mysqli_query($conn, $section_number2);
+                                    $row_section_number2 = mysqli_fetch_assoc($result_section_number2);
+
+                                    $section_number3 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 3";
+                                    $result_section_number3 = mysqli_query($conn, $section_number3);
+                                    $row_section_number3 = mysqli_fetch_assoc($result_section_number3);
+
+                                    $section_number4 = "SELECT COUNT(*) as count FROM `sections` WHERE `course` = '$course' AND year_level = 4";
+                                    $result_section_number4 = mysqli_query($conn, $section_number4);
+                                    $row_section_number4 = mysqli_fetch_assoc($result_section_number4);
+
+                                    $count1 = $row_section_number1['count'];
+                                    $count2 = $row_section_number2['count'];
+                                    $count3 = $row_section_number3['count'];
+                                    $count4 = $row_section_number4['count'];
                                     
                                 ?>
                                     <option id="<?= $course; ?>" value="<?= $course; ?>" <?= ($course === $course_db) ? 'selected' : '';?>><?php echo "(" . $institute . ") " . $course; ?></option>
-                                    <option id="<?= $course . "_number"; ?>" value="<?= $count ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_1'; ?>" value="<?= $count1 ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_2'; ?>" value="<?= $count2 ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_3'; ?>" value="<?= $count3 ?>" hidden><?= $prefix ?></option>
+                                    <option id="<?= $course . '_4'; ?>" value="<?= $count4 ?>" hidden><?= $prefix ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -169,7 +187,10 @@ $acad_year_active_id = $row_acad_year_active['id'];
 
                 <!-- Submit button -->
                 <div class="text-end">
-                    <button class="btn btn-primary btn-lg" name="submitAddSection" type="submit">
+                    <input type="text" value="<?= $course_db ?>" id="course_holder" hidden>
+                    <input type="text" value="<?= $year_level_db ?>" id="year_holder" hidden>
+                    <input type="text" value="<?= $section_db ?>" id="section_holder" hidden>
+                    <button class="btn btn-primary btn-lg" name="submitEditSection"  value="<?= $section_id ?>" type="submit">
                         Submit
                     </button>
                 </div>
@@ -210,13 +231,25 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
     function setSection(){
         section_display.disabled = true;
 
-        var number_id = course.value + '_number';
+        var number_id = course.value + '_' + year.value;
+
+        console.log(number_id);
+
         var sectionNum = document.getElementById(number_id).value;
         var prefix = document.getElementById(number_id).innerHTML;
+        var course_holder = document.getElementById('course_holder').value;
+        var year_holder = document.getElementById('year_holder').value;
+        var section_holder = document.getElementById('section_holder').value;
+
         sectionNum++;
-        
+
         section_display.value = prefix + year.value + "0" + sectionNum;
         section_hidden.value = prefix + year.value + "0" + sectionNum;
+
+        if(course_holder == course.value && year_holder == year.value){
+            section_display.value = section_holder;
+            section_hidden.value = section_holder; 
+        }
     }
 
     setSection();
