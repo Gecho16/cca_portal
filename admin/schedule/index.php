@@ -94,9 +94,52 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
     </div>
 </div>
 
+<div id="graphics_container" class="d-flex flex-row card px-2">
+    <div class="d-flex flex-column justify-content-around headers border border-danger">
+        <div class="border border-danger">Time</div>
+        <div class="border border-danger">6</div>
+        <div class="border border-danger">7</div>
+        <div class="border border-danger">8</div>
+        <div class="border border-danger">9</div>
+        <div class="border border-danger">10</div>
+        <div class="border border-danger">11</div>
+        <div class="border border-danger">12</div>
+        <div class="border border-danger">1</div>
+        <div class="border border-danger">2</div>
+        <div class="border border-danger">3</div>
+        <div class="border border-danger">4</div>
+        <div class="border border-danger">5</div>
+        <div class="border border-danger">6</div>
+        <div class="border border-danger">7</div>
+        <div class="border border-danger">8</div>
+        <div class="border border-danger">9</div>
+    </div>
+    <div class="fsdfsdf">
+        <div class="d-flex flex-row justify-content-around headers border border-danger">
+            <div class="border border-danger">Monday</div>
+            <div class="border border-danger">Tuesday</div>
+            <div class="border border-danger">Wednesday</div>
+            <div class="border border-danger">Thursday</div>
+            <div class="border border-danger">Friday</div>
+            <div class="border border-danger">Saturday</div>
+        </div>
+        <div class="d-flex flex-row justify-content-around headers border border-danger">
+            <div class="border border-danger">Monday</div>
+            <div class="border border-danger">Tuesday</div>
+            <div class="border border-danger">Wednesday</div>
+            <div class="border border-danger">Thursday</div>
+            <div class="border border-danger">Friday</div>
+            <div class="border border-danger">Saturday</div>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
 <?php
 
-include "grid_schedule.php";
 include $baseUrl . "assets/modals/admin/schedule/schedule_modals.php";
 include $baseUrl . "assets/templates/admin/footer.inc.php";
 
@@ -113,10 +156,10 @@ function scheduleGrid(){
 
 }
 
-// document.getElementById("graphics").style.display = 'grid';
-// document.getElementById("table_container").style.display = 'none';
+document.getElementById("graphics_container").style.display = 'grid';
+document.getElementById("table_container").style.display = 'none';
 
-document.getElementById("graphics_container").style.display = 'none';
+// document.getElementById("graphics_container").style.display = 'none';
 scheduleTable()
 
 $( document ).ready(function() {
