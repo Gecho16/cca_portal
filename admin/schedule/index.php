@@ -12,14 +12,14 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 <!-- BODY HEADERS -->
 <div class="d-flex justify-content-between align-items-center mb-3 d-print-none">
     <div class="d-flex flex-column align-items-start w-50">
-        <h1 id="page-title" class="h1">Schedule</h1>
+        <h1 id="page-title" class="h1">Classes Table</h1>
     </div>
     <div class="d-flex flex-column w-50">
         <div class="d-flex justify-content-end align-items-center my-2">
             <div class="d-flex align-items-center">
                 <select class="form-select me-2" id="tableSelect">
-                    <option value='week'>Weekly View</option>
                     <option value='table'>Table View</option>
+                    <option value='grid'>Grid View</option>
                 </select>
                 <select class="form-select me-2" id="academicYearFull">
 
@@ -69,33 +69,34 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 
             </div>	
         </div>
-        <!-- <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end">
             <div class="d-flex mx-2">
-                <a class='btn bg-white border border-dark d-flex' href='#'>
+                <a class='btn bg-white border border-dark d-flex' href='add'>
                     Add Entry
                 </a>
             </div>
-            <div class="d-flex mx-2">
+            <!-- <div class="d-flex mx-2">
                 <a class="btn bg-white border border-dark d-flexx justify-content-center align-items-center" href="#">
                     <i class="fa-solid fa-upload me-2"></i>
                     Import
                 </a>
-            </div>
-        </div> -->
+            </div> -->
+        </div>
     </div>
 </div>
 
 <!-- TABLE -->
-<div class="card">
+<div id="table_container" class="card">
     <div class="card-body">
-        <div class="table-responsive">
+        <form class="table-responsive" id="scheduleFrom" >
             <table class="table table-striped table-sm w-100" id="schedule"></table>
-        </div>
+        </form>
     </div>
 </div>
 
 <?php
 
+include "grid_schedule.php";
 include $baseUrl . "assets/modals/admin/schedule/schedule_modals.php";
 include $baseUrl . "assets/templates/admin/footer.inc.php";
 
@@ -104,18 +105,59 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 <!-- TABLE SCRIPT -->
 <script>
 
-$( document ).ready(function() {
-    // Initialize Table
+function scheduleTable(){
     $.getScript('../../assets/js/admin/schedule/schedule-table-script.js');
+}
 
+function scheduleGrid(){
+
+}
+
+// document.getElementById("graphics").style.display = 'grid';
+// document.getElementById("table_container").style.display = 'none';
+
+document.getElementById("graphics_container").style.display = 'none';
+scheduleTable()
+
+$( document ).ready(function() {
     // Refresh table when academic year value is changed
     $('#academicYearFull').on('change', function() {
         acadYear = document.getElementById("academicYearFull").value;
         var table = $('#schedule').DataTable();
         table.destroy();
-        // console.log(document.getElementById("academicYearFull").value);
 
         $.getScript('../../assets/js/admin/schedule/schedule-table-script.js');
+    });
+
+    // Refresh table when view value is changed
+    $('#tableSelect').on('change', function() {
+        var table = $('#schedule').DataTable();
+        var container = $('#schedule');
+        table.destroy();
+
+        if ($.fn.DataTable.isDataTable('#schedule')) {
+            table.destroy();
+            container.remove();
+        }
+            
+        
+        view = document.getElementById("tableSelect").value;
+        if(view == 'table'){
+            var parentContainer = $('#scheduleFrom');
+            var newTable = $('<table class="table table-striped table-sm w-100" id="schedule"></table>');
+            parentContainer.append(newTable);
+
+            scheduleTable()
+
+            document.getElementById("table_container").style.display = 'block';
+            document.getElementById("graphics_container").style.display = 'none';
+            document.getElementById("page-title").innerHTML = 'Classes Table';
+        }else if(view == 'grid'){
+            document.getElementById("table_container").style.display = 'none';
+            document.getElementById("graphics_container").style.display = 'grid';
+            document.getElementById("page-title").innerHTML = 'Classes Grid';
+
+        }
     });
 });
 
