@@ -94,46 +94,134 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
     </div>
 </div>
 
-<div id="graphics_container" class="d-flex flex-row card px-2">
-    <div class="d-flex flex-column justify-content-around headers border border-danger">
-        <div class="border border-danger">Time</div>
-        <div class="border border-danger">6</div>
-        <div class="border border-danger">7</div>
-        <div class="border border-danger">8</div>
-        <div class="border border-danger">9</div>
-        <div class="border border-danger">10</div>
-        <div class="border border-danger">11</div>
-        <div class="border border-danger">12</div>
-        <div class="border border-danger">1</div>
-        <div class="border border-danger">2</div>
-        <div class="border border-danger">3</div>
-        <div class="border border-danger">4</div>
-        <div class="border border-danger">5</div>
-        <div class="border border-danger">6</div>
-        <div class="border border-danger">7</div>
-        <div class="border border-danger">8</div>
-        <div class="border border-danger">9</div>
-    </div>
-    <div class="fsdfsdf">
-        <div class="d-flex flex-row justify-content-around headers border border-danger">
-            <div class="border border-danger">Monday</div>
-            <div class="border border-danger">Tuesday</div>
-            <div class="border border-danger">Wednesday</div>
-            <div class="border border-danger">Thursday</div>
-            <div class="border border-danger">Friday</div>
-            <div class="border border-danger">Saturday</div>
+
+<div id="graphics_container" class="card p-3">
+    <div class="row" style="background-color: #6c757d; color: white;">
+        <!-- Time Header -->
+        <div class="col-2 p-3 text-center border border-white">
+            Time
         </div>
-        <div class="d-flex flex-row justify-content-around headers border border-danger">
-            <div class="border border-danger">Monday</div>
-            <div class="border border-danger">Tuesday</div>
-            <div class="border border-danger">Wednesday</div>
-            <div class="border border-danger">Thursday</div>
-            <div class="border border-danger">Friday</div>
-            <div class="border border-danger">Saturday</div>
+        <!-- Automate Days Header -->
+        <div class="col-10 d-flex justify-content-center align-items-center p-0">
+            <?php
+                $days = array("monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
+
+                for ($i = 0; $i < count($days); $i++) {
+            ?>
+                <div class="col-2 h-100 d-flex justify-content-center align-items-center text-center border border-white">
+                    <?= ucfirst($days[$i]); ?>
+                </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
-    
-    
+    <div class="row">
+        <div class="col-2 p-0 text-center" style="background-color: #dbdddf;">
+            <?php
+                $hour = 6;
+                $meridiem = "A.M.";
+                $endmeridiem = "A.M.";
+                for ($i = 1; $i < 16; $i++) {
+                    $endhour = $hour+1;
+
+                    if($hour == 12){
+                        $meridiem = "P.M.";
+                        $endhour = 1;
+                    }
+
+                    if($hour == 11){
+                        $endmeridiem = "P.M.";
+                    }
+            ?>
+                <div class="p-3 border border-white">
+                    <?= $hour . ":00 " . $meridiem . " - " . $endhour . ":00 " . $endmeridiem; ?>
+                </div>
+            <?php
+                    if($hour == 12){
+                        $hour = 0;
+                    }
+
+                    $hour++;
+
+                }
+            ?>
+        </div>
+        <div class="col-10 d-flex p-0">
+            <?php
+                $days = array("monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
+
+                for ($i = 0; $i < count($days); $i++) {
+            ?>
+                <div id="<?= substr($days[$i], 0, 3) . '_container'; ?>" class="col-2 text-center">
+                    <?php 
+                        
+
+                        $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                        $result_classtime_synch = mysqli_query($conn, $sql_classtime_synch);
+
+                        $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                        $result_classtime_asynch = mysqli_query($conn, $sql_classtime_asynch);
+
+                        // $hour = 6;
+                        // $meridiem = "A.M.";
+                        // $endmeridiem = "A.M.";
+
+                        for ($j = 1; $j < 16; $j++) {
+                            // echo $j;
+
+                            $half = 100/15;
+                            $whole = 100/30;
+                            $startHour = 6;
+                            $endHour = $startHour+1;
+                            $startmeridiem = "A.M.";
+                            $endmeridiem = "A.M.";
+
+                            $timeblockcount = 0;
+
+                            while ($row_classtime_synch = mysqli_fetch_assoc($result_classtime_synch)) {
+                                $fulltime = substr($row_classtime_synch['synch_time'], 0, 5);
+                                $hour = intval(substr($fulltime, 0, 2));
+                                $minute = intval(substr($fulltime, 3));
+
+                                if($startHour <= $hour){
+                                    echo $hour;
+                                }
+                            }
+
+                            // while ($row_classtime_asynch = mysqli_fetch_assoc($result_classtime_asynch)) {
+                            //     echo $row_classtime_asynch['asynch_time'];
+                            // }
+
+
+                            if(0){
+                                ?>
+                                <div class="d-flex justify-content-center align-items-center border border-white" style="height: 6.7%; background-color: var(--green); color: white;">
+                                    Subject
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="border border-white" style="background-color: #f2f2f2; height: 6.7%;">
+                                    <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                </div>
+                                <?php
+                            }
+                        }
+
+                        // if(1){
+
+                        // }
+
+                        
+
+                    ?>
+                </div>
+            <?php
+                }
+            ?>
+        </div>
+    </div>
 </div>
 
 
