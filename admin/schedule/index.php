@@ -151,11 +151,12 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
             <?php
                 $days = array("monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
 
+
                 for ($i = 0; $i < count($days); $i++) {
             ?>
                 <div id="<?= substr($days[$i], 0, 3) . '_container'; ?>" class="col-2 text-center">
                     <?php 
-                        
+                        $tilecount = 1;                    
 
                         $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
                         $result_classtime_synch = mysqli_query($conn, $sql_classtime_synch);
@@ -163,43 +164,63 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                         $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
                         $result_classtime_asynch = mysqli_query($conn, $sql_classtime_asynch);
 
-                        // $hour = 6;
-                        // $meridiem = "A.M.";
-                        // $endmeridiem = "A.M.";
+                        $half = 100/30;
+                        $whole = 100/15;
+                        $startHour = 6;
+                        $startmeridiem = "A.M.";
+                        $endmeridiem = "A.M.";
 
                         for ($j = 1; $j < 16; $j++) {
-                            // echo $j;
-
-                            $half = 100/15;
-                            $whole = 100/30;
-                            $startHour = 6;
                             $endHour = $startHour+1;
-                            $startmeridiem = "A.M.";
-                            $endmeridiem = "A.M.";
+                            
 
-                            $timeblockcount = 0;
+                            $timeblock = 0;
+                            $hour = 0;
+                            $minute = 0;
+                            $duration = 0;
 
+                            $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                            $result_classtime_synch = mysqli_query($conn, $sql_classtime_synch);
                             while ($row_classtime_synch = mysqli_fetch_assoc($result_classtime_synch)) {
                                 $fulltime = substr($row_classtime_synch['synch_time'], 0, 5);
+                                $duration = $row_classtime_synch['synch_duration'];
                                 $hour = intval(substr($fulltime, 0, 2));
                                 $minute = intval(substr($fulltime, 3));
 
-                                if($startHour <= $hour){
-                                    echo $hour;
+                                $startHour;
+
+                                if($startHour >= $hour && $startHour < $hour + $duration){
+                                    $timeblock = 1;
+                                    continue;
                                 }
                             }
 
-                            // while ($row_classtime_asynch = mysqli_fetch_assoc($result_classtime_asynch)) {
-                            //     echo $row_classtime_asynch['asynch_time'];
-                            // }
-
-
-                            if(0){
-                                ?>
-                                <div class="d-flex justify-content-center align-items-center border border-white" style="height: 6.7%; background-color: var(--green); color: white;">
-                                    Subject
-                                </div>
-                                <?php
+                            if($timeblock != 0){
+                                if($startHour == $hour + $duration-1){
+                                    $height = $whole * $duration;
+                                    if($minute != 0){
+                                        ?>
+                                        <div class="border border-white" style="background-color: #f2f2f2; height: 3.3%;">
+                                            <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                        </div>
+                                        <?php
+                                    }
+                                    $j + .5;
+                                    $minute;
+                                    ?>
+                                    <div class="d-flex justify-content-center align-items-center border border-white" style="height: <?= $height; ?>%; background-color: var(--green); color: white;">
+                                        Subject
+                                    </div>
+                                    <?php
+                                    if($minute % 2 === 0){
+                                        ?>
+                                        <div class="border border-white" style="background-color: #f2f2f2; height: 3.3%;">
+                                            <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                        </div>
+                                        <?php
+                                    $j + .5;
+                                    }
+                                }
                             }else{
                                 ?>
                                 <div class="border border-white" style="background-color: #f2f2f2; height: 6.7%;">
@@ -207,17 +228,20 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                                 </div>
                                 <?php
                             }
-                        }
 
-                        // if(1){
-
-                        // }
-
-                        
-
+                            // $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                            // $result_classtime_asynch = mysqli_query($conn, $sql_classtime_asynch);
+                            // while ($row_classtime_asynch = mysqli_fetch_assoc($result_classtime_asynch)) {
+                            //     echo $row_classtime_asynch['asynch_time'];
+                            // }
+                            $startHour++;
+                            // echo $tilecount++;
+                            // echo $j;
+                        }                        
                     ?>
                 </div>
             <?php
+
                 }
             ?>
         </div>
