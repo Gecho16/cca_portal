@@ -21,6 +21,11 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                     <option value='table'>Table View</option>
                     <option value='grid'>Grid View</option>
                 </select>
+                <select class="form-select me-2" id="gridSelect">
+                    <option value='table'>Section</option>
+                    <option value='table'>Faculty</option>
+                    <option value='table'>Room</option>
+                </select>
                 <select class="form-select me-2" id="academicYearFull">
 
                     <?php

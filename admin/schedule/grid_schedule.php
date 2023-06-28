@@ -59,6 +59,10 @@
                 $minuteblock = 0;
                 $prevblock = "vacantblock";
 
+                $section = "I402";
+                $faculty = "";
+                $room = "";
+
                 for ($i = 0; $i < count($days); $i++) {
             ?>
                 <div id="<?= substr($days[$i], 0, 3) . '_container'; ?>" class="col-2 text-center">
@@ -178,7 +182,7 @@
                                     $j = $j - .5;
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                        <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -190,7 +194,7 @@
                                             $j = $j - ($duration - 1);
                                             ?>
                                             <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                                <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                                <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
                                             </div>
                                             <?php
                                             $prevblock = "vacantblock";
@@ -218,7 +222,7 @@
                                             $j = $j + .5;
                                             ?>
                                             <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                                <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                                <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
                                             </div>
                                             <?php
                                             $prevblock = "vacantblock";
@@ -233,7 +237,7 @@
                                     $j = $j - .5;
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                        <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -241,7 +245,7 @@
                                 }else{
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href="" class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
