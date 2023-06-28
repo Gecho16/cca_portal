@@ -332,6 +332,12 @@ table .text-xs {
 	color: #31353a;
 }
 
+/* Schedule Grid */
+.schedule_add_link:hover{
+	background-color: #dbdddf;
+	color: #474747 !important;
+}
+
 /*MEDIA PRINT*/
 @media print {
 	@page {

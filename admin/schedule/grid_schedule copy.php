@@ -55,21 +55,10 @@
             <?php
                 $days = array("monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
 
-                // Check if number is whole
-                function is_whole($var) {
-                    // Check if the variable is numeric
-                    if (is_numeric($var)) {
-                        // Convert the variable to an integer using intval
-                        $integerValue = intval($var);
-                        // Check if the integer value is equal to the original value
-                        if ($var == $integerValue) {
-                            return true; // The variable is a whole number
-                        }
-                    }
-                    return false; // The variable is not a whole number
-                }
-                
-                
+                $timeblock = 0;
+                $minuteblock = 0;
+                $prevblock = "vacantblock";
+                $prevheight = "whole";
 
                 $section = "I402";
                 $faculty = "";
@@ -92,11 +81,6 @@
                         $startHour = 6;
                         $startmeridiem = "A.M.";
                         $endmeridiem = "A.M.";
-
-                        $prevblock = "vacantblock";
-                        $prevheight = "whole";
-                        $timeblock = 0;
-                        $minuteblock = 0;
 
                         for ($j = 1; $j < 16; $j++) {
                             $endHour = $startHour+1;
@@ -195,103 +179,82 @@
                             }
 
                             if($timeblock){
-                                // Vacant Slots
-                                if($startHour == $hour && $minuteblock && $prevblock == "vacantblock" && $prevheight == "whole"){
+                                if($minuteblock && $hour == 6 && $startHour == $hour){
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+<?= $j . "aa"; ?></a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
-                                    $prevheight = "half";
-                                    $minuteblock = 0;
-                                    $j = $j - .5;
-                                }else if($startHour == $hour && $minuteblock && $prevblock == "vacantblock" && $prevheight == "half"){
-                                    $j = $j - .5;
-                                    ?>
-                                    <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
-                                    </div>
-                                    <?php
-                                    $prevblock = "vacantblock";
-                                    $prevheight = "half";
-                                    $minuteblock = 0;
                                 }
-                                
-                                // Occupied Slots
-                                if($startHour == $hour + $duration - 1 && $prevblock == "vacantblock"){
-                                    $j -= 1;
+                                if($startHour == $hour + $duration - 1){
+                                    if($minuteblock && $hour != 6){
+                                        // $j = $j - .5;
+                                        if($prevblock == "vacantblock"){
+                                            $j = $j - ($duration - 1);
+                                            ?>
+                                            <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
+                                                <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+<?= $j . "a"; ?></a>
+                                            </div>
+                                            <?php
+                                            $prevblock = "vacantblock";
+                                            $j = $j + $duration;
+                                        }
+                                    }
+
+                                    
                                     ?>
                                     <div class="d-flex justify-content-center align-items-center border border-white" style="height: <?= $height; ?>%; background-color: #<?= $block_color; ?>;">
-                                        <?= $subject;?>
+                                        <?= $subject . "_" . $j;?>
                                     </div>
                                     <?php
                                     
                                     $prevblock = "timeblock";
-                                    $prevheight = "custom";
-                                    $j += 2;
-                                }else if($startHour == $hour + $duration - 1 && $prevblock == "timeblock"){
-                                    $j -= 2;
-                                    ?>
-                                    <div class="d-flex justify-content-center align-items-center border border-white" style="height: <?= $height; ?>%; background-color: #<?= $block_color; ?>;">
-                                        <?= $subject;?>
-                                    </div>
-                                    <?php
-                                    
-                                    $prevblock = "timeblock";
-                                    $prevheight = "custom";
-                                    $j += 2;
+
+                                    if($minuteblock && $hour != 6){
+                                        if($prevblock == "timeblock"){
+                                            $j = $j + .5;
+                                            ?>
+                                            <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
+                                                <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+<?= $j . "b"; ?></a>
+                                            </div>
+                                            <?php
+                                            $prevblock = "vacantblock";
+
+                                        }
+                                    }
                                 }
                                 
                                 $timeblock = 0;
                             }else{
-                                if($j > 15){
+                                if((!is_numeric($j)) && $prevblock == "vacantblock"){
                                     $j = $j - .5;
+
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+<?= $j . "dd"; ?></a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
-                                    $prevheight = "whole";
-                                }else if($prevblock == "timeblock" && !is_whole($j)){
+                                }else if($j > 15){
+                                    $j = $j - .5;
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+<?= $j . "c"; ?></a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
-                                    $prevheight = "half";
-
-                                }else if($prevblock == "timeblock" && is_whole($j)){
-                                    ?>
-                                    <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
-                                    </div>
-                                    <?php
-                                    $prevblock = "vacantblock";
-                                    $prevheight = "half";
-
-                                }else if($prevblock == "vacantblock" && $prevheight == "half"){
-                                    $j = $j - .5;
-                                    ?>
-                                    <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
-                                    </div>
-                                    <?php
-                                    $prevblock = "vacantblock";
-                                    $prevheight = "whole";
 
                                 }else{
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none" style="color: #6c757d;">+<?= $j . "d"; ?></a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
-                                    $prevheight = "whole";
+
                                 }
-                        
+                            
                             }
                             $startHour++;
                         }                        
