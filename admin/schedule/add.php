@@ -63,8 +63,6 @@ if(isset($_GET["time"])){
     $time_URL = "";
 }
 
-
-
 // Get Sections
 $section = "SELECT * FROM sections";
 $result_section = mysqli_query($conn, $section);
@@ -110,9 +108,10 @@ $result_room_asynch = mysqli_query($conn, $room);
                             <select class="form-select form-select-lg" id="section" name="section" required>
                                 <?php while ($row = mysqli_fetch_assoc($result_section)) {
                                     $section = $row['section'];
+                                    $id = $row['id'];
                                     $course_section = " (" . $row['course'] . ") " . $row['section'];
                                 ?>
-                                    <option id="" value="<?= $section ?>" <?= ($section === $section_URL) ? 'selected' : '';?>><?= $course_section ?></option>
+                                    <option id="" value="<?= $id ?>" <?= ($id === $section_URL) ? 'selected' : '';?>><?= $course_section ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -140,8 +139,9 @@ $result_room_asynch = mysqli_query($conn, $room);
                                 <option id="" value="">None</option>
                                 <?php while ($row = mysqli_fetch_assoc($result_faculty)) {
                                     $faculty = $row['firstname'] . " " . $row['lastname'];
+                                    $id = $row['id'];
                                 ?>
-                                    <option id="" value="<?= $faculty ?>"><?= $faculty ?></option>
+                                    <option id="" value="<?= $id ?>" <?= ($id === $faculty_URL) ? 'selected' : '';?>><?= $faculty ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -245,26 +245,13 @@ $result_room_asynch = mysqli_query($conn, $room);
                                 <option id="" value="">None</option>
                                 <?php while ($row = mysqli_fetch_assoc($result_room_synch)) {
                                     $room = $row['room_code'];
+                                    $id = $row['id'];
                                 ?>
-                                    <option id="" value="<?= $room ?>"><?= $room ?></option>
+                                    <option id="" value="<?= $id ?>" <?= ($id === $room_URL) ? 'selected' : '';?>><?= $room ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
-
-                    <!-- Synchronous Link -->
-                    <div class="col-md-9">
-                        <div class="mb-3">
-                            <label>Virtual Link</label>
-                            <input class="form-select form-select-lg" id="synch_link" name="synch_link">
-                        </div>
-                    </div>
-
-                    <!-- <div class="col-md-3">
-                        <div class="mb-3 d-flex align-items-center h-100">
-                            <a href="" id="asynch_link_button" class="btn btn-success">Try link</a>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="row">
@@ -363,26 +350,31 @@ $result_room_asynch = mysqli_query($conn, $room);
                                 <option id="" value="">None</option>
                                 <?php while ($row = mysqli_fetch_assoc($result_room_asynch)) {
                                     $room = $row['room_code'];
+                                    $id = $row['id'];
                                 ?>
-                                    <option id="" value="<?= $room ?>"><?= $room ?></option>
+                                    <option id="" value="<?= $id ?>" <?= ($id === $room_URL) ? 'selected' : '';?>><?= $room ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
+                    <label class="h3" >Virtual Meeting Information</label>
                     <!-- Asynchronous Link -->
                     <div class="col-md-9">
                         <div class="mb-3">
                             <label>Virtual Link</label>
-                            <input class="form-select form-select-lg" id="asynch_link" name="asynch_link">
+                            <input class="form-select form-select-lg" id="meeting_link" name="meeting_link">
+                            <p id="link_warning" class="text-danger d-none">*Not a valid google meet link</p>
                         </div>
                     </div>
 
-                    <!-- <div class="col-md-3">
-                        <div class="mb-3 d-flex align-items-center h-100">
-                            <a href="" id="asynch_link_button" class="btn btn-success">Try link</a>
+                    <div class="col-md-3">
+                        <div class="mb-3 d-flex align-items-center justify-content-center h-100 w-100">
+                            <a href="" target="_blank" id="meeting_link_button" class="btn btn-success d-flex align-items-center justify-content-center"><i class="m-2 fa-solid fa-video fa-sm"></i>Try link</a>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
 
                 <!-- Submit button -->
@@ -403,29 +395,43 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 ?>
 
 <script>
-    // Course Name
-    var course_name = document.getElementById('course_name');
+    function isGoogleMeetLink(link) {
+        var meetLinkRegex = /^https?:\/\/meet\.google\.com\//i;
+        return meetLinkRegex.test(link);
+    }
 
-    course_name.addEventListener('input', function() {
-        let words = course_name.value.split(' ');
+    function handleClick(event) {
+        event.preventDefault();
+        link.removeEventListener("click", handleClick); // Remove the event listener
+    }
 
-        // Capitalize the first letter of each word
-        for (let i = 0; i < words.length; i++) {
-            let word = words[i];
-            words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+    
+
+    $( document ).ready(function() {
+        var link = document.getElementById('meeting_link').value;
+        if(link == ""){
+            document.getElementById('meeting_link_button').addEventListener("click", function(event) {
+                event.preventDefault(); 
+            });
         }
+        $('#meeting_link').on('change', function() {
+            var link = document.getElementById('meeting_link').value;
+            console.log(link);
 
-        // Join the words back into a string
-        course_name.value = words.join(' ');
-    });
+            validLink = isGoogleMeetLink(link);
 
-    // Course Code
-    var course_code = document.getElementById('course_code');
-
-    course_code.addEventListener('input', function() {
-        this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
-        if (this.value.length > 8) {
-            this.value = this.value.substring(0, 8);
-        }
-    });
+            if (validLink) {
+                document.getElementById('meeting_link_button').removeEventListener("click", function(event));
+                document.getElementById('meeting_link_button').href = link;
+                document.getElementById('link_warning').classList.add("d-none");
+                document.getElementById('link_warning').classList.remove("d-block");
+            } else {
+                document.getElementById('meeting_link_button').addEventListener("click", function(event) {
+                    event.preventDefault(); 
+                });
+                document.getElementById('link_warning').classList.add("d-block");
+                document.getElementById('link_warning').classList.remove("d-none");
+            }
+        });
+    });    
 </script>

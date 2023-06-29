@@ -1,4 +1,23 @@
+<?php
+if(isset($_GET["section"])){
+    $section_URL = sanitize($_GET["section"]);
+}else{
+    $section_URL = "";
+}
 
+if(isset($_GET["faculty"])){
+    $faculty_URL = sanitize($_GET["faculty"]);
+}else{
+    $faculty_URL = "";
+}
+
+if(isset($_GET["room"])){
+    $room_URL = sanitize($_GET["room"]);
+}else{
+    $room_URL = "";
+}
+
+?>
 <div id="graphics_container" class="card p-3">
     <div class="row" style="background-color: #6c757d; color: white;">
         <!-- Time Header -->
@@ -68,23 +87,45 @@
                     }
                     return false; // The variable is not a whole number
                 }
-                
-                
 
-                $section = "I402";
-                $faculty = "";
-                $room = "";
+                $section = $section_URL;
+                $faculty = $faculty_URL;
+                $room = $room_URL;
 
                 for ($i = 0; $i < count($days); $i++) {
             ?>
                 <div id="<?= substr($days[$i], 0, 3) . '_container'; ?>" class="col-2 text-center">
                     <?php 
-                        $tilecount = 1;                    
+                        $tilecount = 1;
+                        
+                        if(isset($_GET["section"])){
+                            $sql_classtime_synch = "SELECT * FROM classes WHERE `section` = $section AND synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                            
+                        }else if(isset($_GET["faculty"])){
+                            $sql_classtime_synch = "SELECT * FROM classes WHERE `faculty` = $faculty AND synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                            
+                        }else if(isset($_GET["room"])){
+                            $sql_classtime_synch = "SELECT * FROM classes WHERE `synch_room` = $room AND synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                            
+                        }else{
+                            $sql_classtime_synch = "SELECT * FROM classes WHERE `section` = 1 AND synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                        }
 
-                        $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                        if(isset($_GET["section"])){
+                            $sql_classtime_asynch = "SELECT * FROM classes WHERE `section` = '$section' AND asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                            
+                        }else if(isset($_GET["faculty"])){
+                            $sql_classtime_asynch = "SELECT * FROM classes WHERE `faculty` = '$faculty' AND asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                            
+                        }else if(isset($_GET["room"])){
+                            $sql_classtime_asynch = "SELECT * FROM classes WHERE `asynch_room` = '$room' AND asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                            
+                        }else{
+                            $sql_classtime_asynch = "SELECT * FROM classes WHERE `section` = 1 AND asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                        }
+
                         $result_classtime_synch = mysqli_query($conn, $sql_classtime_synch);
 
-                        $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
                         $result_classtime_asynch = mysqli_query($conn, $sql_classtime_asynch);
 
                         $half = 100/30;
@@ -112,7 +153,7 @@
                             $class_type = '';
                             $block_color = '';
 
-                            $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
+                            // $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
                             $result_classtime_synch = mysqli_query($conn, $sql_classtime_synch);
                             while ($row_classtime_synch = mysqli_fetch_assoc($result_classtime_synch)) {
                                 $fulltime = substr($row_classtime_synch['synch_time'], 0, 5);
@@ -149,7 +190,7 @@
                             }
 
                             if(!$timeblock){
-                                $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
+                                // $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
                                 $result_classtime_asynch = mysqli_query($conn, $sql_classtime_asynch);
                                 while ($row_classtime_asynch = mysqli_fetch_assoc($result_classtime_asynch)) {
                                     $fulltime = substr($row_classtime_asynch['asynch_time'], 0, 5);

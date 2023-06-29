@@ -7,6 +7,36 @@ $page = "schedule";
 
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
+// Get Sections
+$section = "SELECT * FROM sections";
+$result_section = mysqli_query($conn, $section);
+
+// Get Faculty
+$faculty = "SELECT * FROM faculty";
+$result_faculty = mysqli_query($conn, $faculty);
+
+// Get Rooms
+$room = "SELECT * FROM rooms";
+$result_room_synch = mysqli_query($conn, $room);
+
+if(isset($_GET["section"])){
+    $section_URL = sanitize($_GET["section"]);
+}else{
+    $section_URL = "";
+}
+
+if(isset($_GET["faculty"])){
+    $faculty_URL = sanitize($_GET["faculty"]);
+}else{
+    $faculty_URL = "";
+}
+
+if(isset($_GET["room"])){
+    $room_URL = sanitize($_GET["room"]);
+}else{
+    $room_URL = "";
+}
+
 ?>
 
 <!-- BODY HEADERS -->
@@ -21,10 +51,43 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
                     <option value='table'>Table View</option>
                     <option value='grid'>Grid View</option>
                 </select>
+
+                <!-- Grid Select -->
                 <select class="form-select me-2" id="gridSelect">
-                    <option value='table'>Section</option>
-                    <option value='table'>Faculty</option>
-                    <option value='table'>Room</option>
+                    <option value='section' <?= ($section_URL !== '') ? 'selected' : '';?>>Section</option>
+                    <option value='faculty'  <?= ($faculty_URL !== '') ? 'selected' : '';?>>Faculty</option>
+                    <option value='room'  <?= ($room_URL !== '') ? 'selected' : '';?>>Room</option>
+                </select>
+
+                <!-- Section Select -->
+                <select class="form-select me-2" id="sectionSelect">
+                    <?php while ($row = mysqli_fetch_assoc($result_section)) {
+                        $section = $row['section'];
+                        $id = $row['id'];
+                        $course_section = " (" . $row['course'] . ") " . $row['section'];
+                    ?>
+                        <option id="<?= "section_" . $id ?>" value="<?= $id ?>" <?= ($id === $section_URL) ? 'selected' : '';?>><?= $course_section ?></option>
+                    <?php } ?>
+                </select>
+
+                <!-- Faculty Select -->
+                <select class="form-select me-2" id="facultySelect">
+                    <?php while ($row = mysqli_fetch_assoc($result_faculty)) {
+                        $faculty = $row['firstname'] . " " . $row['lastname'];
+                        $id = $row['id'];
+                    ?>
+                        <option id="<?= "faculty_" . $id ?>" value="<?= $id ?>" <?= ($id === $faculty_URL) ? 'selected' : '';?>><?= $faculty ?></option>
+                    <?php } ?>
+                </select>
+
+                <!-- Room Select -->
+                <select class="form-select me-2" id="roomSelect">
+                    <?php while ($row = mysqli_fetch_assoc($result_room_synch)) {
+                        $room = $row['room_code'];
+                        $id = $row['id'];
+                    ?>
+                        <option id="<?= "room_" . $id ?>" value="<?= $id ?>" <?= ($id === $room_URL) ? 'selected' : '';?>><?= $room ?></option>
+                    <?php } ?>
                 </select>
                 <select class="form-select me-2" id="academicYearFull">
 
@@ -76,7 +139,7 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
         </div>
         <div class="d-flex justify-content-end">
             <div class="d-flex mx-2">
-                <a class='btn bg-white border border-dark d-flex' href='add'>
+                <a class='btn bg-white border border-dark d-flex' href='add?section=<?= ($section_URL !== "") ? $section_URL : '';?>&faculty=<?= ($faculty_URL !== "") ? $faculty_URL : '';?>&room=<?= ($room_URL !== "") ? $room_URL : '';?>'>
                     Add Entry
                 </a>
             </div>
@@ -99,12 +162,15 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
     </div>
 </div>
 
-
-
+<div id="refresh_grid">
+    <?php
+    include "grid_schedule.php";
+    ?>
+</div>
 
 <?php
 
-include "grid_schedule.php";
+// include "grid_schedule.php";
 include $baseUrl . "assets/modals/admin/schedule/schedule_modals.php";
 include $baseUrl . "assets/templates/admin/footer.inc.php";
 
@@ -117,8 +183,70 @@ function scheduleTable(){
     $.getScript('../../assets/js/admin/schedule/schedule-table-script.js');
 }
 
-function scheduleGrid(){
+function removeTextInsideParentheses(text) {
+    return text.replace(/\([^()]*\)/g, '');
+}
 
+function scheduleGrid(){
+    var gridSelect = document.getElementById("gridSelect").value;
+
+    document.getElementById("sectionSelect").style.display = 'none';
+    document.getElementById("facultySelect").style.display = 'none';
+    document.getElementById("roomSelect").style.display = 'none';
+
+    var selectedGrid = gridSelect + 'Select';
+
+    document.getElementById(selectedGrid).style.display = 'block';
+
+    var gridValue = document.getElementById(selectedGrid).value;
+    var pageTitleID = gridSelect + "_" + gridValue;
+    var pageTitle = document.getElementById(pageTitleID).innerHTML;
+
+    document.getElementById("page-title").innerHTML = removeTextInsideParentheses(pageTitle) + " Schedule";
+}
+
+function refreshGrid(){
+    var gridSelect = document.getElementById("gridSelect").value;
+    var selectedGrid = gridSelect + 'Select';
+    var gridValue = document.getElementById(selectedGrid).value;
+
+    window.location.href = "?" + gridSelect + "=" + gridValue;
+}
+
+function viewSelect(){
+    var table = $('#schedule').DataTable();
+    var container = $('#schedule');
+    table.destroy();
+
+    if ($.fn.DataTable.isDataTable('#schedule')) {
+        table.destroy();
+        container.remove();
+    }
+        
+    
+    view = document.getElementById("tableSelect").value;
+    if(view == 'table'){
+        var parentContainer = $('#scheduleFrom');
+        var newTable = $('<table class="table table-striped table-sm w-100" id="schedule"></table>');
+        parentContainer.append(newTable);
+
+        scheduleTable()
+
+        document.getElementById("table_container").style.display = 'block';
+        document.getElementById("graphics_container").style.display = 'none';
+        document.getElementById("gridSelect").style.display = 'none';
+        document.getElementById("sectionSelect").style.display = 'none';
+        document.getElementById("facultySelect").style.display = 'none';
+        document.getElementById("roomSelect").style.display = 'none';
+        document.getElementById("page-title").innerHTML = 'Classes Table';
+    }else if(view == 'grid'){
+        document.getElementById("table_container").style.display = 'none';
+        document.getElementById("graphics_container").style.display = 'grid';
+        document.getElementById("gridSelect").style.display = 'block';
+
+        scheduleGrid();
+
+    }
 }
 
 document.getElementById("graphics_container").style.display = 'grid';
@@ -126,6 +254,7 @@ document.getElementById("table_container").style.display = 'none';
 
 // document.getElementById("graphics_container").style.display = 'none';
 scheduleTable()
+scheduleGrid()
 
 $( document ).ready(function() {
     // Refresh table when academic year value is changed
@@ -139,33 +268,27 @@ $( document ).ready(function() {
 
     // Refresh table when view value is changed
     $('#tableSelect').on('change', function() {
-        var table = $('#schedule').DataTable();
-        var container = $('#schedule');
-        table.destroy();
+        viewSelect();
+    });
 
-        if ($.fn.DataTable.isDataTable('#schedule')) {
-            table.destroy();
-            container.remove();
-        }
-            
-        
-        view = document.getElementById("tableSelect").value;
-        if(view == 'table'){
-            var parentContainer = $('#scheduleFrom');
-            var newTable = $('<table class="table table-striped table-sm w-100" id="schedule"></table>');
-            parentContainer.append(newTable);
+    $('#gridSelect').on('change', function() {
+        scheduleGrid();
+        refreshGrid();
+    });
 
-            scheduleTable()
+    $('#sectionSelect').on('change', function() {
+        scheduleGrid();
+        refreshGrid();
+    });
 
-            document.getElementById("table_container").style.display = 'block';
-            document.getElementById("graphics_container").style.display = 'none';
-            document.getElementById("page-title").innerHTML = 'Classes Table';
-        }else if(view == 'grid'){
-            document.getElementById("table_container").style.display = 'none';
-            document.getElementById("graphics_container").style.display = 'grid';
-            document.getElementById("page-title").innerHTML = 'Classes Grid';
+    $('#facultySelect').on('change', function() {
+        scheduleGrid();
+        refreshGrid();
+    });
 
-        }
+    $('#roomSelect').on('change', function() {
+        scheduleGrid();
+        refreshGrid();
     });
 });
 

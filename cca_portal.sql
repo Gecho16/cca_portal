@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2023 at 08:25 PM
+-- Generation Time: Jun 28, 2023 at 07:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -94,9 +94,11 @@ CREATE TABLE `classes` (
   `faculty` bigint(20) DEFAULT NULL,
   `synch_day` varchar(255) NOT NULL,
   `synch_time` time NOT NULL,
+  `synch_duration` int(11) NOT NULL,
   `synch_room` bigint(20) NOT NULL,
   `asynch_day` varchar(255) DEFAULT NULL,
   `asynch_time` time DEFAULT NULL,
+  `asynch_duration` int(11) NOT NULL,
   `asynch_room` bigint(20) DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   `remarks` longtext DEFAULT NULL
@@ -106,28 +108,12 @@ CREATE TABLE `classes` (
 -- Dumping data for table `classes`
 --
 
-INSERT INTO `classes` (`id`, `class_code`, `academic_year`, `institute`, `course`, `subject`, `section`, `faculty`, `synch_day`, `synch_time`, `synch_room`, `asynch_day`, `asynch_time`, `asynch_room`, `status`, `remarks`) VALUES
-(64, 'C001', 4, 1, 2, 6, 1, 2, 'Monday', '08:00:00', 1, 'Wednesday', '13:00:00', 4, 'Ongoing', NULL),
-(65, 'C002', 5, 3, 7, 8, 3, 4, 'Tuesday', '10:30:00', 6, 'Thursday', '09:30:00', 6, 'Completed', NULL),
-(66, 'C003', 4, 2, 5, 5, 3, 5, 'Monday', '14:00:00', 3, 'Wednesday', '08:30:00', 7, 'Archived', NULL),
-(67, 'C004', 5, 1, 1, 1, 2, 1, 'Tuesday', '16:00:00', 7, 'Thursday', '10:30:00', 3, 'Pending', 'Missing'),
-(68, 'C005', 4, 3, 9, 10, 2, 4, 'Friday', '09:00:00', 5, 'Monday', '09:30:00', 4, 'Dropped', NULL),
-(69, 'C006', 4, 2, 4, 3, 2, 3, 'Wednesday', '13:30:00', 5, 'Friday', '14:00:00', 5, 'Ongoing', NULL),
-(70, 'C007', 5, 1, 6, 9, 1, 5, 'Thursday', '11:00:00', 2, 'Tuesday', '10:00:00', 2, 'Completed', NULL),
-(71, 'C008', 4, 3, 11, 8, 6, 1, 'Monday', '15:30:00', 7, 'Wednesday', '09:30:00', 4, 'Ongoing', 'Conflict'),
-(72, 'C009', 5, 2, 13, 4, 7, 2, 'Tuesday', '14:00:00', 5, 'Thursday', '11:00:00', 7, 'Pending', NULL),
-(73, 'C010', 4, 1, 3, 7, 8, 4, 'Friday', '10:30:00', 9, 'Monday', '08:30:00', 6, 'Completed', NULL),
-(74, 'C011', 4, 2, 1, 2, 6, 3, 'Monday', '16:30:00', 3, 'Wednesday', '14:00:00', 2, 'Archived', 'asdfasdvasdfgadfg'),
-(75, 'C012', 5, 3, 9, 10, 4, 5, 'Tuesday', '13:00:00', 3, 'Thursday', '10:30:00', 3, 'Ongoing', NULL),
-(76, 'C013', 4, 1, 4, 5, 3, 1, 'Wednesday', '09:30:00', 4, 'Friday', '12:00:00', 4, 'Completed', NULL),
-(77, 'C014', 5, 2, 6, 1, 5, 4, 'Thursday', '12:00:00', 5, 'Tuesday', '09:00:00', 1, 'Pending', NULL),
-(78, 'C015', 4, 3, 8, 6, 3, 2, 'Friday', '11:30:00', 6, 'Monday', '15:30:00', 6, 'Dropped', NULL),
-(79, 'C016', 5, 1, 10, 3, 4, 3, 'Monday', '14:30:00', 8, 'Wednesday', '11:30:00', 4, 'Ongoing', NULL),
-(80, 'C017', 4, 2, 5, 4, 1, 4, 'Thursday', '15:30:00', 1, 'Tuesday', '11:30:00', 4, 'Completed', NULL),
-(81, 'C018', 5, 3, 8, 9, 8, 1, 'Friday', '09:30:00', 1, 'Monday', '14:30:00', 6, 'Pending', NULL),
-(82, 'C019', 4, 1, 4, 3, 9, 3, 'Monday', '14:30:00', 1, 'Wednesday', '09:00:00', 8, 'Ongoing', NULL),
-(83, 'C020', 5, 2, 6, 4, 9, 1, 'Friday', '11:00:00', 2, 'Monday', '15:00:00', 2, 'Completed', NULL),
-(84, 'C021', 4, 3, 1, 9, 9, 3, 'Wednesday', '10:00:00', 3, 'Friday', '12:00:00', 9, 'Pending', NULL);
+INSERT INTO `classes` (`id`, `class_code`, `academic_year`, `institute`, `course`, `subject`, `section`, `faculty`, `synch_day`, `synch_time`, `synch_duration`, `synch_room`, `asynch_day`, `asynch_time`, `asynch_duration`, `asynch_room`, `status`, `remarks`) VALUES
+(87, 'C006', 5, 3, 9, 10, 2, 4, 'Monday', '06:30:00', 3, 5, 'Tuesday', '09:30:00', 3, 4, 'Dropped', NULL),
+(88, 'C007', 5, 3, 9, 2, 2, 4, 'Friday', '09:30:00', 3, 5, 'Saturday', '09:30:00', 3, 4, 'Dropped', NULL),
+(89, 'C008', 5, 3, 9, 3, 2, 4, 'Saturday', '12:30:00', 3, 5, 'Wednesday', '09:30:00', 3, 4, 'Dropped', NULL),
+(90, 'C009', 5, 3, 9, 5, 2, 4, 'Monday', '16:00:00', 3, 5, 'Thursday', '12:30:00', 3, 4, 'Dropped', NULL),
+(91, 'C0011', 5, 3, 9, 1, 2, 4, 'Friday', '12:30:00', 3, 5, 'Monday', '12:30:00', 3, 4, 'Dropped', NULL);
 
 -- --------------------------------------------------------
 
@@ -519,7 +505,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `avatar`, `firstname`, `lastname`, `middlename`, `suffix`, `institute`, `course`, `email`, `username`, `initial_password`, `password`, `role`, `last_login`, `current_login`, `is_active`) VALUES
-(1, 'cca-avatar.png', 'Admin', 'CCA', NULL, NULL, 'MISSO', NULL, 'CCA-Admin@cca.edu.ph', 'CCA-Admin', 'changed', '$2y$10$AGkdHZZGPoAupwxfbpWTx.ardK0dew/gNzV3prryRB15AlA8tX2uC', 'Admin', '2023-06-24 22:47:29', '2023-06-25 09:35:19', 1),
+(1, 'cca-avatar.png', 'Admin', 'CCA', NULL, NULL, 'MISSO', NULL, 'CCA-Admin@cca.edu.ph', 'CCA-Admin', 'changed', '$2y$10$AGkdHZZGPoAupwxfbpWTx.ardK0dew/gNzV3prryRB15AlA8tX2uC', 'Admin', '2023-06-28 21:28:19', '2023-06-28 23:14:46', 1),
 (25, 'cca-avatar.png', 'IBM', 'Dean', NULL, NULL, 'IBM', NULL, 'ibmdean@cca.edu.ph', 'IBM-Dean', 'changed', '$2y$10$a8qypk3s7wqeI7mLRl.ik.FmB.gXqYxYQPgqmxTayR4kwQsqQzbn.', 'Dean', '2023-06-04 20:47:04', '2023-06-04 20:47:04', 1),
 (26, 'cca-avatar.png', 'ICSLIS', 'Dean', NULL, NULL, 'ICSLIS', NULL, 'icslisdean@cca.edu.ph', 'ICSLIS-Dean', 'changed', '$2y$10$XrEVl3lGO5GZ0rYh/ndgfuHLcHFJU0whI7a7W06KZVa83F1HMa6SG', 'Dean', '2023-06-04 20:47:13', '2023-06-04 20:47:13', 1),
 (27, 'cca-avatar.png', 'IEAS', 'Dean', NULL, NULL, 'IEAS', NULL, 'ieasdean@cca.edu.ph', 'IEAS-Dean', 'changed', '$2y$10$XOxk2Vmvh1dNd30C9kepy.XUl50HZLNKBTDacTukK7Sm3up4Ak..C', 'Dean', '2023-06-04 20:47:26', '2023-06-04 20:47:26', 1),
@@ -684,7 +670,7 @@ ALTER TABLE `accomplishment_reports`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `clearance`
