@@ -240,7 +240,7 @@ if(isset($_GET["room"])){
                                 if($startHour == $hour && $minuteblock && $prevblock == "vacantblock" && $prevheight == "whole"){
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -251,7 +251,7 @@ if(isset($_GET["room"])){
                                     $j = $j - .5;
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -290,7 +290,7 @@ if(isset($_GET["room"])){
                                     $j = $j - .5;
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -298,7 +298,7 @@ if(isset($_GET["room"])){
                                 }else if($prevblock == "timeblock" && !is_whole($j)){
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $half; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -307,7 +307,7 @@ if(isset($_GET["room"])){
                                 }else if($prevblock == "timeblock" && is_whole($j)){
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -317,7 +317,7 @@ if(isset($_GET["room"])){
                                     $j = $j - .5;
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";
@@ -326,7 +326,7 @@ if(isset($_GET["room"])){
                                 }else{
                                     ?>
                                     <div class="border border-white" style="background-color: #f2f2f2; height: <?= $whole; ?>%;">
-                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none schedule_add_link" style="color: #f2f2f2;">+</a>
+                                        <a href='add?section=<?= $section?>&faculty=<?= $faculty?>&room=<?= $room?>&day=<?= $days[$i]?>&time=<?= $j?>' class="d-flex justify-content-center align-items-center w-100 h-100 h1 text-decoration-none d-print-none schedule_add_link" style="color: #f2f2f2;">+</a>
                                     </div>
                                     <?php
                                     $prevblock = "vacantblock";

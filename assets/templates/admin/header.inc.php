@@ -66,7 +66,7 @@ allowedRole($baseUrl, "Admin");
 </head>
 <body>
 	<div class="wrapper">
-		<nav class="sidebar js-sidebar user-select-none" id="sidebar">
+		<nav class="sidebar js-sidebar user-select-none d-print-none" id="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand d-flex flex-column align-items-center text-center" href="<?= $baseUrl; ?>admin">
 					<img class="pe-none w-40" src="<?= $baseUrl; ?>assets/images/photos/cca-logo.png">

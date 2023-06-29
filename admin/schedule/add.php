@@ -365,14 +365,15 @@ $result_room_asynch = mysqli_query($conn, $room);
                     <div class="col-md-9">
                         <div class="mb-3">
                             <label>Virtual Link</label>
-                            <input class="form-select form-select-lg" id="meeting_link" name="meeting_link">
+                            <input class="form-select form-select-lg" id="meeting_link_input" name="meeting_link">
                             <p id="link_warning" class="text-danger d-none">*Not a valid google meet link</p>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="mb-3 d-flex align-items-center justify-content-center h-100 w-100">
-                            <a href="" target="_blank" id="meeting_link_button" class="btn btn-success d-flex align-items-center justify-content-center"><i class="m-2 fa-solid fa-video fa-sm"></i>Try link</a>
+                            <a href="" target="_blank" id="meeting_link" class="btn btn-success align-items-center justify-content-center"><i class="m-2 fa-solid fa-video fa-sm"></i>Try link</a>
+                            <button type="button" id="meeting_link_button" class="btn btn-danger align-items-center justify-content-center d-none"></i>Invalid link</a>
                         </div>
                     </div>
                 </div>
@@ -400,38 +401,53 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
         return meetLinkRegex.test(link);
     }
 
-    function handleClick(event) {
-        event.preventDefault();
-        link.removeEventListener("click", handleClick); // Remove the event listener
+    function checkLink() {
+        var link = document.getElementById('meeting_link_input').value;
+        validLink = isGoogleMeetLink(link);
+
+        if(validLink){
+            // Transfer Link to Button
+            document.getElementById('meeting_link').href = link;
+            
+            // Show Warning Text
+            document.getElementById('link_warning').classList.add("d-none");
+            document.getElementById('link_warning').classList.remove("d-block");
+
+            // Hide Invalid Link Button
+            document.getElementById('meeting_link_button').classList.add("d-none");
+            document.getElementById('meeting_link_button').classList.remove("d-flex");
+
+            // Show Try Link Button
+            document.getElementById('meeting_link').classList.add("d-flex");
+            document.getElementById('meeting_link').classList.remove("d-none");
+
+        }else if(link == ""){
+            // Hide Try Link Button
+            document.getElementById('meeting_link').classList.add("d-none");
+            document.getElementById('meeting_link').classList.remove("d-flex");
+        }else {
+            // Transfer Link to Button
+            document.getElementById('meeting_link').href = link;
+
+            // Show Warning Text
+            document.getElementById('link_warning').classList.add("d-block");
+            document.getElementById('link_warning').classList.remove("d-none");
+
+            // Show Invalid Link Button
+            document.getElementById('meeting_link_button').classList.add("d-flex");
+            document.getElementById('meeting_link_button').classList.remove("d-none");
+
+            // Hide Try Link Button
+            document.getElementById('meeting_link').classList.add("d-none");
+            document.getElementById('meeting_link').classList.remove("d-flex");
+        }
     }
 
-    
-
+    checkLink();
     $( document ).ready(function() {
         var link = document.getElementById('meeting_link').value;
-        if(link == ""){
-            document.getElementById('meeting_link_button').addEventListener("click", function(event) {
-                event.preventDefault(); 
-            });
-        }
-        $('#meeting_link').on('change', function() {
-            var link = document.getElementById('meeting_link').value;
-            console.log(link);
-
-            validLink = isGoogleMeetLink(link);
-
-            if (validLink) {
-                document.getElementById('meeting_link_button').removeEventListener("click", function(event));
-                document.getElementById('meeting_link_button').href = link;
-                document.getElementById('link_warning').classList.add("d-none");
-                document.getElementById('link_warning').classList.remove("d-block");
-            } else {
-                document.getElementById('meeting_link_button').addEventListener("click", function(event) {
-                    event.preventDefault(); 
-                });
-                document.getElementById('link_warning').classList.add("d-block");
-                document.getElementById('link_warning').classList.remove("d-none");
-            }
+        $('#meeting_link_input').on('change', function() {
+            checkLink();
         });
     });    
 </script>
