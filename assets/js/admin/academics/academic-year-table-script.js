@@ -1,16 +1,3 @@
-// Table Column Headers
-var checkbox = "<input id='selectAll' onclick='select_all()' type='checkbox'>";
-var actionBullet = "";
-    actionBullet += "<div class='btn-group d-flex justify-content-end'>";
-    actionBullet += "<button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>";
-    actionBullet += "<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>";
-    actionBullet += "</button>";
-    actionBullet += "<div class='dropdown-menu' id='dropdown-container'>";
-    actionBullet += "<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#deleteSelectedModal' data-bs-name='' data-bs-href='../assets/includes/admin/user.inc.php?deleteSelectedUser' title='deleteSelected'>Option (Button)</button>";
-    actionBullet += "<a class='dropdown-item' href='' title='edit'>Option (Link)</a>";
-    actionBullet += "</div>";
-    actionBullet += "</div>";
-
 // Initialize Table
 $('#academics').DataTable({
     dom: 'Bfrtip',

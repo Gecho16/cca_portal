@@ -100,7 +100,6 @@ if (isset($_GET["selectYear"])) {
 			$subdata = array();
 
 			// Data to array
-			$subdata[] = $checkbox;
 			$subdata[] = $id;
 			$subdata[] = $institute_code;
 			$subdata[] = $institute_name;

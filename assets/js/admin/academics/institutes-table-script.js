@@ -1,16 +1,3 @@
-// Table Column Headers
-var checkbox = "<input id='selectAll' onclick='select_all()' type='checkbox'>";
-var actionBullet = "";
-    actionBullet += "<div class='btn-group d-flex justify-content-end'>";
-    actionBullet += "<button class='bg-transparent border-0 dropdown-toggle dropdown-toggle-no-caret' type='button' data-bs-toggle='dropdown'>";
-    actionBullet += "<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>";
-    actionBullet += "</button>";
-    actionBullet += "<div class='dropdown-menu' id='dropdown-container'>";
-    actionBullet += "<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#deleteSelectedModal' data-bs-name='' data-bs-href='../assets/includes/admin/user.inc.php?deleteSelectedUser' title='deleteSelected'>Option (Button)</button>";
-    actionBullet += "<a class='dropdown-item' href='' title='edit'>Option (Link)</a>";
-    actionBullet += "</div>";
-    actionBullet += "</div>";
-
 // Initialize Table
 $('#academics').DataTable({
     dom: 'Bfrtip',
@@ -82,11 +69,10 @@ $('#academics').DataTable({
     // Setting column names and bool orderable
     columns: [
         // Checkbox column
-        { data: 0, title: checkbox, orderable: false, visible: true},
-        { data: 1, title: "Id", orderable: false, visible: false},
-        { data: 2, title: "Institute Code", orderable: true, visible: true },
-        { data: 3, title: "Institute Name", orderable: true, visible: true },
-        { data: 4, title: "Institute Dean", orderable: true, visible: true },
-        { data: 5, title: actionBullet, orderable: false, visible: true },
+        { data: 0, title: "Id", orderable: false, visible: true},
+        { data: 1, title: "Institute Code", orderable: true, visible: true },
+        { data: 2, title: "Institute Name", orderable: true, visible: true },
+        { data: 3, title: "Institute Dean", orderable: true, visible: true },
+        { data: 4, title: "", orderable: false, visible: true },
     ],
 });

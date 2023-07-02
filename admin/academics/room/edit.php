@@ -9,10 +9,22 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 
 $year_start = range(strftime("%Y", time()), 2098);
 
+// Get room
+$room_id = sanitize($_GET["room"]);
+$room = "SELECT * FROM rooms WHERE id = $room_id";
+$result_room = mysqli_query($conn, $room);
+$row_room = mysqli_fetch_assoc($result_room);
+
+// Set Variables
+$room_name = $row_room['room_name'];
+$room_code = $row_room['room_code'];
+$type = $row_room['type'];
+$location = $row_room['location'];
+
 ?>
 
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">
-    <h1 class="h3 mb-0">Add Room</h1>
+    <h1 class="h3 mb-0">Edit Room</h1>
 
     <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../?table=rooms">
         <i class="fa-solid fa-chevron-left me-2"></i>
@@ -31,7 +43,7 @@ $year_start = range(strftime("%Y", time()), 2098);
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Room Name</label>
-                            <input type="text" class="form-select form-select-lg" id="room_name" name="room_name" required>
+                            <input type="text" class="form-select form-select-lg" id="room_name" name="room_name" value='<?= $room_name ?>' required>
                             </input>
                         </div>
                     </div> 
@@ -40,7 +52,7 @@ $year_start = range(strftime("%Y", time()), 2098);
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Room Code</label>
-                            <input type="text" class="form-control form-select-lg" id="room_code" name="room_code" required>
+                            <input type="text" class="form-control form-select-lg" id="room_code" name="room_code" value='<?= $room_code ?>' required>
                             </input>
                         </div>
                     </div>
@@ -52,8 +64,8 @@ $year_start = range(strftime("%Y", time()), 2098);
                         <div class="mb-3">
                             <label>Room Type</label>
                             <select class="form-select form-select-lg" id="type" name="type" required>
-                                    <option value="Lecture">Lecture</option>
-                                    <option value="Laboratory">Laboratory</option>
+                                    <option value="Lecture" <?= ($type === "Lecture") ? 'selected' : '';?>>Lecture</option>
+                                    <option value="Laboratory" <?= ($type === "Laboratory") ? 'selected' : '';?>>Laboratory</option>
                             </select>
                         </div>
                     </div> 
@@ -63,9 +75,9 @@ $year_start = range(strftime("%Y", time()), 2098);
                         <div class="mb-3">
                             <label>Room Location</label>
                             <select class="form-select form-select-lg" id="location" name="location" required>
-                                    <option value="Main Building">Main Building</option>
-                                    <option value="Second Building">Second Building</option>
-                                    <option value="Gymnasium">Gymnasium</option>
+                                    <option value="Main Building"  <?= ($location === "Main Building") ? 'selected' : '';?>>Main Building</option>
+                                    <option value="Second Building"  <?= ($location === "Second Building") ? 'selected' : '';?>>Second Building</option>
+                                    <option value="Gymnasium"  <?= ($location === "Gymnasium") ? 'selected' : '';?>>Gymnasium</option>
                             </select>
                         </div>
                     </div>
@@ -73,7 +85,7 @@ $year_start = range(strftime("%Y", time()), 2098);
                 
                 <!-- Submit button -->
                 <div class="text-end">
-                    <button class="btn btn-primary btn-lg" name="submitAddRoom" type="submit">
+                    <button class="btn btn-primary btn-lg" name="submitEditRoom" type="submit" value='<?= $room_id ?>'>
                         Submit
                     </button>
                 </div>

@@ -77,6 +77,7 @@ if (isset($_GET["selectYear"])) {
 			$firstname = $row["firstname"];
 			$lastname = $row["lastname"];
 			$middlename = $row["middlename"];
+			$middle_initital = substr($middlename, 0, 1);
 			$suffix = $row["suffix"];
 			$institute = $row["institute"];
 			$reference_number = $row["reference_number"];
@@ -86,14 +87,14 @@ if (isset($_GET["selectYear"])) {
 			$checkbox = "<input id='" . $row["id"] . "' type='checkbox' name='checkbox[]' value='" . $row["id"] . "'>";
 
 			// Fullname
-			if ($middlename === null || $middlename === "") {
-				$fullname = $lastname . " " . $suffix . ", " . $firstname;
-			}else if($suffix === null || $suffix === ""){
-				$fullname = $lastname . ", " . $firstname . " " . $middlename;
-			}else if(($middlename === null || $middlename === "") || ($suffix === null || $suffix === "")){
+			if(($middlename === null || $middlename === "") && ($suffix === null || $suffix === "")){
 				$fullname = $lastname . ", " . $firstname;
+			}else if ($middlename === null || $middlename === "") {
+				$fullname = $lastname . ", " . $firstname . $suffix ;
+			}else if($suffix === null || $suffix === ""){
+				$fullname = $lastname . ", " . $firstname . " " . $middle_initital . ".";
 			}else{
-				$fullname = $lastname . " " . $suffix . ", " . $firstname . " " . $middlename;
+				$fullname = $lastname . ", " . $firstname . " " . $middle_initital . ". " . $suffix ;
 			}
 
 			// Middlename
@@ -108,10 +109,14 @@ if (isset($_GET["selectYear"])) {
 
 			// Status
 			if ($type == "COS Full Time") {
-			    $type = "<span class='badge bg-primary'>" . $type . "</span>";
+			    $type = "<span class='badge bg-info'>" . $type . "</span>";
 			} else if ($type == "COS Part Time") {
+				$type = "<span class='badge bg-warning'>" . $type . "</span>";
+			} else if ($type == "Plantilla Permanent") {
 				$type = "<span class='badge bg-success'>" . $type . "</span>";
-			} 	else {
+			} else if ($type == "Plantilla Temporary") {
+				$type = "<span class='badge bg-primary'>" . $type . "</span>";
+			} else {
 				$type = "None";
 			}
 
@@ -122,8 +127,12 @@ if (isset($_GET["selectYear"])) {
 			$actionBullet .= "<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>";
 			$actionBullet .= "</button>";
 			$actionBullet .= "<div class='dropdown-menu' id='dropdown-container'>";
-			$actionBullet .= "<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#deleteSelectedModal' data-bs-name='' data-bs-href='../assets/includes/admin/user.inc.php?deleteSelectedUser' title='deleteSelected'>Option (Button)</button>";
-			$actionBullet .= "<a class='dropdown-item' href='#' title='edit'>Option (Link)</a>";
+			$actionBullet .= "	<a class='dropdown-item' href='faculty/edit?faculty=" . $id . "' title='edit'>
+									Edit
+								</a>";
+			$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $reference_number . "' data-bs-href='../../assets/includes/admin/academics/faculty.inc.php?deleteFaculty&id=" . $id . "' title='delete'>
+									Delete
+								</button>";
 			$actionBullet .= "</div>";
 			$actionBullet .= "</div>";
 

@@ -11,19 +11,31 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 $institutes = "SELECT institute_code, institute_name FROM institutes WHERE institute_code != 'MISSO' AND institute_code != 'NTPs'";
 $result_institutes = mysqli_query($conn, $institutes);
 
+// Get faculty count
+$faculty = "SELECT MAX(id) AS max_id FROM faculty";
+$result_faculty = mysqli_query($conn, $faculty);
+$row_faculty = mysqli_fetch_assoc($result_faculty);
+$last_id = $row_faculty['max_id'] + 1;
+
+// Get active academic year
+$acad_year = "SELECT year FROM academic_years WHERE is_active = 1";
+$result_acad_year = mysqli_query($conn, $acad_year);
+$row = mysqli_fetch_assoc($result_acad_year);
+$academic_year = $row['year'];
+
 ?>
 
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">
     <h1 class="h3 mb-0">Add Faculty</h1>
 
-    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../">
+    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../?table=faculty">
         <i class="fa-solid fa-chevron-left me-2"></i>
         Back
     </a>
 </div>
 
 <div class="card col-md-6">
-    <form class="card-body" id="form" action="<?= $baseUrl ?>assets/includes/admin/academics/academic.inc.php" method="POST" autocomplete="off">
+    <form class="card-body" id="form" action="<?= $baseUrl ?>assets/includes/admin/academics/faculty.inc.php" method="POST" autocomplete="off">
         <div class="row">
             <div class="col-md-12">
 
@@ -33,7 +45,7 @@ $result_institutes = mysqli_query($conn, $institutes);
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Firstname</label>
-                            <input type="text" class="form-select form-select-lg names" name="firstname" required>
+                            <input type="text" class="form-select form-select-lg names" id="firstname" name="firstname" required>
                             </input>
                         </div>
                     </div> 
@@ -42,7 +54,7 @@ $result_institutes = mysqli_query($conn, $institutes);
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Lastname</label>
-                            <input type="text" class="form-select form-select-lg names" name="lastname" required>
+                            <input type="text" class="form-select form-select-lg names" id="lastname" name="lastname" required>
                             </input>
                         </div>
                     </div> 
@@ -68,8 +80,22 @@ $result_institutes = mysqli_query($conn, $institutes);
                 </div>
 
                 <div class="row">
+                    <!-- Reference Number -->
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label>Reference Number</label>
+                            <input type="text" class="form-control form-select-lg names" id="reference_number" name="reference_number" required>
+                        </div>
+                        <label class="form-check" id="userReadonly">
+                            <input class="form-check-input" type="checkbox" id="userReadonlyCheckbox" checked>
+                            <span class="form-check-label">
+                                Autofill
+                            </span>
+                        </label>
+                    </div> 
+
                     <!-- Institute -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label>Institute</label>
                             <select class="form-select form-select-lg" id="institute" name="institute" required>
@@ -80,17 +106,9 @@ $result_institutes = mysqli_query($conn, $institutes);
                         </div>
                     </div>
 
-                    <!-- Reference Number -->
-                    <div class="col-md-3">
-                        <div class="mb-3">
-                            <label>Reference Number</label>
-                            <input type="text" class="form-select form-select-lg names" id="reference_number" name="reference_number" required>
-                            </input>
-                        </div>
-                    </div> 
-
+                    
                     <!-- Faculty Type -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label>Faculty Type</label>
                             <select class="form-select form-select-lg" id="type" name="type" required>
@@ -106,7 +124,11 @@ $result_institutes = mysqli_query($conn, $institutes);
 
                 <!-- Submit button -->
                 <div class="text-end">
-                    <button class="btn btn-primary btn-lg" name="submitAddInstitute" type="submit">
+                    <!-- Values for autofill -->
+                    <input type='hidden' name='user_count' id="user_count" value='<?= $last_id ?>'>
+                    <input type='hidden' name='academic_year' id="academic_year" value='<?= $academic_year ?>'>
+
+                    <button class="btn btn-primary btn-lg" name="submitAddFaculty" type="submit">
                         Submit
                     </button>
                 </div>
@@ -122,13 +144,85 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 ?>
 
 <script>
+    function setReferenceNum(){
+        var firstname = document.getElementById("firstname");
+        var lastname = document.getElementById("lastname");
+
+        var usercode = "";
+
+        if(firstname.value == "" && lastname.value == ""){
+            usercode = "??";
+        }else if(firstname.value === ""){
+            usercode = "?" + lastname.value.charAt(0);
+        }else if(lastname.value === ""){
+            usercode = firstname.value.charAt(0) + "?";
+        }else{
+            usercode = firstname.value.charAt(0) + lastname.value.charAt(0);
+        }
+
+        // Reference Number
+        var user_count = document.getElementById("user_count").value;
+        var academic_year = document.getElementById("academic_year").value;
+        var institute = document.getElementById("institute").value;
+        var type = document.getElementById("type").value;
+        var type_short = "";
+
+        if(type === "COS Full Time"){
+            type_short = "CF";
+        } else if(type === "COS Part Time"){
+            type_short = "CP";
+        } else if(type === "Plantilla Permanent"){
+            type_short = "PP";
+        } else if(type === "Plantilla Temporary"){
+            type_short = "PT";
+        }
+
+        if (user_count.length < 6) {
+            user_count_padded = user_count.padStart(4, '0');
+        }
+        academic_year_sliced = academic_year.slice(7);
+        institute_sliced = institute.slice(1,2);
+        usercode = (usercode).toUpperCase();
+
+        // Reference Number
+        document.getElementById("reference_number").value = "CCA" + academic_year_sliced + "_" + usercode + user_count_padded;
+        
+        // Reference Number Formula --->
+        // "CCA" +
+        // Last year of academic year ex:(23 = 2022-2023) +
+        // Name Initial ex:(JD = Juan Dela Cruz) +
+        // Current User Count
+    }
+
+    setReferenceNum()
+    document.getElementById("reference_number").readOnly = true;
+
+    // Auto Fill Reference Number
+    $('#firstname').on('input', function() {
+        setReferenceNum()
+    });
+
+    $('#lastname').on('input', function() {
+        setReferenceNum()
+    });
+
+    // Read only Username
+    const usernameInput = document.getElementById("reference_number");
+    const userReadonlyCheckbox = document.getElementById("userReadonlyCheckbox");
+    userReadonlyCheckbox.addEventListener("change", function() {
+        usernameInput.readOnly = userReadonlyCheckbox.checked;
+        if (userReadonlyCheckbox.checked) {
+            setReferenceNum();
+        }
+    });
+    
     // Reference Number
     var reference_number = document.getElementById('reference_number');
 
     reference_number.addEventListener('input', function() {
-        this.value = this.value.replace(/[^a-zA-Z0-9-df]/g, '').toUpperCase();
-        if (this.value.length > 8) {
-            this.value = this.value.substring(0, 8);
+        this.value = this.value.replace(/[^a-zA-Z0-9-_-]/g, '').toUpperCase();
+        if (this.value.length > 12) {
+            this.value = this.value.substring(0, 12);
         }
     });
 
@@ -146,4 +240,5 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
             event.target.value = capitalizedValue;
         });
     }
+    
 </script>

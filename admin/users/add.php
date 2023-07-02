@@ -8,7 +8,7 @@ $page = "users";
 include $baseUrl . "assets/templates/admin/header.inc.php";
 
 // Get user count
-$users = "SELECT id FROM user_accounts WHERE role = 'student' OR role = 'faculty'";
+$users = "SELECT id FROM user_accounts WHERE role = 'student'";
 $result_users = mysqli_query($conn, $users);
 $user_count = mysqli_num_rows($result_users);
 

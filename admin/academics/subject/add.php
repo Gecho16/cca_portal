@@ -22,7 +22,7 @@ $result_subject_code3 = mysqli_query($conn, $subject_code3);
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">   
     <h1 class="h3 mb-0">Add Subject</h1>
 
-    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../">
+    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../?table=subjects">
         <i class="fa-solid fa-chevron-left me-2"></i>
         Back
     </a>
@@ -36,7 +36,7 @@ $result_subject_code3 = mysqli_query($conn, $subject_code3);
                 <div class="row">
                     <label class="h3" >Subject Information</label>
                     <!-- Subject Name -->
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label>Subject Name</label>
                             <input type="text" class="form-select form-select-lg" id="subject_title" name="subject_title" required>
@@ -45,7 +45,7 @@ $result_subject_code3 = mysqli_query($conn, $subject_code3);
                     </div>
                     
                     <!-- Subject Code-->
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label>Subject Code</label>
                             <input type="text" class="form-select form-select-lg" id="subject_code" name="subject_code" required>
@@ -54,7 +54,7 @@ $result_subject_code3 = mysqli_query($conn, $subject_code3);
                     </div>
 
                     <!-- Year Level -->
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label>Year Level</label>
                             <select class="form-select form-select-lg" id="year" name="year" required>
@@ -73,6 +73,7 @@ $result_subject_code3 = mysqli_query($conn, $subject_code3);
                         <div class="mb-3">
                             <label>Lecture Hours</label>
                             <select class="form-select form-select-lg hours-units" id="lecture_hours" name="lecture_hours" required>
+                                <option value="0">None</option>
                                 <?php
                                 $maxHours = 16;
                                 for ($i = 1; $i <= $maxHours; $i++) {
@@ -129,6 +130,7 @@ $result_subject_code3 = mysqli_query($conn, $subject_code3);
                         <div class="mb-3">
                             <label>Pre-requisite</label>
                             <select class="form-select form-select-lg" id="prerequisite" name="prerequisite" required>
+                                <option value="">None</option>
                                 <?php while ($row = mysqli_fetch_assoc($result_subject_code1)) { $subject_code1 = $row['subject_code']; ?>
                                     <option value="<?php echo $subject_code1; ?>" class="subject_year subject_year1 d-none"><?php echo $subject_code1; ?></option>
                                 <?php } ?>
@@ -202,8 +204,8 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
         var subject_year3 = document.querySelectorAll('.subject_year3');
 
         if(year.value == 1){
-            prerequisite.disabled = true;
             prerequisite.value= "";
+            prerequisite.disabled = true;
 
         } else  if(year.value == 2){
             prerequisite.disabled = false;

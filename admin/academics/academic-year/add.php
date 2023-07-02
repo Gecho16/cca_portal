@@ -14,7 +14,7 @@ $year_start = range(strftime("%Y", time()), 2098);
 <div class="d-flex justify-content-between align-items-center d-print-none mb-3">
     <h1 class="h3 mb-0">Add Acacdemic Year</h1>
 
-    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../">
+    <a class="btn btn-secondary d-flex justify-content-between align-items-center" onclick="history.back()" href="../?table=academic-year">
         <i class="fa-solid fa-chevron-left me-2"></i>
         Back
     </a>

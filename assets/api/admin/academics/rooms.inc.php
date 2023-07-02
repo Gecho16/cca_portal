@@ -105,8 +105,12 @@ if (isset($_GET["selectYear"])) {
 			$actionBullet .= "<i class='fa-solid fa-ellipsis-vertical fa-xl'></i>";
 			$actionBullet .= "</button>";
 			$actionBullet .= "<div class='dropdown-menu' id='dropdown-container'>";
-			$actionBullet .= "<button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#deleteSelectedModal' data-bs-name='' data-bs-href='../assets/includes/admin/user.inc.php?deleteSelectedUser' title='deleteSelected'>Option (Button)</button>";
-			$actionBullet .= "<a class='dropdown-item' href='#' title='edit'>Option (Link)</a>";
+			$actionBullet .= "	<a class='dropdown-item' href='room/edit?room=" . $id . "' title='edit'>
+									Edit
+								</a>";
+			$actionBullet .= "	<button type='button' class='dropdown-item'' data-bs-toggle='modal' data-bs-target='#deleteModal' data-bs-name='" . $room_code . "' data-bs-href='../../assets/includes/admin/academics/room.inc.php?deleteRoom&id=" . $id . "' title='delete'>
+									Delete
+								</button>";
 			$actionBullet .= "</div>";
 			$actionBullet .= "</div>";
 
