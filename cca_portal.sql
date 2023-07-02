@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2023 at 07:04 PM
+-- Generation Time: Jun 29, 2023 at 04:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -110,10 +110,10 @@ CREATE TABLE `classes` (
 
 INSERT INTO `classes` (`id`, `class_code`, `academic_year`, `institute`, `course`, `subject`, `section`, `faculty`, `synch_day`, `synch_time`, `synch_duration`, `synch_room`, `asynch_day`, `asynch_time`, `asynch_duration`, `asynch_room`, `status`, `remarks`) VALUES
 (87, 'C006', 5, 3, 9, 10, 2, 4, 'Monday', '06:30:00', 3, 5, 'Tuesday', '09:30:00', 3, 4, 'Dropped', NULL),
-(88, 'C007', 5, 3, 9, 2, 2, 4, 'Friday', '09:30:00', 3, 5, 'Saturday', '09:30:00', 3, 4, 'Dropped', NULL),
-(89, 'C008', 5, 3, 9, 3, 2, 4, 'Saturday', '12:30:00', 3, 5, 'Wednesday', '09:30:00', 3, 4, 'Dropped', NULL),
-(90, 'C009', 5, 3, 9, 5, 2, 4, 'Monday', '16:00:00', 3, 5, 'Thursday', '12:30:00', 3, 4, 'Dropped', NULL),
-(91, 'C0011', 5, 3, 9, 1, 2, 4, 'Friday', '12:30:00', 3, 5, 'Monday', '12:30:00', 3, 4, 'Dropped', NULL);
+(88, 'C007', 5, 3, 9, 2, 2, 2, 'Friday', '09:30:00', 3, 5, 'Saturday', '09:30:00', 3, 4, 'Dropped', NULL),
+(89, 'C008', 5, 3, 9, 3, 2, 1, 'Saturday', '12:30:00', 3, 5, 'Wednesday', '09:30:00', 3, 4, 'Dropped', NULL),
+(90, 'C009', 5, 3, 9, 5, 2, 8, 'Monday', '16:00:00', 3, 5, 'Thursday', '12:30:00', 3, 4, 'Dropped', NULL),
+(91, 'C0011', 5, 3, 9, 1, 2, 9, 'Friday', '12:30:00', 3, 5, 'Monday', '12:30:00', 3, 4, 'Dropped', NULL);
 
 -- --------------------------------------------------------
 
@@ -505,7 +505,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `avatar`, `firstname`, `lastname`, `middlename`, `suffix`, `institute`, `course`, `email`, `username`, `initial_password`, `password`, `role`, `last_login`, `current_login`, `is_active`) VALUES
-(1, 'cca-avatar.png', 'Admin', 'CCA', NULL, NULL, 'MISSO', NULL, 'CCA-Admin@cca.edu.ph', 'CCA-Admin', 'changed', '$2y$10$AGkdHZZGPoAupwxfbpWTx.ardK0dew/gNzV3prryRB15AlA8tX2uC', 'Admin', '2023-06-28 21:28:19', '2023-06-28 23:14:46', 1),
+(1, 'cca-avatar.png', 'Admin', 'CCA', NULL, NULL, 'MISSO', NULL, 'CCA-Admin@cca.edu.ph', 'CCA-Admin', 'changed', '$2y$10$AGkdHZZGPoAupwxfbpWTx.ardK0dew/gNzV3prryRB15AlA8tX2uC', 'Admin', '2023-06-29 08:44:48', '2023-06-29 22:00:54', 1),
 (25, 'cca-avatar.png', 'IBM', 'Dean', NULL, NULL, 'IBM', NULL, 'ibmdean@cca.edu.ph', 'IBM-Dean', 'changed', '$2y$10$a8qypk3s7wqeI7mLRl.ik.FmB.gXqYxYQPgqmxTayR4kwQsqQzbn.', 'Dean', '2023-06-04 20:47:04', '2023-06-04 20:47:04', 1),
 (26, 'cca-avatar.png', 'ICSLIS', 'Dean', NULL, NULL, 'ICSLIS', NULL, 'icslisdean@cca.edu.ph', 'ICSLIS-Dean', 'changed', '$2y$10$XrEVl3lGO5GZ0rYh/ndgfuHLcHFJU0whI7a7W06KZVa83F1HMa6SG', 'Dean', '2023-06-04 20:47:13', '2023-06-04 20:47:13', 1),
 (27, 'cca-avatar.png', 'IEAS', 'Dean', NULL, NULL, 'IEAS', NULL, 'ieasdean@cca.edu.ph', 'IEAS-Dean', 'changed', '$2y$10$XOxk2Vmvh1dNd30C9kepy.XUl50HZLNKBTDacTukK7Sm3up4Ak..C', 'Dean', '2023-06-04 20:47:26', '2023-06-04 20:47:26', 1),

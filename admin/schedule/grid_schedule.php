@@ -153,22 +153,14 @@ if(isset($_GET["room"])){
                             $class_type = '';
                             $block_color = '';
 
-                            // $sql_classtime_synch = "SELECT * FROM classes WHERE synch_day = '" . ucfirst($days[$i]) . "'  ORDER BY synch_time ASC";
                             $result_classtime_synch = mysqli_query($conn, $sql_classtime_synch);
                             while ($row_classtime_synch = mysqli_fetch_assoc($result_classtime_synch)) {
                                 $fulltime = substr($row_classtime_synch['synch_time'], 0, 5);
-                                // echo "a" . 
                                 $duration = $row_classtime_synch['synch_duration'];
-                                // echo "b" . 
                                 $hour = intval(substr($fulltime, 0, 2));
-                                // echo "c" . 
                                 $minute = intval(substr($fulltime, 3));
-
-                                // echo "d" . 
+                            
                                 $startHour;
-
-
-                                // echo "</br>";
 
                                 // Set Variables
                                 $subject_id = $row_classtime_synch['subject'];
@@ -190,23 +182,15 @@ if(isset($_GET["room"])){
                             }
 
                             if(!$timeblock){
-                                // $sql_classtime_asynch = "SELECT * FROM classes WHERE asynch_day = '" . ucfirst($days[$i]) . "'  ORDER BY asynch_time ASC";
                                 $result_classtime_asynch = mysqli_query($conn, $sql_classtime_asynch);
                                 while ($row_classtime_asynch = mysqli_fetch_assoc($result_classtime_asynch)) {
                                     $fulltime = substr($row_classtime_asynch['asynch_time'], 0, 5);
-                                    // echo "a" . 
                                     $duration = $row_classtime_asynch['asynch_duration'];
-                                    // echo "b" . 
                                     $hour = intval(substr($fulltime, 0, 2));
-                                    // echo "c" . 
                                     $minute = intval(substr($fulltime, 3));
-    
-                                    // echo "d" . 
+                                    
                                     $startHour;
-    
-    
-                                    // echo "</br>";
-    
+                                    
                                     // Set Variables
                                     $subject_id = $row_classtime_asynch['subject'];
                                     $sql_subject_asynch = "SELECT * FROM subjects WHERE id = $subject_id";

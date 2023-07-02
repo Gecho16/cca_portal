@@ -372,8 +372,7 @@ $result_room_asynch = mysqli_query($conn, $room);
 
                     <div class="col-md-3">
                         <div class="mb-3 d-flex align-items-center justify-content-center h-100 w-100">
-                            <a href="" target="_blank" id="meeting_link" class="btn btn-success align-items-center justify-content-center"><i class="m-2 fa-solid fa-video fa-sm"></i>Try link</a>
-                            <button type="button" id="meeting_link_button" class="btn btn-danger align-items-center justify-content-center d-none"></i>Invalid link</a>
+                            <a href="" target="_blank" id="meeting_link" class="btn btn-success align-items-center justify-content-center d-none"><i class="m-2 fa-solid fa-video fa-sm"></i>Try link</a>
                         </div>
                     </div>
                 </div>
@@ -397,15 +396,21 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
 
 <script>
     function isGoogleMeetLink(link) {
-        var meetLinkRegex = /^https?:\/\/meet\.google\.com\//i;
-        return meetLinkRegex.test(link);
+    // var meetLinkRegex = /^https?:\/\/meet\.google\.com\/[a-z-]+$/i;
+    var meetLinkRegex = /^https?:\/\/meet\.google\.com\/[a-z]{3,4}-[a-z]{4}-[a-z]{3}$/i;
+    return meetLinkRegex.test(link);
     }
 
     function checkLink() {
         var link = document.getElementById('meeting_link_input').value;
         validLink = isGoogleMeetLink(link);
 
-        if(validLink){
+        if(link === ""){
+            // Hide Try Link Button
+            document.getElementById('meeting_link').classList.add("d-none");
+            document.getElementById('meeting_link').classList.remove("d-flex");
+            
+        }else if(validLink){
             // Transfer Link to Button
             document.getElementById('meeting_link').href = link;
             
@@ -413,18 +418,10 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
             document.getElementById('link_warning').classList.add("d-none");
             document.getElementById('link_warning').classList.remove("d-block");
 
-            // Hide Invalid Link Button
-            document.getElementById('meeting_link_button').classList.add("d-none");
-            document.getElementById('meeting_link_button').classList.remove("d-flex");
-
             // Show Try Link Button
             document.getElementById('meeting_link').classList.add("d-flex");
             document.getElementById('meeting_link').classList.remove("d-none");
 
-        }else if(link == ""){
-            // Hide Try Link Button
-            document.getElementById('meeting_link').classList.add("d-none");
-            document.getElementById('meeting_link').classList.remove("d-flex");
         }else {
             // Transfer Link to Button
             document.getElementById('meeting_link').href = link;
@@ -432,10 +429,6 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
             // Show Warning Text
             document.getElementById('link_warning').classList.add("d-block");
             document.getElementById('link_warning').classList.remove("d-none");
-
-            // Show Invalid Link Button
-            document.getElementById('meeting_link_button').classList.add("d-flex");
-            document.getElementById('meeting_link_button').classList.remove("d-none");
 
             // Hide Try Link Button
             document.getElementById('meeting_link').classList.add("d-none");
@@ -446,7 +439,7 @@ include $baseUrl . "assets/templates/admin/footer.inc.php";
     checkLink();
     $( document ).ready(function() {
         var link = document.getElementById('meeting_link').value;
-        $('#meeting_link_input').on('change', function() {
+        $('#meeting_link_input').on('input', function() {
             checkLink();
         });
     });    
