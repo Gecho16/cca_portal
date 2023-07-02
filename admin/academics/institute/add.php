@@ -45,44 +45,6 @@ include $baseUrl . "assets/templates/admin/header.inc.php";
 
                 </div>
 
-                <div class="row">
-                    <!-- <label class="h3" >Dean</label> -->
-                    <!-- First name -->
-                    <!-- <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Firstname</label>
-                            <input type="text" class="form-select form-select-lg names" name="firstname">
-                            </input>
-                        </div>
-                    </div>  -->
-
-                    <!-- Last name -->
-                    <!-- <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Lastname</label>
-                            <input type="text" class="form-select form-select-lg names" name="lastname">
-                            </input>
-                        </div>
-                    </div>  -->
-
-                    <!-- Middle name -->
-                    <!-- <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Middlename</label>
-                            <input type="text" class="form-select form-select-lg names" name="middlename">
-                            </input>
-                        </div>
-                    </div>  -->
-
-                    <!-- Suffix -->
-                    <!-- <div class="col-md-6">
-                        <div class="mb-3">
-                            <label>Suffix</label>
-                            <input type="text" class="form-select form-select-lg names" name="suffix">
-                            </input>
-                        </div>
-                    </div>  -->
-
                 </div>
 
                 <!-- Submit button -->

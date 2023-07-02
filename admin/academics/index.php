@@ -138,72 +138,28 @@ function academicTable(){
     }
 }
 
-
 // Refresh table when view value is changed
 $( document ).ready(function() {
     academicTable()
     // Refresh table when view value is changed
     $('#tableSelect').on('change', function() {
         view = document.getElementById("tableSelect").value;
-        // var table = $('#academics').DataTable();
-        // var container = $('#academics');
-
-        // // console.log(view);
-
-        // if ($.fn.DataTable.isDataTable('#academics')) {
-        //     table.destroy();
-        //     container.remove();
-        // }
-
-        // var parentContainer = $('#academics-container');
-        // var newTable = $('<table class="table table-striped table-sm w-100" id="academics"></table>');
-        // parentContainer.append(newTable);
-
-        // academicTable()
-
-        // var input_buttons = document.querySelectorAll('.input-buttons');
-
-        // for (var i = 0; i < input_buttons.length; i++) {
-        //     input_buttons[i].classList.remove('d-flex');
-        //     input_buttons[i].classList.add('d-none');
-        // }
 
         // Set page title depending of selected table
         if(view == 'academic-year'){
             window.location.href = "?table=academic-year";
-            // document.getElementById("page-title").innerHTML = 'Academic Years';
-            // document.getElementById("academic-year-input-buttons").classList.remove('d-none');
-            // document.getElementById("academic-year-input-buttons").classList.add('d-flex');
         }else if(view == 'institutes'){
             window.location.href = "?table=institutes";
-            // document.getElementById("page-title").innerHTML = 'Institutes';
-            // document.getElementById("institute-input-buttons").classList.remove('d-none');
-            // document.getElementById("institute-input-buttons").classList.add('d-flex');
         }else if(view == 'courses'){
             window.location.href = "?table=courses";
-            // document.getElementById("page-title").innerHTML = 'Courses';
-            // document.getElementById("course-input-buttons").classList.remove('d-none');
-            // document.getElementById("course-input-buttons").classList.add('d-flex');
         }else if(view == 'subjects'){
             window.location.href = "?table=subjects";
-            // document.getElementById("page-title").innerHTML = 'Subjects';
-            // document.getElementById("subject-input-buttons").classList.remove('d-none');
-            // document.getElementById("subject-input-buttons").classList.add('d-flex');
         }else if(view == 'sections'){
             window.location.href = "?table=sections";
-            // document.getElementById("page-title").innerHTML = 'Sections';
-            // document.getElementById("section-input-buttons").classList.remove('d-none');
-            // document.getElementById("section-input-buttons").classList.add('d-flex');
         }else if(view == 'faculty'){
             window.location.href = "?table=faculty";
-            // document.getElementById("page-title").innerHTML = 'Faculty';
-            // document.getElementById("faculty-input-buttons").classList.remove('d-none');
-            // document.getElementById("faculty-input-buttons").classList.add('d-flex');
         }else if(view == 'rooms'){
             window.location.href = "?table=rooms";
-            // document.getElementById("page-title").innerHTML = 'Rooms';
-            // document.getElementById("room-input-buttons").classList.remove('d-none');
-            // document.getElementById("room-input-buttons").classList.add('d-flex');
         }else{
             window.location.href = "?table=academic-year";
         }

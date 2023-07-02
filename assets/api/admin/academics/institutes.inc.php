@@ -18,7 +18,6 @@ if (isset($_GET["selectYear"])) {
 		1 => 'id',
 		2 => 'institute_code',
 		3 => 'institute_name',
-		4 => 'dean',
 		5 => '',
 	);
 	
@@ -31,7 +30,6 @@ if (isset($_GET["selectYear"])) {
 	if (!empty($request["search"]["value"])) {
 		$where .= " WHERE institute_code LIKE '%" . $request["search"]["value"] . "%'";
 		$where .= " OR institute_name LIKE '%" . $request["search"]["value"] . "%'";
-		$where .= " OR dean LIKE '%" . $request["search"]["value"] . "%'";
 	}
 
 	$sqlTot .= $sql;
@@ -67,19 +65,9 @@ if (isset($_GET["selectYear"])) {
 			$id = $row["id"];
 			$institute_code = $row["institute_code"];
 			$institute_name = $row["institute_name"];
-			$dean = $row["dean"];
 
             // Checbox
 			$checkbox = "<input id='" . $row["id"] . "' type='checkbox' name='checkbox[]' value='" . $row["id"] . "'>";
-
-			// Dean
-			if (($dean === null || $dean === "") && ($institute_code == "MISSO" || $institute_code == "NTPs")) {
-				$institute_dean = "N/A";
-			} else if ($dean === null || $dean === ""){
-				$institute_dean = "- - -";
-			} else {
-				$institute_dean = $dean;
-			}
 
 			//Action Bullet 
 			$actionBullet = "";
@@ -103,7 +91,6 @@ if (isset($_GET["selectYear"])) {
 			$subdata[] = $id;
 			$subdata[] = $institute_code;
 			$subdata[] = $institute_name;
-			$subdata[] = $institute_dean;
 			$subdata[] = $actionBullet;
 
 			$data[] = $subdata;

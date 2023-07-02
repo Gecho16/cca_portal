@@ -21,7 +21,7 @@ if (isset($_POST["submitAddCourse"])) {
 
 	// If entry already exists send error message
 	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Course Code Already <b>Exists</b>");
+		header("Location: {$baseUrl}admin/academics?table=courses&table=courses&error=Course Code Already <b>Exists</b>");
 		exit();
 	}
 
@@ -51,21 +51,21 @@ if (isset($_POST["submitAddCourse"])) {
 
 	// Error preparing the statement
 	if (!$stmt) {
-		header("Location: {$baseUrl}admin/academics?error=Add Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=courses&error=Add Entry <b>Error</b>");
 		exit();
 	}
 	
 	// Execute the statement
 	if (!mysqli_stmt_execute($stmt)) {
-		header("Location: {$baseUrl}admin/academics?error=Add Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=courses&error=Add Entry <b>Error</b>");
 		exit();
 	}
 
 	// Check if any rows were affected
 	if (mysqli_stmt_affected_rows($stmt) > 0) {
-		header("Location: {$baseUrl}admin/academics?&success=Added <b>ENTRY</b> successfully");
+		header("Location: {$baseUrl}admin/academics?table=courses&success=Added <b>ENTRY</b> successfully");
 	} else {
-		header("Location: {$baseUrl}admin/academics?error=Add Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=courses&error=Add Entry <b>Error</b>");
 	}
 
 	// Close prepared statment 
@@ -108,7 +108,7 @@ if (isset($_POST["submitEditCourse"])) {
 
 	// Error preparing the statement
 	if (!$stmt) {
-		header("Location: {$baseUrl}admin/academics?error=Update Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=courses&error=Update Entry <b>Error</b>");
 		exit();
 	}
 
@@ -119,15 +119,15 @@ if (isset($_POST["submitEditCourse"])) {
 
 	// Execute the statement
 	if (!mysqli_stmt_execute($stmt)) {
-		header("Location: {$baseUrl}admin/academics?error=Update Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=courses&error=Update Entry <b>Error</b>");
 		exit();
 	}
 
 	// Check if any rows were affected
 	if (mysqli_stmt_affected_rows($stmt) > 0) {
-		header("Location: {$baseUrl}admin/academics?success=Updated <b>ENTRY</b> Successfully");
+		header("Location: {$baseUrl}admin/academics?table=courses&success=Updated <b>ENTRY</b> Successfully");
 	} else {
-		header("Location: {$baseUrl}admin/academics?error=No <b>ENTRY</b> Info Updated");
+		header("Location: {$baseUrl}admin/academics?table=courses&error=No <b>ENTRY</b> Info Updated");
 	}
 
 	// Close prepared statement

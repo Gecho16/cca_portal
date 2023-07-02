@@ -17,10 +17,6 @@
                             <td>Name:</td>
                             <td class="institute_name"></td>
                         </tr>
-                        <tr>
-                            <td>Dean:</td>
-                            <td class="dean"></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -36,17 +32,14 @@
         let modalTitle = button.getAttribute("data-bs-modal-title");
         let institute_code = button.getAttribute("data-bs-institute_code");
         let institute_name = button.getAttribute("data-bs-institute_name");
-        let dean = button.getAttribute("data-bs-dean");
 
         let modalBodyTitle = institute_information.querySelector(".modal-header .modal-title");
         let modalBodyinstitute_code = institute_information.querySelector(".modal-body .institute_code");
         let modalBodyinstitute_name = institute_information.querySelector(".modal-body .institute_name");
-        let modalBodydean = institute_information.querySelector(".modal-body .dean");
         
         modalBodyTitle.innerHTML = modalTitle;
         modalBodyinstitute_code.innerHTML = institute_code;
         modalBodyinstitute_name.innerHTML = institute_name;
-        modalBodydean.innerHTML = dean;
 
     });
 </script>

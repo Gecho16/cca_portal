@@ -131,7 +131,6 @@ if (isset($_GET["selectUsers"])) {
 													data-bs-modal-title='Institute Information'
 													data-bs-institute_code='" . $row_institutes['institute_code'] . "'
 													data-bs-institute_name='" . $row_institutes['institute_name'] . "'
-													data-bs-dean='UserID:(" . $row_institutes['dean'] . ")'
 													title='Click for more info'>
 													<i class='me-2 fa-solid fa-circle-info fa-lg table-info-icon'></i>
 													" . $row_institutes['institute_code'] . "

@@ -14,11 +14,11 @@ if (isset($_POST["submitAddYear"])) {
 	if (preg_match('/^\d{4}-\d{4}$/', $year)) {
 		$acad_year = $year . " " . $semester;
 	} else {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Year");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=<b>Error</b> Selecting Year");
 	}
 
 	if ($semester !== "1st" && $semester !== "2nd" && $semester !== "Summer") {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Semester");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=<b>Error</b> Selecting Semester");
 	}
 
 	$acad_year = $year . " " . $semester;
@@ -33,7 +33,7 @@ if (isset($_POST["submitAddYear"])) {
 
 	// If entry already exists send error message
 	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Academic Year Already <b>Exists</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Academic Year Already <b>Exists</b>");
 		exit();
 	}
 
@@ -62,21 +62,21 @@ if (isset($_POST["submitAddYear"])) {
 
 	// Error preparing the statement
 	if (!$stmt) {
-		header("Location: {$baseUrl}admin/academics?error=Add Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Add Entry <b>Error</b>");
 		exit();
 	}
 	
 	// Execute the statement
 	if (!mysqli_stmt_execute($stmt)) {
-		header("Location: {$baseUrl}admin/academics?error=Add Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Add Entry <b>Error</b>");
 		exit();
 	}
 
 	// Check if any rows were affected
 	if (mysqli_stmt_affected_rows($stmt) > 0) {
-		header("Location: {$baseUrl}admin/academics?&success=Added <b>ENTRY</b> successfully");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&success=Added <b>ENTRY</b> successfully");
 	} else {
-		header("Location: {$baseUrl}admin/academics?error=Add Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Add Entry <b>Error</b>");
 	}
 
 	// Close prepared statment 
@@ -96,11 +96,11 @@ if (isset($_POST["submitEditYear"])) {
 	if (preg_match('/^\d{4}-\d{4}$/', $year)) {
 		$acad_year = $year . " " . $semester;
 	} else {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Year");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=<b>Error</b> Selecting Year");
 	}
 
 	if ($semester !== "1st" && $semester !== "2nd" && $semester !== "Summer") {
-		header("Location: {$baseUrl}admin/academics?error=<b>Error</b> Selecting Semester");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=<b>Error</b> Selecting Semester");
 	}
 
 	$acad_year = $year . " " . $semester;
@@ -115,7 +115,7 @@ if (isset($_POST["submitEditYear"])) {
 
 	// If entry already exists send error message
 	if ($count > 0) {
-		header("Location: {$baseUrl}admin/academics?error=Academic Year Already <b>Exists</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Academic Year Already <b>Exists</b>");
 		exit();
 	}
 
@@ -143,7 +143,7 @@ if (isset($_POST["submitEditYear"])) {
 
 	// Error preparing the statement
 	if (!$stmt) {
-		header("Location: {$baseUrl}admin/academics?error=Update Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Update Entry <b>Error</b>");
 		exit();
 	}
 
@@ -154,15 +154,15 @@ if (isset($_POST["submitEditYear"])) {
 
 	// Execute the statement
 	if (!mysqli_stmt_execute($stmt)) {
-		header("Location: {$baseUrl}admin/academics?error=Update Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Update Entry <b>Error</b>");
 		exit();
 	}
 
 	// Check if any rows were affected
 	if (mysqli_stmt_affected_rows($stmt) > 0) {
-		header("Location: {$baseUrl}admin/academics?success=Updated <b>ENTRY</b> Successfully");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&success=Updated <b>ENTRY</b> Successfully");
 	} else {
-		header("Location: {$baseUrl}admin/academics?error=No <b>ENTRY</b> Info Updated");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=No <b>ENTRY</b> Info Updated");
 	}
 
 	// Close prepared statement
@@ -183,14 +183,14 @@ if (isset($_GET["deleterAcadYear"])) {
     if (!mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
-		header("Location: {$baseUrl}admin/academics?error=Delete Entry <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Delete Entry <b>Error</b>");
         exit();
     }
 
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 
-    header("Location: {$baseUrl}admin/academics?success=<b>ENTRY</b> Deleted Successfully");
+    header("Location: {$baseUrl}admin/academics?table=academic-year&success=<b>ENTRY</b> Deleted Successfully");
     exit();
 }
 
@@ -205,7 +205,7 @@ if (isset($_GET["activateAcadYear"])) {
 	if (!mysqli_stmt_execute($stmt)) {
 		mysqli_stmt_close($stmt);
 		mysqli_close($conn);
-		header("Location: {$baseUrl}admin/academics?error=Activate Academic Year <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Activate Academic Year <b>Error</b>");
 		exit();
 	}
 
@@ -219,14 +219,14 @@ if (isset($_GET["activateAcadYear"])) {
 	if (!mysqli_stmt_execute($stmt)) {
 		mysqli_stmt_close($stmt);
 		mysqli_close($conn);
-		header("Location: {$baseUrl}admin/academics?error=Activate Academic Year <b>Error</b>");
+		header("Location: {$baseUrl}admin/academics?table=academic-year&error=Activate Academic Year <b>Error</b>");
 		exit();
 	}
 
 	mysqli_stmt_close($stmt);
 	mysqli_close($conn);
 
-	header("Location: {$baseUrl}admin/academics?success=<b>Academic Year</b> Activated Successfully");
+	header("Location: {$baseUrl}admin/academics?table=academic-year&success=<b>Academic Year</b> Activated Successfully");
 	exit();
 }
 	

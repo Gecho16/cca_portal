@@ -72,7 +72,6 @@ $('#academics').DataTable({
         { data: 0, title: "Id", orderable: false, visible: true},
         { data: 1, title: "Institute Code", orderable: true, visible: true },
         { data: 2, title: "Institute Name", orderable: true, visible: true },
-        { data: 3, title: "Institute Dean", orderable: true, visible: true },
-        { data: 4, title: "", orderable: false, visible: true },
+        { data: 3, title: "", orderable: false, visible: true },
     ],
 });
