@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2023 at 04:54 PM
+-- Generation Time: Jul 02, 2023 at 05:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -302,16 +302,10 @@ CREATE TABLE `faculty` (
 --
 
 INSERT INTO `faculty` (`id`, `firstname`, `lastname`, `middlename`, `suffix`, `institute`, `reference_number`, `type`) VALUES
-(1, 'John', 'Doe', 'Davis', 'Jr', 'IBM', 'CCA-9876', 'COS Full Time'),
-(2, 'Jane', 'Smith', 'Johnson', NULL, 'ICSLIS', 'CCA-8765', 'COS Part Time'),
-(3, 'Michael', 'Williams', 'Brown', NULL, 'IEAS', 'CCA-7654', 'COS Full Time'),
-(4, 'Emily', 'Davis', 'Wilson', NULL, 'IBM', 'CCA-6543', 'COS Part Time'),
-(5, 'David', 'Miller', 'Anderson', 'Sr', 'ICSLIS', 'CCA-5432', 'COS Full Time'),
-(6, 'Sarah', 'Jones', 'Taylor', NULL, 'IEAS', 'CCA-4321', 'COS Part Time'),
-(7, 'Matthew', 'Clark', 'Lee', NULL, 'IBM', 'CCA-3210', 'COS Full Time'),
-(8, 'Olivia', 'Thomas', 'Martin', NULL, 'ICSLIS', 'CCA-2109', 'COS Part Time'),
-(9, 'Daniel', 'Johnson', 'Harris', NULL, 'IEAS', 'CCA-1098', 'COS Full Time'),
-(10, 'Sophia', 'Brown', 'Walker', NULL, 'IBM', 'CCA-0987', 'COS Part Time');
+(5, 'Jon', 'Dela Cruz', NULL, NULL, 'ICSLIS', 'CCA23_CJD0003', 'COS Part Time'),
+(6, 'Jones', 'Hernandez', NULL, NULL, 'IEAS', 'CCA23_EJH0001', 'COS Full Time'),
+(7, 'Keith', 'Guzman', 'Lumbang', NULL, 'IBM', 'CCA23_BKG0002', 'Plantilla Permanent'),
+(8, 'Sally', 'Delos Santos', 'Juco', 'Sr.', 'IBM', 'CCA23_BSD0003', 'Plantilla Temporary');
 
 -- --------------------------------------------------------
 
@@ -322,20 +316,19 @@ INSERT INTO `faculty` (`id`, `firstname`, `lastname`, `middlename`, `suffix`, `i
 CREATE TABLE `institutes` (
   `id` bigint(20) NOT NULL,
   `institute_code` varchar(255) NOT NULL,
-  `institute_name` varchar(255) NOT NULL,
-  `dean` varchar(255) DEFAULT NULL
+  `institute_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `institutes`
 --
 
-INSERT INTO `institutes` (`id`, `institute_code`, `institute_name`, `dean`) VALUES
-(1, 'IBM', 'Institute of Business and Management', NULL),
-(2, 'ICSLIS', 'Institute of Computing Studies and Library Information Science', 'Mark Gil Superio'),
-(3, 'IEAS', 'Institute of Education, Arts and Sciences', NULL),
-(4, 'MISSO', 'Multimedia and Information Systems Services Office', NULL),
-(5, 'NTPs', 'Non Teaching Personnels', NULL);
+INSERT INTO `institutes` (`id`, `institute_code`, `institute_name`) VALUES
+(1, 'IBM', 'Institute of Business and Management'),
+(2, 'ICSLIS', 'Institute of Computing Studies and Library Information Science'),
+(3, 'IEAS', 'Institute of Education, Arts and Sciences'),
+(4, 'MISSO', 'Multimedia and Information Systems Services Office'),
+(5, 'NTPs', 'Non Teaching Personnels');
 
 -- --------------------------------------------------------
 
@@ -357,16 +350,11 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `room_code`, `room_name`, `type`, `location`, `status`) VALUES
-(1, 'CR-A', 'Conference Room A', 'Lecture', 'Main Building', 'Available'),
-(2, 'LH-101', 'Lecture Hall 101', 'Lecture', 'Main Building', 'Available'),
-(3, 'CL-203', 'Computer Lab 203', 'Laboratory', 'Main Building', 'Occupied'),
-(4, 'SR-B', 'Seminar Room B', 'Lecture', 'Main Building', 'Available'),
-(5, 'SR-305', 'Studio Room 305', 'Laboratory', 'Second Building', 'Available'),
-(6, 'TR-102', 'Training Room 102', 'Lecture', 'Second Building', 'Available'),
-(7, 'LSA', 'Library Study Area', 'Lecture', 'Second Building', 'Available'),
-(8, 'CR-C', 'Conference Room C', 'Lecture', 'Main Building', 'Available'),
-(9, 'AR-201', 'Art Room 201', 'Laboratory', 'Second Building', 'Available'),
-(10, 'GYM', 'Gymnasium', 'Lecture', 'Gymnasium', 'Available');
+(1, 'L201', 'Lecture Room 1', 'Lecture', 'Main Building', 'Available'),
+(2, 'L202', 'Lecture Room 2', 'Lecture', 'Main Building', 'Available'),
+(3, 'CLAB1', 'Computer Lab 1', 'Laboratory', 'Main Building', 'Available'),
+(4, 'KLAB1', 'Kitchen Lab 1', 'Laboratory', 'Main Building', 'Available'),
+(5, 'GYM', 'Gymnasium', 'Lecture', 'Gymnasium', 'Available');
 
 -- --------------------------------------------------------
 
@@ -505,7 +493,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `avatar`, `firstname`, `lastname`, `middlename`, `suffix`, `institute`, `course`, `email`, `username`, `initial_password`, `password`, `role`, `last_login`, `current_login`, `is_active`) VALUES
-(1, 'cca-avatar.png', 'Admin', 'CCA', NULL, NULL, 'MISSO', NULL, 'CCA-Admin@cca.edu.ph', 'CCA-Admin', 'changed', '$2y$10$AGkdHZZGPoAupwxfbpWTx.ardK0dew/gNzV3prryRB15AlA8tX2uC', 'Admin', '2023-06-29 08:44:48', '2023-06-29 22:00:54', 1),
+(1, 'cca-avatar.png', 'Admin', 'CCA', NULL, NULL, 'MISSO', NULL, 'CCA-Admin@cca.edu.ph', 'CCA-Admin', 'changed', '$2y$10$AGkdHZZGPoAupwxfbpWTx.ardK0dew/gNzV3prryRB15AlA8tX2uC', 'Admin', '2023-07-02 14:36:52', '2023-07-02 21:10:35', 1),
 (25, 'cca-avatar.png', 'IBM', 'Dean', NULL, NULL, 'IBM', NULL, 'ibmdean@cca.edu.ph', 'IBM-Dean', 'changed', '$2y$10$a8qypk3s7wqeI7mLRl.ik.FmB.gXqYxYQPgqmxTayR4kwQsqQzbn.', 'Dean', '2023-06-04 20:47:04', '2023-06-04 20:47:04', 1),
 (26, 'cca-avatar.png', 'ICSLIS', 'Dean', NULL, NULL, 'ICSLIS', NULL, 'icslisdean@cca.edu.ph', 'ICSLIS-Dean', 'changed', '$2y$10$XrEVl3lGO5GZ0rYh/ndgfuHLcHFJU0whI7a7W06KZVa83F1HMa6SG', 'Dean', '2023-06-04 20:47:13', '2023-06-04 20:47:13', 1),
 (27, 'cca-avatar.png', 'IEAS', 'Dean', NULL, NULL, 'IEAS', NULL, 'ieasdean@cca.edu.ph', 'IEAS-Dean', 'changed', '$2y$10$XOxk2Vmvh1dNd30C9kepy.XUl50HZLNKBTDacTukK7Sm3up4Ak..C', 'Dean', '2023-06-04 20:47:26', '2023-06-04 20:47:26', 1),
@@ -712,7 +700,7 @@ ALTER TABLE `institutes`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sections`
